@@ -25,7 +25,7 @@ cd purple-arrray
 
 ## 🧪 .env Setup
 
-Please set up your local environment variables.
+Please create a .env file under /backend and set up your local environment variables.
 
 ```
 MONGO_URI=<Your_Mongo_URI>
