@@ -23,13 +23,81 @@ git clone https://github.com/freeCodeCamp-2025-Summer-Hackathon/purple-array.git
 cd purple-arrray
 ```
 
-## 🧪 .env Setup
+## MongoDB Setup
 
-Please create a .env file under /backend and set up your local environment variables.
+1.  Create an account on mongodb.com
+2.  If you are creating an account for the first time, you will be taken to the “Deploy your cluster” page. Select the following options:
+
+    - Free
+    - Uncheck “preload sample data”
+    - Name your cluster
+    - Create deployment
+
+3.  Create a database user – keep your username/password somewhere, just in case
+
+    - Create Database User
+
+4.  Click “Choose a connection method”
+
+    - Click “Drivers”
+      - Set “Driver” to “Node.js”
+      - Copy the “connection string” below. Make sure it includes the password <br>
+        **_THIS IS YOUR LAST CHANCE TO GRAB YOUR PASSWORD_**
+
+5.  Click “Done”
+6.  Click “Network Access” (left bar) and “+ADD IP ADDRESS” (green button)
+
+    - “Allow Access From Anywhere”
+
+## 🧪 Your Local Dev Environment Setup
+
+1.  Make sure you have pulled the most recent version of the project’s `main` branch from GitHub.
+    - switch the main branch if you are not already on it, and then run `git pull`
+
+```
+ git switch main
+ git pull
+```
+
+2. Change directories into the backend folder
+
+```
+cd backend
+```
+
+3. Create a “.env” file inside the **_backend_** folder (make sure it’s at the top level, and not nested in an additional folder).
+4. Create the variable **_MONGO_URI=_** followed by the connection string you copied earlier; your Mongo Uniform Resource Indicator (URI), represented by the placeholder value in the brackets below.
 
 ```
 MONGO_URI=<Your_Mongo_URI>
+```
+
+- **_Please note: you don't include any quotation marks or the angle brackets._**
+- The string will look something like this:
+
+```
+mongodb+srv://<YOUR_USERNAME>:<YOUR_PASSWORD>@<CLUSTER_NAME>.iva3yfn.mongodb.net/?retryWrites=true&w=majority$appName=<CLUSTER_NAME>
+```
+
+5. Additionally, you can a name for the database by adding it to URI after the `iva3yfn.mongodb.net/` portion of the string, as shown below:
+
+```
+mongodb+srv://<your_username>:<your_password>@<cluster_name>.iva3yfn.mongodb.net/<ADD_DB_NAME_HERE>?retryWrites=true&w=majority$appName=<cluster_name>
+```
+
+6. Now add your PORT variable to the .env file and set it to whatever you want
+   e.g `PORT=5001`
+
+## 🧪 .env Setup
+
+Please create a .env file under /backend and set up your local environment variables, including the Node environment variable shown below.
+
+```
+MONGO_URI=<Your_Mongo_URI>
+
 PORT=<Your_designated_PORT>
+
+NODE_ENV=development
 ```
 
 ## 🔧 Run the Backend
