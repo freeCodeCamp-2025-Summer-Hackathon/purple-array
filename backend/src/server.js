@@ -10,5 +10,5 @@ const app = express();
 const PORT = process.env.PORT;
 
 app.listen(PORT, () => {
-    console.log("Server started on PORT: 5001");
+    console.log("Server started on PORT:", PORT);
 })
