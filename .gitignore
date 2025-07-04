@@ -30,6 +30,7 @@ Thumbs.db
 
 # Dependency directories
 jspm_packages/
+node_modules
 
 # Optional npm cache directory
 .npm
