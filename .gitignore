@@ -1,3 +1,46 @@
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# React Build
+build/
+dist/
+.next/
+
+# Vite (if using Vite for React)
+dist/
+*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Dependency directories
+jspm_packages/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Temporary folders
+tmp/
+temp/
+
 # Logs
 logs
 *.log
@@ -7,21 +50,9 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
-
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-
 # Environment Variables
 .env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
