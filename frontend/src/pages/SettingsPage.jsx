@@ -3,7 +3,7 @@ import Navbar from '../components/generic/Navbar';
 
 const SettingsPage = () => {
 	return (
-		<div>
+		<div className="min-h-screen">
 			<Navbar />
 			<h1>Settings Page</h1>
 		</div>
