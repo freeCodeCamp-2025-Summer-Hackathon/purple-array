@@ -1,5 +1,5 @@
-{
-    "*.{js,mjs,cjs}": [
+export default {
+    "*.js": [
       "eslint --fix",
       "prettier --write"
     ],
