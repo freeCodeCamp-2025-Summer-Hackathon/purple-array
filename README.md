@@ -25,7 +25,7 @@ cd purple-arrray
 
 ## MongoDB Setup
 
-1.  Create an account on mongodb.com
+1.  Create an account on [MongoDB](https://www.mongodb.com/cloud/atlas/register)
 2.  If you are creating an account for the first time, you will be taken to the “Deploy your cluster” page. Select the following options:
 
     - Free
@@ -52,7 +52,7 @@ cd purple-arrray
 ## 🧪 Your Local Dev Environment Setup
 
 1.  Make sure you have pulled the most recent version of the project’s `main` branch from GitHub.
-    - switch the main branch if you are not already on it, and then run `git pull`
+    - switch to the main branch if you are not already on it, and then run `git pull`
 
 ```
  git switch main
@@ -66,7 +66,7 @@ cd backend
 ```
 
 3. Create a “.env” file inside the **_backend_** folder (make sure it’s at the top level, and not nested in an additional folder).
-4. Create the variable **_MONGO_URI=_** followed by the connection string you copied earlier; your Mongo Uniform Resource Indicator (URI), represented by the placeholder value in the brackets below.
+4. Create the variable `MONGO_URI=` followed by the connection string you copied earlier; your Mongo Uniform Resource Indicator (URI), represented by the placeholder value in the brackets below.
 
 ```
 MONGO_URI=<Your_Mongo_URI>
@@ -79,7 +79,7 @@ MONGO_URI=<Your_Mongo_URI>
 mongodb+srv://<YOUR_USERNAME>:<YOUR_PASSWORD>@<CLUSTER_NAME>.iva3yfn.mongodb.net/?retryWrites=true&w=majority$appName=<CLUSTER_NAME>
 ```
 
-5. Additionally, you can a name for the database by adding it to URI after the `iva3yfn.mongodb.net/` portion of the string, as shown below:
+5. Additionally, you can add a name for the database by adding it to URI after the `iva3yfn.mongodb.net/` portion of the string, as shown below:
 
 ```
 mongodb+srv://<your_username>:<your_password>@<cluster_name>.iva3yfn.mongodb.net/<ADD_DB_NAME_HERE>?retryWrites=true&w=majority$appName=<cluster_name>
@@ -88,9 +88,9 @@ mongodb+srv://<your_username>:<your_password>@<cluster_name>.iva3yfn.mongodb.net
 6. Now add your PORT variable to the .env file and set it to whatever you want
    e.g `PORT=5001`
 
-## 🧪 .env Setup
+7. Now add the following variable to your .env as well: `NODE_ENV=development`
 
-Please create a .env file under /backend and set up your local environment variables, including the Node environment variable shown below.
+**_Please ensure that you now have all of the following environment variables in your .env file, including the Node environment variable with value set to `development` as shown below._**
 
 ```
 MONGO_URI=<Your_Mongo_URI>
