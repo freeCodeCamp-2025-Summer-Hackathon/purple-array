@@ -1,5 +1,5 @@
 export default {
-    "*!(*config).js": [
+    "*!(*.config|*-lock).js": [
       "eslint --fix"
     ],
     "*.{js,mjs,cjs,json,md}": [
