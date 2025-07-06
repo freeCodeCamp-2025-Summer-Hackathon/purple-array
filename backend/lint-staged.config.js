@@ -2,7 +2,7 @@ export default {
     "*!(*config).js": [
       "eslint --fix"
     ],
-    "*.{js,json,md}": [
+    "*.{js,mjs,cjs,json,md}": [
       "prettier --write"
     ]
   }
