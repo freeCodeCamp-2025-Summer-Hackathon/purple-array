@@ -1,6 +1,5 @@
-import React from 'react';
 import Navbar from '../components/generic/Navbar';
-import JournalEntry from '../components/home/JournalEntry';
+import JournalEntry from '../components/journal/JournalEntry';
 
 const JournalPage = () => {
 	return (
