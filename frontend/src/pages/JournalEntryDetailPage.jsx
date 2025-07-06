@@ -1,12 +1,12 @@
 import Navbar from '../components/generic/Navbar';
-import JournalDetail from '../components/journal/JournalEntryDetail';
+import JournalEntryDetail from '../components/journal/JournalEntryDetail';
 
 const JournalEntryDetailPage = () => {
 	return (
 		<div className="min-h-screen">
 			<Navbar />
 			<h1>Journal Entry Detail Page</h1>
-            <JournalEntryDetail />
+            		<JournalEntryDetail />
 		</div>
 	);
 };
