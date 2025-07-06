@@ -7,7 +7,7 @@ const JournalEntry = () => {
     <div>
         <header>
             <span>
-                {formatDate(new Date())};
+                {formatDate(new Date())}
             </span>
             <button>
                 <Link to={""}>Edit</Link>
