@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const marketSchema = new mongoose.Schema(
+const productSchema = new mongoose.Schema(
     {
         name: {
             type: String,
@@ -14,14 +14,16 @@ const marketSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        tag: {
-            type: String,
-            required: true,
-        },
+        tags: [
+            {
+                type: String,
+                required: true,
+            },
+        ],
     },
     { timestamps: true }
 );
 
-const Market = mongoose.model('Market', marketSchema);
+const Product = mongoose.model('Product', productSchema);
 
-export default Market;
+export default Product;
