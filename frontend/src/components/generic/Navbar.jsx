@@ -10,13 +10,23 @@ const Navbar = () => {
 						<h1 className="text-3xl font-bold text-primary font-sans tracking-tight">
 							<Link to={'/'}> Word of the Day</Link>
 						</h1>
+						<h1 className="text-3xl font-bold text-primary font-sans tracking-tight">
+							<Link to={'/journal'}> Journal </Link>
+						</h1>
+						<h1 className="text-3xl font-bold text-primary font-sans tracking-tight">
+							<Link to={'/market'}> Market</Link>
+						</h1>
+						<h1 className="text-3xl font-bold text-primary font-sans tracking-tight">
+							<Link to={'/settings'}> Settings</Link>
+						</h1>
+
 						<button
 							className="btn btn-primary"
 							onClick={() => {
-								toast.success('Great Success!');
+								toast.error('Logout not functional yet!');
 							}}
 						>
-							Toast!
+							Logout
 						</button>
 					</div>
 				</div>
