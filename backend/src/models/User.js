@@ -15,14 +15,14 @@ const userSchema = new mongoose.Schema(
         settings: {
             // will need to add a new category for each upgrade type
             timezone: String,
-            background: String,
+            theme: String, // light and dark, maybe future themes
             font: String,
             ink: String,
             parchment: String,
         },
         inventory: {
             // will need to add a new category for each upgrade type
-            background: [String],
+            theme: [String], // stretch goal
             font: [String],
             ink: [String],
             parchment: [String],
