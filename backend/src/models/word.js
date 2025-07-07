@@ -17,9 +17,13 @@ const WordSchema = new mongoose.Schema({
         required: [true, "please provide the definition"],
         minlength:2 ,
     },
-    dateUsed:{
+    lastUsed:{
         type:Date,
-        default:Date.now
+        
+    },
+    history:{
+        type:[Date],
+        default:[]
     }
 
 });
