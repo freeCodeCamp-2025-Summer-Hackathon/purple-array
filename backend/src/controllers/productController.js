@@ -2,7 +2,7 @@ import Product from '../models/Product.js';
 
 export async function getAllProducts(_, res) {
     try {
-        const products = await Product.find().sort({ createdAt: -1 });
+        const products = await Product.find();
         res.status(200).json({ products });
     } catch (error) {
         console.error('Error in getAllProducts controller', error);
