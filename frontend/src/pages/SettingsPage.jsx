@@ -4,10 +4,12 @@ import SettingsOptions from '../components/settings/SettingsOptions';
 
 const SettingsPage = () => {
 	return (
-		<div className="min-h-screen bg-[#FDF6EC]">
+		<div className="min-h-screen">
 			<Navbar />
-			<div className="max-w-2xl mx-auto px-4 py-12 space-y-8">
-				<h1 className="text-2xl font-semibold text-gray-800">Settings</h1>
+			<div className="max-w-2xl mx-auto px-4 py-20 space-y-12">
+				<h1 className="text-center text-3xl font-semibold text-secondary">
+					Settings
+				</h1>
 				<SettingsOptions />
 			</div>
 		</div>

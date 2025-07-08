@@ -8,7 +8,7 @@ import SettingsPage from './pages/SettingsPage';
 
 const App = () => {
 	return (
-		<div data-theme="cupcake">
+		<div data-theme="writeLight">
 			<Routes>
 				<Route path="/" element={<HomePage />} />
 				<Route path="/signin" element={<SignInPage />} />
