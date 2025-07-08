@@ -12,17 +12,21 @@ export default {
 	plugins: [typography, daisyui],
 	daisyui: {
 		themes: [
-			'light',
-			'dark',
 			'cupcake',
-			'aqua',
 			'wireframe',
-			'coffee',
-			'night',
-			'pastel',
-			'nord',
-			'sunset',
-			'cyberpunk',
+			{
+				writeLight: {
+					primary: '#463aa2',
+					secondary: '#4b4b4b',
+					accent: '#8f97ff',
+					neutral: '221551',
+					'base-100': '#ffffff',
+					info: '#8fd6ff',
+					success: '#96f2b9',
+					warning: '#fdff8f',
+					error: '#ff7a7a',
+				},
+			},
 		],
 	},
 };

@@ -5,7 +5,12 @@ const SignInPage = () => {
 	return (
 		<div className="min-h-screen">
 			<Navbar />
-			<h1>Sign-in Page</h1>
+			<div className="max-w-4xl mx-auto py-20">
+				<h1 className="text-3xl font-semibold text-secondary">
+					Sign In / Log In
+				</h1>
+				{/* Signin Options to go here */}
+			</div>
 		</div>
 	);
 };
