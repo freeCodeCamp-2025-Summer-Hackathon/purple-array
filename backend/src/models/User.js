@@ -52,6 +52,10 @@ const userSchema = new mongoose.Schema(
                 reward: Number,
             },
         ],
+        admin: {
+            type: Boolean,
+            default: false,
+        },
     },
     { timestamps: true }
 );
