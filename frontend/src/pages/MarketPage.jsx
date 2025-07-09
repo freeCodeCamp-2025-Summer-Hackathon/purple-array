@@ -1,5 +1,6 @@
 import React from 'react';
 import Navbar from '../components/generic/Navbar';
+import MarketItems from '../components/Market/MarketItems';
 
 const MarketPage = () => {
 	return (
@@ -9,6 +10,7 @@ const MarketPage = () => {
 				<h1 className="text-center text-3xl font-semibold text-secondary">
 					Market
 				</h1>
+				<MarketItems />
 				{/* Items Shop to go here */}
 			</div>
 		</div>
