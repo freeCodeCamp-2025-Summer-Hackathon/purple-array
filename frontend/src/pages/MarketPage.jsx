@@ -1,6 +1,13 @@
+import { use } from 'react';
 import Navbar from '../components/generic/Navbar';
+import useProducts from '../util/hooks/useProducts';
 
 const MarketPage = () => {
+	const { isLoading, data } = useProducts();
+
+	// ensure we're getting results back from DB
+	console.log({ isLoading, data });
+
 	return (
 		<div className="min-h-screen">
 			<Navbar />
