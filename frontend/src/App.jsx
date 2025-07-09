@@ -5,6 +5,7 @@ import JournalPage from './pages/JournalPage';
 import JournalEntryDetailPage from './pages/JournalEntryDetailPage';
 import MarketPage from './pages/MarketPage';
 import SettingsPage from './pages/SettingsPage';
+import JournalCreatePage from './pages/JournalCreatePage';
 
 const App = () => {
 	return (
@@ -15,6 +16,8 @@ const App = () => {
 				<Route path="/journal" element={<JournalPage />} />
 				{/*Path for the Journal Entry Route will need to be updated, once we get the endpoint setup from the Backend*/}
 				<Route path="/journal-entry" element={<JournalEntryDetailPage />} />
+				<Route path="/journal-create" element={<JournalCreatePage />} />
+
 				<Route path="/market" element={<MarketPage />} />
 				<Route path="/settings" element={<SettingsPage />} />
 			</Routes>
