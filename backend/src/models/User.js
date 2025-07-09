@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import bcrypt from 'bcryptjs';
 
 const userSchema = new mongoose.Schema(
     {
@@ -59,6 +60,17 @@ const userSchema = new mongoose.Schema(
     },
     { timestamps: true }
 );
+
+// salt and hash the password before storing
+userSchema.pre('save', async function (next) {
+    try {
+        if (!this.isModified('password')) return next();
+        this.password = await bcrypt.hash(this.password, 12); // 12 salt rounds before hash
+        next();
+    } catch (error) {
+        next(error); // pass errors to next middleware
+    }
+});
 
 const User = mongoose.model('User', userSchema);
 
