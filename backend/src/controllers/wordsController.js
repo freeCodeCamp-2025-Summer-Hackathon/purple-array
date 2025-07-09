@@ -11,3 +11,15 @@ export async function addWord(req, res) {
         res.status(500).json({ message: 'Internal server error' });
     }
 }
+
+export async function getWord(req, res) {
+    try {
+        const words = await Word.find();
+        const { word, pronunciation, definition } =
+            words[Math.floor(Math.random() * words.length)];
+        res.status(200).json({ word, pronunciation, definition });
+    } catch (error) {
+        console.error('Error in getWord controller', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+}
