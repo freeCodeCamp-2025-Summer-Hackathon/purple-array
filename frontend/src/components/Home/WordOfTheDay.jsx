@@ -35,7 +35,7 @@ function WordOfTheDay() {
 	if (loading) {
 		return (
 			<div className="flex justify-center items-center h-64">
-				<div className="card w-full max-w-3xl bg-base-100 p-10 shadow-md animate-pulse">
+				<div className="card w-full max-w-3xl bg-base-200 p-10 shadow-md animate-pulse">
 					<div className="h-6 bg-base-300 rounded w-1/3 mb-4"></div>
 					<div className="h-4 bg-base-300 rounded w-2/3 mb-2"></div>
 					<div className="h-4 bg-base-300 rounded w-full mb-1"></div>
@@ -49,7 +49,7 @@ function WordOfTheDay() {
 
 	return (
 		<div className="flex justify-center px-4 py-10">
-			<div className="card w-full max-w-3xl bg-base-100 shadow-xl border border-base-300 p-10 text-center space-y-6">
+			<div className="card w-full max-w-3xl bg-base-200 shadow-xl border border-base-300 p-10 text-center space-y-6">
 				<h2 className="text-4xl font-bold text-primary">
 					{wordData.word}
 				</h2>
