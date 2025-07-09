@@ -56,9 +56,10 @@ function WordOfTheDay() {
 				<p className="text-md text-neutral italic">
 					{wordData.pronunciation}
 				</p>
-				<p className="text-lg text-neutral-content whitespace-pre-line">
-					{wordData.definition}
-				</p>
+				<p className="text-lg text-base-content/70 whitespace-pre-line">
+  Definition: <b>{words[wordIdx].definition}</b>
+</p>
+
 			</div>
 		</div>
 	);
