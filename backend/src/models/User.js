@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import bcrypt from 'bcrypt';
 
 const userSchema = new mongoose.Schema(
     {
@@ -8,17 +9,32 @@ const userSchema = new mongoose.Schema(
             unique: [true, 'Email has been used'],
         },
         password: {
-            // encrypt first
             type: String,
             required: [true, 'You must provide a password'],
         },
         settings: {
             // will need to add a new category for each upgrade type
-            timezone: String,
-            theme: String, // light and dark, maybe future themes
-            font: String,
-            ink: String,
-            parchment: String,
+            timezone: {
+                type: String,
+                default: '',
+            },
+            theme: {
+                // light and dark, maybe future themes
+                type: String,
+                default: '',
+            },
+            font: {
+                type: String,
+                default: '',
+            },
+            ink: {
+                type: String,
+                default: '',
+            },
+            parchment: {
+                type: String,
+                default: '',
+            },
         },
         inventory: {
             // will need to add a new category for each upgrade type
@@ -59,6 +75,17 @@ const userSchema = new mongoose.Schema(
     },
     { timestamps: true }
 );
+
+// salt and hash the password before storing
+userSchema.pre('save', async function (next) {
+    try {
+        if (!this.isModified('password')) return next();
+        this.password = await bcrypt.hash(this.password, 12); // 12 salt rounds before hash
+        next();
+    } catch (error) {
+        next(error); // pass errors to next middleware
+    }
+});
 
 const User = mongoose.model('User', userSchema);
 
