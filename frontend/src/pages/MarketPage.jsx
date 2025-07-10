@@ -1,5 +1,6 @@
 import Navbar from '../components/generic/Navbar';
 import useProducts from '../util/hooks/useProducts';
+import MarketItems from '../components/Market/MarketItems';
 
 const MarketPage = () => {
 	const { products, isLoading } = useProducts();
@@ -13,6 +14,7 @@ const MarketPage = () => {
 				<h1 className="text-center text-3xl font-semibold text-secondary">
 					Market
 				</h1>
+				<MarketItems />
 				{/* Items Shop to go here */}
 			</div>
 		</div>
