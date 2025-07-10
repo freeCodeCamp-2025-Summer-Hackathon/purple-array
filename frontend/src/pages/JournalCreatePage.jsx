@@ -1,15 +1,21 @@
 import Navbar from '../components/generic/Navbar';
-import JournalEntryDetail from '../components/journal/JournalEntryDetail';
 
 const JournalCreatePage = () => {
-
     return (
+
         <div className="min-h-screen">
             <Navbar />
-            <h1>Journal Create Page</h1>
-            <JournalEntryDetail />
-        </div>
+            <div className="container px-12 py-20">
+                <div className="max-w-6xl mx-auto">
+                    <Link to={'/journal'} className="btn btn-outline Ibtn-primary mb-8">
+                        <ArrowLeftIcon className="size-5" />
+                        Back to Journal
+                    </Link>
+
+                    <JournalEntryForm />
+                </div>
+            </div>
+        </div >
     );
 };
-
 export default JournalCreatePage;
