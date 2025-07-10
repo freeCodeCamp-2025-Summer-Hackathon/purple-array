@@ -39,7 +39,7 @@ export async function login(req, res, next) {
                 .status(400)
                 .json({ message: 'Email and password required' });
         }
-        const user = await User.findOne({ email });
+        const user = await User.findOne({ email }, '_id password');
         if (!user) {
             return res
                 .status(400)
