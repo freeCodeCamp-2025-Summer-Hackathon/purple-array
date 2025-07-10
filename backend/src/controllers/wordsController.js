@@ -1,4 +1,22 @@
 import Word from '../models/Word.js';
+import User from '../models/User.js';
+import schedule from 'node-schedule';
+import { setWord } from '../helpers/wordHelper.js';
+
+const wordObj = {
+    pastWord: {},
+    currentWord: {},
+};
+
+const rule = new schedule.RecurrenceRule();
+rule.hour = 0;
+rule.minute = 0;
+rule.tz = 'Etc/UTC';
+
+const _job = schedule.scheduleJob(rule, async function () {
+    wordObj.pastWord = wordObj.currentWord;
+    wordObj.currentWord = await setWord();
+});
 
 export async function addWord(req, res) {
     try {
@@ -14,10 +32,9 @@ export async function addWord(req, res) {
 
 export async function getWord(req, res) {
     try {
-        const words = await Word.find();
-        const { word, pronunciation, definition } =
-            words[Math.floor(Math.random() * words.length)];
-        res.status(200).json({ word, pronunciation, definition });
+        const user = await User.findById(req.params.id);
+        console.log(user);
+        res.status(200).json(wordObj.currentWord);
     } catch (error) {
         console.error('Error in getWord controller', error);
         res.status(500).json({ message: 'Internal server error' });
