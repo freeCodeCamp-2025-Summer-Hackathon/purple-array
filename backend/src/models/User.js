@@ -9,17 +9,32 @@ const userSchema = new mongoose.Schema(
             unique: [true, 'Email has been used'],
         },
         password: {
-            // encrypt first
             type: String,
             required: [true, 'You must provide a password'],
         },
         settings: {
             // will need to add a new category for each upgrade type
-            timezone: String,
-            theme: String, // light and dark, maybe future themes
-            font: String,
-            ink: String,
-            parchment: String,
+            timezone: {
+                type: String,
+                default: '',
+            },
+            theme: {
+                // light and dark, maybe future themes
+                type: String,
+                default: '',
+            },
+            font: {
+                type: String,
+                default: '',
+            },
+            ink: {
+                type: String,
+                default: '',
+            },
+            parchment: {
+                type: String,
+                default: '',
+            },
         },
         inventory: {
             // will need to add a new category for each upgrade type

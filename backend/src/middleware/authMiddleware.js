@@ -1,7 +1,7 @@
 import User from '../models/User.js';
 import jwt from 'jsonwebtoken';
 
-export function userVerification(req, res) {
+export function userVerification(req, res, next) {
     const token = req.cookies.token;
     if (!token) {
         return res.status(401).json({ status: false });
@@ -11,8 +11,10 @@ export function userVerification(req, res) {
             return res.status(401).json({ status: false });
         } else {
             const user = await User.findById(data.id, '_id');
-            if (user) return res.json({ status: true, _id: user._id });
-            else return res.status(401).json({ status: false });
+            if (user) {
+                req.id = data.id;
+                next();
+            } else return res.status(401).json({ status: false });
         }
     });
 }
