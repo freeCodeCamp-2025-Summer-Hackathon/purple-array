@@ -1,8 +1,7 @@
 import Navbar from '../components/generic/Navbar';
-import { BookOpen } from 'lucide-react';
 import JournalEntry from '../components/journal/JournalEntry';
 
-const JournalPage = () => {
+const JournalDisplayPage = () => {
 	return (
 		<div className="min-h-screen">
 			<Navbar />
@@ -10,10 +9,11 @@ const JournalPage = () => {
 				<h1 className="text-center text-3xl font-semibold text-secondary">
 					Journal
 				</h1>
+				{/* Component for list of past entries should be place on this page as well */}
 				<JournalEntry />
 			</div>
 		</div>
 	);
 };
 
-export default JournalPage;
+export default JournalDisplayPage;

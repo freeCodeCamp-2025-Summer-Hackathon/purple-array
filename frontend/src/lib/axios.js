@@ -1,10 +1,8 @@
 import axios from 'axios';
 
-const PORT = import.meta.env.PORT;
+// in production we cannot account for localhost so this needs to run dynamically
 const BASE_URL =
-	import.meta.env.MODE === 'development'
-		? `http://localhost:${PORT}/api`
-		: '/api';
+	import.meta.env.MODE === 'development' ? `http://localhost:5001/` : '/';
 
 const api = axios.create({
 	baseURL: BASE_URL,
