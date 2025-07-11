@@ -3,6 +3,7 @@ import HomePage from './pages/HomePage';
 import SignInPage from './pages/SignInPage';
 import JournalDisplayPage from './pages/JournalDisplayPage';
 import JournalCollectionPage from './pages/JournalCollectionPage';
+import JournalEntryPage from './pages/JournalEntryPage';
 import JournalCreatePage from './pages/JournalCreatePage';
 import JournalEditPage from './pages/JournalEditPage';
 import MarketPage from './pages/MarketPage';
@@ -17,6 +18,7 @@ const App = () => {
 				<Route path="/signin" element={<SignInPage />} />
 				<Route path="/journal" element={<JournalDisplayPage />} />
 				<Route path="/journal/collection" element={<JournalCollectionPage />} />
+				<Route path="/journal/collection/:id" element={<JournalEntryPage />} />
 				<Route path="/create" element={<JournalCreatePage />} />
 				<Route path="/edit" element={<JournalEditPage />} />
 				<Route path="/market" element={<MarketPage />} />
