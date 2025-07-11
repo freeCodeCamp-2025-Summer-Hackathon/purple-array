@@ -7,6 +7,7 @@ import productsRoutes from './routes/productsRoutes.js';
 import settingsRoutes from './routes/settingsRoutes.js';
 import wordsRoutes from './routes/wordsRoutes.js';
 import authRoutes from './routes/authRoutes.js';
+import inventoryRoutes from './routes/inventoryRoutes.js';
 import { userVerification } from './middleware/authMiddleware.js';
 
 dotenv.config();
@@ -24,6 +25,7 @@ app.use('/', authRoutes);
 app.use('/word', userVerification, wordsRoutes);
 app.use('/products', userVerification, productsRoutes);
 app.use('/settings', userVerification, settingsRoutes);
+app.use('/inventory', userVerification, inventoryRoutes);
 
 app.listen(PORT, () => {
     console.log('Server started on PORT:', PORT);
