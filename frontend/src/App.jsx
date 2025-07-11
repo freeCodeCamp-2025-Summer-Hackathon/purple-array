@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router';
 import HomePage from './pages/HomePage';
+import SignUpPage from './pages/SignUpPage';
 import SignInPage from './pages/SignInPage';
 import JournalDisplayPage from './pages/JournalDisplayPage';
 import JournalCollectionPage from './pages/JournalCollectionPage';
@@ -14,6 +15,7 @@ const App = () => {
 			<Routes>
 				{/* Pathnames for some of these routes will need to be updated, once we get the real endpoints */}
 				<Route path="/" element={<HomePage />} />
+				<Route path="/signup" element={<SignUpPage />} />
 				<Route path="/signin" element={<SignInPage />} />
 				<Route path="/journal" element={<JournalDisplayPage />} />
 				<Route path="/journal/collection" element={<JournalCollectionPage />} />
