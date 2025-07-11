@@ -95,7 +95,7 @@ mongodb+srv://<your_username>:<your_password>@<cluster_name>.iva3yfn.mongodb.net
 ```
 MONGO_URI=<Your_Mongo_URI>
 
-PORT=<Your_designated_PORT>
+PORT=5001
 
 NODE_ENV=development
 ```
