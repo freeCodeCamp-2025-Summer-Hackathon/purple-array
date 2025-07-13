@@ -1,8 +1,9 @@
 import express from 'express';
-import { writeJournal } from '../controllers/journalController.js';
+import { writeJournal, getJournal } from '../controllers/journalController.js';
 
 const router = express.Router();
 
 router.put('/', writeJournal);
+router.get('/', getJournal);
 
 export default router;
