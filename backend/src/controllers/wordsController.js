@@ -1,5 +1,5 @@
-import { Word, WordOfTheDay } from '../models/Word.js';
-import { wordObj } from '../helpers/wordHelper.js';
+import { Word } from '../models/Word.js';
+import { wordObj } from '../utils/wordHelper.js';
 
 export async function addWord(req, res) {
     try {
@@ -17,16 +17,6 @@ export async function getWord(req, res) {
     try {
         const userID = req.id;
         const lastUsed = new Date();
-
-        if (Object.keys(wordObj.previousWord).length === 0) {
-            let wordOfTheDay = await WordOfTheDay.findOne().sort({
-                createdAt: -1,
-            });
-
-            wordObj.previousWord = wordOfTheDay.previousWord;
-            wordObj.currentWord = wordOfTheDay.currentWord;
-            wordObj.nextWord = wordOfTheDay.nextWord;
-        }
 
         const words = await Word.findById(wordObj.currentWord._id);
 

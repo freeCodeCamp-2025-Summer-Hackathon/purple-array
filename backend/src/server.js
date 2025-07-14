@@ -9,6 +9,7 @@ import settingsRoutes from './routes/settingsRoutes.js';
 import wordsRoutes from './routes/wordsRoutes.js';
 import authRoutes from './routes/authRoutes.js';
 import { userVerification } from './middleware/authMiddleware.js';
+import { initWord } from './utils/wordHelper.js';
 
 dotenv.config();
 
@@ -32,5 +33,6 @@ app.use('/products', userVerification, productsRoutes);
 app.use('/settings', userVerification, settingsRoutes);
 
 app.listen(PORT, () => {
+    initWord();
     console.log('Server started on PORT:', PORT);
 });

@@ -7,6 +7,21 @@ export const wordObj = {
     nextWord: {},
 };
 
+export const initWord = async () => {
+    if (Object.keys(wordObj.previousWord).length === 0) {
+        wordObj.previousWord = await setWord();
+        wordObj.currentWord = await setWord();
+        wordObj.nextWord = await setWord();
+
+        const newWord = new WordOfTheDay({
+            previousWord: wordObj.previousWord,
+            currentWord: wordObj.currentWord,
+            nextWord: wordObj.nextWord,
+        });
+        const _savedWord = await newWord.save();
+    }
+};
+
 const setWord = async () => {
     const word = await Word.aggregate([
         {
