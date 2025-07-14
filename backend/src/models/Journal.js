@@ -1,4 +1,3 @@
-// HI
 import mongoose from 'mongoose';
 
 const journalSchema = new mongoose.Schema({
