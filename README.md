@@ -131,6 +131,5 @@ npm run dev
 - [Matthew](https://github.com/imattking)
 - [Michael Liu](https://github.com/mrl588)
 - [amandaw800](https://github.com/amandaw800)
-- [Heath Babb](https://github.com/hbabb)
 - [Avigya Paudel](https://github.com/Avi161)
 - [Marisa Vertz](https://github.com/MarisaVertz)
