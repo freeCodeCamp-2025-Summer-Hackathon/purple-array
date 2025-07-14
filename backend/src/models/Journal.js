@@ -9,7 +9,7 @@ const journalSchema = new mongoose.Schema({
         type: Date,
     },
     history: {
-        type: Array,
+        type: [mongoose.Schema.Types.ObjectId],
     },
 });
 
