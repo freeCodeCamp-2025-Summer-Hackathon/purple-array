@@ -27,27 +27,15 @@ rule.hour = 0;
 rule.minute = 0;
 rule.tz = 'Etc/UTC';
 
-let running = false;
 const _job = schedule.scheduleJob({ rule }, async function () {
-    if (running === false) {
-        const wordOfTheDay = await WordOfTheDay.findOne()
-            .sort({ createdAt: -1 })
-            .exec();
+    wordObj.previousWord = wordObj.currentWord;
+    wordObj.currentWord = wordObj.nextWord;
+    wordObj.nextWord = await setWord();
 
-        wordObj.previousWord = wordOfTheDay.previousWord;
-        wordObj.currentWord = wordOfTheDay.currentWord;
-        wordObj.nextWord = wordOfTheDay.nextWord;
-        running = true;
-    } else {
-        wordObj.previousWord = wordObj.currentWord;
-        wordObj.currentWord = wordObj.nextWord;
-        wordObj.nextWord = await setWord();
-
-        const newWord = new WordOfTheDay({
-            previousWord: wordObj.previousWord,
-            currentWord: wordObj.currentWord,
-            nextWord: wordObj.nextWord,
-        });
-        const _savedWord = await newWord.save();
-    }
+    const newWord = new WordOfTheDay({
+        previousWord: wordObj.previousWord,
+        currentWord: wordObj.currentWord,
+        nextWord: wordObj.nextWord,
+    });
+    const _savedWord = await newWord.save();
 });
