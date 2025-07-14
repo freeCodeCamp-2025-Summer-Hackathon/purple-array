@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { Loader, CalendarFold } from "lucide-react"
-import { Link, useParams } from "react-router"
+import { useParams } from "react-router-dom"
+import JournalCard from "./JournalCard"
 
 const JournalEntriesList = () => {
 
@@ -30,12 +31,7 @@ const JournalEntriesList = () => {
               {isLoading && <div className="flex gap-3"><Loader />Loading...</div>}
               {entries.map((entry)=>{
                 return (
-                  <Link to={`${entry.date}`} key={entry.date} className="flex flex-1 basis-1/3 m-1 min-w-fit p-6 bg-base-100 rounded-md"> 
-                    <div className="flex justify-between w-full">
-                      <div className="flex gap-3"><CalendarFold className="text-primary" strokeWidth={1}/> {entry.date}</div>
-                      <div>{entry.word}</div>                  
-                    </div>
-                  </Link>
+                  <JournalCard key={entry.date} date={entry.date} word={entry.word} />
                 )
               })}
             </div>
