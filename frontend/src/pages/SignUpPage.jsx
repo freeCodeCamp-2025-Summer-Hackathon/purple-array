@@ -20,7 +20,7 @@ const SignUpPage = () => {
 				headers: {
 					'Content-Type': 'application/json',
 				},
-				credentials: 'include',
+				// credentials: 'include',
 				body: JSON.stringify({ email, password }),
 			});
 
@@ -29,6 +29,7 @@ const SignUpPage = () => {
 			if (res.ok) {
 				console.log('Sign up successful!', data);
 				alert('Sign up complete! You can now log in.');
+				console.log ({res, data});
 				// Optionally redirect to /signin
 			} else {
 				alert(data.message || 'Sign up failed');

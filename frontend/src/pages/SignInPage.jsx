@@ -14,7 +14,7 @@ const SignInPage = () => {
 				headers: {
 					'Content-Type': 'application/json',
 				},
-				credentials: 'include',
+				withCredentials: true,
 				body: JSON.stringify({ email, password }),
 			});
 
@@ -22,6 +22,7 @@ const SignInPage = () => {
 
 			if (res.ok) {
 				console.log('Login successful!', data);
+							console.log ({res, data});
 				// TODO: Redirect user after login (e.g., to /journal)
 			} else {
 				alert(data.message || 'Login failed');
