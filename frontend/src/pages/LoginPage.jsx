@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Navbar from '../components/generic/Navbar';
-import { Link, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 import toast from 'react-hot-toast';
 
 const LoginPage = () => {
