@@ -1,22 +1,5 @@
-import Word from '../models/Word.js';
-import User from '../models/User.js';
-import schedule from 'node-schedule';
-import { setWord } from '../helpers/wordHelper.js';
-
-const wordObj = {
-    pastWord: {},
-    currentWord: {},
-};
-
-const rule = new schedule.RecurrenceRule();
-rule.hour = 0;
-rule.minute = 0;
-rule.tz = 'Etc/UTC';
-
-const _job = schedule.scheduleJob(rule, async function () {
-    wordObj.pastWord = wordObj.currentWord;
-    wordObj.currentWord = await setWord();
-});
+import { Word } from '../models/Word.js';
+import { wordObj } from '../utils/wordHelper.js';
 
 export async function addWord(req, res) {
     try {
@@ -32,9 +15,26 @@ export async function addWord(req, res) {
 
 export async function getWord(req, res) {
     try {
-        const user = await User.findById(req.params.id);
-        console.log(user);
-        res.status(200).json(wordObj.currentWord);
+        const userID = req.id;
+        const lastUsed = new Date();
+
+        const words = await Word.findById(wordObj.currentWord._id);
+
+        let history = [];
+        if (words !== null) {
+            history = words.history;
+        }
+        history.push({ id: userID, lastUsed });
+        const _updatedWord = await Word.findByIdAndUpdate(
+            wordObj.currentWord._id,
+            {
+                lastUsed,
+                history,
+            }
+        );
+
+        const { word, pronunciation, definition } = wordObj.currentWord;
+        res.status(200).json({ word, pronunciation, definition });
     } catch (error) {
         console.error('Error in getWord controller', error);
         res.status(500).json({ message: 'Internal server error' });

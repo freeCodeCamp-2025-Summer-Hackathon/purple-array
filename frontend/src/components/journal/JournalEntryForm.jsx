@@ -1,7 +1,6 @@
 import { Link } from 'react-router';
 import { useState } from 'react';
-
-import { formatDate } from '../../lib/utils';
+import { formatDate } from '../../util/helper/formatDate';
 
 const JournalEntryForm = () => {
 	const [primaryPrompt, setPrimaryPrompt] = useState('');

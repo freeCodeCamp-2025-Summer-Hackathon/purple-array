@@ -1,4 +1,5 @@
 import Navbar from '../components/generic/Navbar';
+import JournalEntriesList from '../components/journal/JournalEntriesList';
 
 const JournalCollectionPage = () => {
   return (
@@ -9,6 +10,7 @@ const JournalCollectionPage = () => {
                 Journal Collection
             </h1>
             {/*Journal collection Components*/}
+            <JournalEntriesList />
         </div>
     </div>
   );
