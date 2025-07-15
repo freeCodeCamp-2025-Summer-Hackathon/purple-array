@@ -1,4 +1,4 @@
-import { useWordOfTheDay } from '../../util/hooks/useWordOfTheDay';
+import { useWordOfTheDay } from '../../util/hooks/useWord';
 
 function WordOfTheDay() {
     const hookResult = useWordOfTheDay();
