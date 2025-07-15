@@ -19,8 +19,7 @@ createRoot(document.getElementById('root')).render(
 			<Toaster
 				position={allToasterOptions.position}
 				toastOptions={{
-					duration: 4000,
-					removeDelay: 500,
+					duration: 2000,
 					style: allToasterOptions.styles.style,
 					icon: <MessageCircleHeart />,
 

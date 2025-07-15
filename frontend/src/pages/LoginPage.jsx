@@ -1,12 +1,21 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Navbar from '../components/generic/Navbar';
+import { Link, useNavigate } from 'react-router';
+import toast from 'react-hot-toast';
 
-const SignInPage = () => {
+const LoginPage = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
+	const navigate = useNavigate();
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+
+		if (!email.trim() || !password.trim()) {
+			toast.error(`All fields are required.`);
+			return;
+		}
 
 		try {
 			const res = await fetch('http://localhost:5001/login', {
@@ -14,22 +23,19 @@ const SignInPage = () => {
 				headers: {
 					'Content-Type': 'application/json',
 				},
-				withCredentials: true,
 				body: JSON.stringify({ email, password }),
 			});
 
 			const data = await res.json();
 
 			if (res.ok) {
-				console.log('Login successful!', data);
-							console.log ({res, data});
-				// TODO: Redirect user after login (e.g., to /journal)
-			} else {
-				alert(data.message || 'Login failed');
+				toast.success(data.message || 'Login Successful!');
+				setTimeout(() => {
+					navigate('/');
+				}, 2000);
 			}
 		} catch (err) {
-			console.error('Error logging in:', err);
-			alert('An error occurred');
+			toast.error(data.message || 'Login failed. Please try again.');
 		}
 	};
 
@@ -38,7 +44,9 @@ const SignInPage = () => {
 			<Navbar />
 			<div className="flex justify-center items-center pt-20 px-4">
 				<div className="card w-full max-w-md bg-base-200 shadow-xl border border-base-300 p-10 space-y-6">
-					<h2 className="text-center text-3xl font-bold text-primary">Sign In</h2>
+					<h2 className="text-center text-3xl font-bold text-primary">
+						Log In
+					</h2>
 					<form onSubmit={handleSubmit} className="space-y-4">
 						<div>
 							<label className="label">
@@ -74,4 +82,4 @@ const SignInPage = () => {
 	);
 };
 
-export default SignInPage;
+export default LoginPage;
