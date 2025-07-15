@@ -11,11 +11,14 @@ import {
 	CloudAlert,
 	Bubbles,
 } from 'lucide-react';
+import { CookiesProvider } from 'react-cookie';
 
 createRoot(document.getElementById('root')).render(
 	<StrictMode>
 		<BrowserRouter>
-			<App />
+			<CookiesProvider>
+				<App />
+			</CookiesProvider>
 			<Toaster
 				position={allToasterOptions.position}
 				toastOptions={{

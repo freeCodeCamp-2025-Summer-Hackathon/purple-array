@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Navbar from '../components/generic/Navbar';
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import toast from 'react-hot-toast';
 
 const LoginPage = () => {
@@ -31,7 +31,7 @@ const LoginPage = () => {
 			if (res.ok) {
 				toast.success(data.message || 'Login Successful!');
 				setTimeout(() => {
-					navigate('/');
+					// navigate('/');
 				}, 2000);
 			}
 		} catch (err) {
@@ -75,6 +75,15 @@ const LoginPage = () => {
 						<button type="submit" className="btn btn-primary w-full">
 							Log In
 						</button>
+
+						<div className="card mt-4">
+							<Link
+								to="/signup"
+								className="mx-auto hover:text-primary hover:underline"
+							>
+								Need to create an account? Please Signup.
+							</Link>
+						</div>
 					</form>
 				</div>
 			</div>
