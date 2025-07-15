@@ -30,9 +30,57 @@ const wordSchema = new mongoose.Schema(
 
 const wordOfTheDaySchema = new mongoose.Schema(
     {
-        previousWord: wordSchema,
-        currentWord: wordSchema,
-        nextWord: wordSchema,
+        previousWord: {
+            word: {
+                type: String,
+                required: [true, 'please provide a word'],
+                minlength: 2,
+            },
+            pronunciation: {
+                type: String,
+                required: [true, 'please provide the pronunciation'],
+                minlength: 2,
+            },
+            definition: {
+                type: String,
+                required: [true, 'please provide the definition'],
+                minlength: 2,
+            },
+        },
+        currentWord: {
+            word: {
+                type: String,
+                required: [true, 'please provide a word'],
+                minlength: 2,
+            },
+            pronunciation: {
+                type: String,
+                required: [true, 'please provide the pronunciation'],
+                minlength: 2,
+            },
+            definition: {
+                type: String,
+                required: [true, 'please provide the definition'],
+                minlength: 2,
+            },
+        },
+        nextWord: {
+            word: {
+                type: String,
+                required: [true, 'please provide a word'],
+                minlength: 2,
+            },
+            pronunciation: {
+                type: String,
+                required: [true, 'please provide the pronunciation'],
+                minlength: 2,
+            },
+            definition: {
+                type: String,
+                required: [true, 'please provide the definition'],
+                minlength: 2,
+            },
+        },
     },
     { timestamps: true, minimize: false }
 );
