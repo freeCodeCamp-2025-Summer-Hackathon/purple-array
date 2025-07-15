@@ -1,7 +1,7 @@
-import { useWordOfTheDay } from '../../util/hooks/useWord';
+import { useWord } from '../../util/hooks/useWord';
 
 function WordOfTheDay() {
-    const hookResult = useWordOfTheDay();
+    const hookResult = useWord();
     const wordData = hookResult.wordData;
     const loading = hookResult.loading;
 

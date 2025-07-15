@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-export const useWordOfTheDay = () => {
+export const useWord = () => {
     const [words, setWords] = useState([]);
 	const [loading, setLoading] = useState(true);
 

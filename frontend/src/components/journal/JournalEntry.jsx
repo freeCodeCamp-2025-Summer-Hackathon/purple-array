@@ -2,12 +2,12 @@ import { Link } from 'react-router';
 import { useState, useEffect } from 'react';
 
 import { formatDate } from '../../util/helper/formatDate';
-import { useWordOfTheDay } from '../../util/hooks/useWordOfTheDay';
+import { useWord } from '../../util/hooks/useWord';
 
 const JournalEntry = ({ date }) => {
     const [response, setResponse] = useState(null);
     const [loading, setLoading] = useState(true);
-    const hookResult = useWordOfTheDay();
+    const hookResult = useWord();
     
     const currentWord = hookResult.wordData?.word || 'WORD';
     const displayDate = formatDate(new Date());
