@@ -38,8 +38,8 @@ const setWord = async () => {
 // default value of a component is null
 // if minute not explicitly set to 0, rule will run every minute
 const rule = new schedule.RecurrenceRule();
-//rule.hour = 0;
-//rule.minute = 0;
+rule.hour = 0;
+rule.minute = 0;
 rule.tz = 'Etc/UTC';
 
 const _job = schedule.scheduleJob({ rule }, async function () {
