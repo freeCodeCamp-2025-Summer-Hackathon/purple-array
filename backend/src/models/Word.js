@@ -20,12 +20,10 @@ const wordSchema = new mongoose.Schema(
         lastUsed: {
             type: Date,
         },
-        history: [
-            {
-                id: String,
-                lastUsed: Date,
-            },
-        ],
+        history: {
+            type: [Date],
+            default: [],
+        },
     },
     { timestamps: true, minimize: false }
 );
