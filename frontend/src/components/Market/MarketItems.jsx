@@ -8,7 +8,7 @@ function MarketItems() {
 	console.log({ products, isLoading });
 
 	/**********************************************************************/
-	// Lines 12 - 26 will be replaced with the destructured values on line 5
+	// Lines 12 - 26 will be replaced with the destructured values from line 7
 	const [items, setItems] = useState([]);
 	const [loading, setLoading] = useState(true);
 
