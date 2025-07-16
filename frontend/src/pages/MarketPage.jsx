@@ -3,13 +3,9 @@ import { useNavigate } from 'react-router';
 import { useCookies } from 'react-cookie';
 import api from '../lib/axios';
 import Navbar from '../components/generic/Navbar';
-import useProducts from '../util/hooks/useProducts';
 import MarketItems from '../components/Market/MarketItems';
 
 const MarketPage = () => {
-	const { products, isLoading } = useProducts();
-	console.log({ products, isLoading });
-
 	const navigate = useNavigate();
 	const [cookies, _, removeCookie] = useCookies([], {
 		doNotUpdate: false,
