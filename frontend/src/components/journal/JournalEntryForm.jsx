@@ -1,15 +1,29 @@
 import { Link } from 'react-router';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { formatDate } from '../../util/helper/formatDate';
 
-const JournalEntryForm = () => {
+const JournalEntryForm = ({ initialData = {}, onSubmit = () => { }, onDelete = null,
+}) => {
 	const [primaryPrompt, setPrimaryPrompt] = useState('');
 	const [addPromptOne, setAddPromptOne] = useState('');
 	const [addPromptTwo, setAddPromptTwo] = useState('');
 	const [addPromptThree, setAddPromptThree] = useState('');
 
+	useEffect(() => {
+		setPrimaryPrompt(initialData.primaryPrompt || '');
+		setAddPromptOne(initialData.addPromptOne || '');
+		setAddPromptTwo(initialData.addPromptTwo || '');
+		setAddPromptThree(initialData.addPromptThree || '');
+	}, [initialData]);
+
 	const handleSubmit = (event) => {
 		event.preventDefault();
+		onSubmit({
+			primaryPrompt,
+			addPromptOne,
+			addPromptTwo,
+			addPromptThree,
+		});
 	};
 	return (
 		<div>
@@ -27,6 +41,7 @@ const JournalEntryForm = () => {
 						type="text"
 						value={primaryPrompt}
 						onChange={(e) => setPrimaryPrompt(e.target.value)}
+						className='border'
 					/>
 				</label>
 				<label>
@@ -35,6 +50,8 @@ const JournalEntryForm = () => {
 						type="text"
 						value={addPromptOne}
 						onChange={(e) => setAddPromptOne(e.target.value)}
+						className='border'
+
 					/>
 				</label>
 				<label>
@@ -43,6 +60,8 @@ const JournalEntryForm = () => {
 						type="text"
 						value={addPromptTwo}
 						onChange={(e) => setAddPromptTwo(e.target.value)}
+						className='border'
+
 					/>
 				</label>
 				<label>
@@ -51,6 +70,8 @@ const JournalEntryForm = () => {
 						type="text"
 						value={addPromptThree}
 						onChange={(e) => setAddPromptThree(e.target.value)}
+						className='border'
+
 					/>
 				</label>
 				<br />
