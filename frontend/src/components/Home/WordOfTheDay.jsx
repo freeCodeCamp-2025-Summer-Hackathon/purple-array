@@ -1,36 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useWord } from '../../util/hooks/useWord';
 
 function WordOfTheDay() {
-	const [words, setWords] = useState([]);
-	const [loading, setLoading] = useState(true);
+    const hookResult = useWord();
+    const wordData = hookResult.wordData;
+    const loading = hookResult.loading;
 
-	useEffect(() => {
-		fetch('/wordDict.json')
-			.then((res) => res.json())
-			.then((data) => {
-				setWords(data);
-				setLoading(false);
-			})
-			.catch((err) => {
-				console.error('Error loading JSON:', err);
-				setLoading(false);
-			});
-	}, []);
-
-	const getESTDate = () => {
-		const now = new Date();
-		const utc = now.getTime() + now.getTimezoneOffset() * 60000;
-		const estOffset = -5;
-		return new Date(utc + 3600000 * estOffset);
-	};
-
-	let wordIdx = 0;
-	if (words.length > 0) {
-		const estDate = getESTDate();
-		const start = new Date('2025-07-01T00:00:00');
-		const daysSince = Math.floor((estDate - start) / (1000 * 60 * 60 * 24));
-		wordIdx = ((daysSince % 30) + 30) % 30;
-	}
 
 	if (loading) {
 		return (
@@ -45,8 +19,6 @@ function WordOfTheDay() {
 		);
 	}
 
-	const wordData = words[wordIdx];
-
 	return (
 		<div className="flex justify-center px-4 py-10">
 			<div className="card w-full max-w-3xl bg-base-200 shadow-xl border border-base-300 p-10 text-center space-y-6">
@@ -57,7 +29,7 @@ function WordOfTheDay() {
 					{wordData.pronunciation}
 				</p>
 				<p className="text-lg text-base-content/70 whitespace-pre-line">
-  Definition: <b>{words[wordIdx].definition}</b>
+  Definition: <b>{wordData.definition}</b>
 </p>
 
 			</div>
