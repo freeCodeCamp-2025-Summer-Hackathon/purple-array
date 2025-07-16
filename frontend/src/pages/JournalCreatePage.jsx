@@ -1,4 +1,4 @@
-import JournalPage from "./JournalPage";
+import JournalStyleCreateEdit from "../components/journal/JournalStyleCreateEdit";
 
 
 const JournalCreatePage = () => {
@@ -6,7 +6,7 @@ const JournalCreatePage = () => {
         console.log('created')
     }
     return (
-        <JournalPage onSubmit={handleCreate} />
+        <JournalStyleCreateEdit onSubmit={handleCreate} />
     );
 };
 export default JournalCreatePage;

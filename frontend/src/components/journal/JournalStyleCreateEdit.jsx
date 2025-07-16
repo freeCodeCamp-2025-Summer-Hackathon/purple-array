@@ -1,8 +1,8 @@
 import { ArrowLeftIcon } from 'lucide-react';
 import { Link } from 'react-router';
-import JournalEntryForm from '../components/journal/JournalEntryForm'
+import JournalEntryForm from './JournalEntryForm'
 
-const JournalPage = ({ initialData, onSubmit, onDelete }) => {
+const JournalStyleCreateEdit = ({ initialData, onSubmit, onDelete }) => {
     return (
         <div>
             <div className="container px-12 py-20">
@@ -21,4 +21,4 @@ const JournalPage = ({ initialData, onSubmit, onDelete }) => {
         </div>
     );
 };
-export default JournalPage;
+export default JournalStyleCreateEdit;

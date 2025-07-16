@@ -1,4 +1,5 @@
-import JournalPage from "./JournalPage";
+import JournalStyleCreateEdit from "../components/journal/JournalStyleCreateEdit";
+
 const JournalEditPage = () => {
 	const existingEntry = {
 		primaryPrompt: "Existing primary prompt",
@@ -15,7 +16,7 @@ const JournalEditPage = () => {
 
 	return (
 		<div>
-			<JournalPage initialData={existingEntry} onSubmit={onSubmit} onDelete={handleDelete} />
+			<JournalStyleCreateEdit initialData={existingEntry} onSubmit={onSubmit} onDelete={handleDelete} />
 		</div>
 
 	);
