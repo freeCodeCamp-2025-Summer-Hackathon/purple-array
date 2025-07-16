@@ -7,7 +7,7 @@ import JournalEntry from '../components/journal/JournalEntry';
 
 const JournalDisplayPage = () => {
 	const navigate = useNavigate();
-	const [cookies, removeCookie] = useCookies([], {
+	const [cookies, _, removeCookie] = useCookies([], {
 		doNotUpdate: false,
 	});
 
@@ -26,7 +26,6 @@ const JournalDisplayPage = () => {
 				}
 			} catch (err) {
 				console.log({ err });
-				navigate('/login');
 			}
 		};
 		verifyCookie();

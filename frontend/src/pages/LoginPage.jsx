@@ -24,7 +24,7 @@ const LoginPage = () => {
 				{ email, password },
 				{ withCredentials: true }
 			);
-			console.log({ data });
+
 			const { success, message } = data;
 			if (success) {
 				toast.success(message || 'Login Successful!');

@@ -8,11 +8,10 @@ import MarketItems from '../components/Market/MarketItems';
 
 const MarketPage = () => {
 	const { products, isLoading } = useProducts();
-	//this log will show you the shape of the data being returned, but should be removed before we ship
-	console.log({ isLoading, products });
+	console.log({ products, isLoading });
 
 	const navigate = useNavigate();
-	const [cookies, removeCookie, updateCookies] = useCookies([], {
+	const [cookies, _, removeCookie] = useCookies([], {
 		doNotUpdate: false,
 	});
 
@@ -31,7 +30,6 @@ const MarketPage = () => {
 				}
 			} catch (err) {
 				console.log({ err });
-				navigate('/login');
 			}
 		};
 		verifyCookie();

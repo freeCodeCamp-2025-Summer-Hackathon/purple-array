@@ -71,14 +71,18 @@ const Navbar = () => {
 								</p>
 							</Link>
 						</div>
-						<button
-							className="btn btn-outline btn-primary"
-							onClick={() => {
-								toast.error('Logout not functional yet!');
-							}}
-						>
-							Logout
-						</button>
+
+						{/* This button will remain conditionally not visible for now, until logout can be refactored */}
+						{false && (
+							<button
+								className="btn btn-outline btn-primary"
+								onClick={() => {
+									toast.error('Logout not functional yet!');
+								}}
+							>
+								Logout
+							</button>
+						)}
 					</div>
 				</div>
 			</header>

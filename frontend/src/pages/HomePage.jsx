@@ -7,7 +7,7 @@ import WordOfTheDay from '../components/Home/WordOfTheDay';
 
 const HomePage = () => {
 	const navigate = useNavigate();
-	const [cookies, removeCookie, updateCookies] = useCookies([], {
+	const [cookies, _, removeCookie] = useCookies([], {
 		doNotUpdate: false,
 	});
 
@@ -15,7 +15,6 @@ const HomePage = () => {
 		const verifyCookie = async () => {
 			if (!cookies.token) {
 				navigate('/login');
-				console.log(`IF: Cookies.token: ` + cookies.token);
 			}
 			console.log({ cookies });
 			try {
@@ -26,9 +25,7 @@ const HomePage = () => {
 					removeCookie('token'), navigate('/login');
 				}
 			} catch (err) {
-				console.log(`CATCH: Cookies.token: ` + cookies.token);
 				console.log({ err });
-				navigate('/login');
 			}
 		};
 		verifyCookie();
@@ -48,9 +45,11 @@ const HomePage = () => {
 				</h1>
 			</div>
 			<WordOfTheDay />
-			<button className="btn btn-outline" onClick={handleLogout}>
-				Logout
-			</button>
+			<div className="card">
+				<button className="btn btn-outline mx-auto" onClick={handleLogout}>
+					Logout
+				</button>
+			</div>
 		</div>
 	);
 };

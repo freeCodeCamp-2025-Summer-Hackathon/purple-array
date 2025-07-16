@@ -7,7 +7,7 @@ import SettingsOptions from '../components/settings/SettingsOptions';
 
 const SettingsPage = () => {
 	const navigate = useNavigate();
-	const [cookies, removeCookie] = useCookies([], {
+	const [cookies, _, removeCookie] = useCookies([], {
 		doNotUpdate: false,
 	});
 
@@ -26,7 +26,6 @@ const SettingsPage = () => {
 				}
 			} catch (err) {
 				console.log({ err });
-				navigate('/login');
 			}
 		};
 		verifyCookie();
