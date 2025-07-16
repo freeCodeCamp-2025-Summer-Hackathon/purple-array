@@ -20,7 +20,7 @@ const JournalDisplayPage = () => {
 			try {
 				const { data } = await api.post('/', {}, { withCredentials: true });
 				const { status } = data;
-				console.log({ status });
+
 				if (!status) {
 					removeCookie('token'), navigate('/login');
 				}

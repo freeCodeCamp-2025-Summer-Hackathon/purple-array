@@ -16,11 +16,11 @@ const HomePage = () => {
 			if (!cookies.token) {
 				navigate('/login');
 			}
-			console.log({ cookies });
+
 			try {
 				const { data } = await api.post('/', {}, { withCredentials: true });
 				const { status } = data;
-				console.log({ status });
+
 				if (!status) {
 					removeCookie('token'), navigate('/login');
 				}
