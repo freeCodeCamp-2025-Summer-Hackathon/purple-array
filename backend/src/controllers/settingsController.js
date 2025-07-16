@@ -1,5 +1,5 @@
 import User from '../models/User.js';
-import { checkSettings } from '../utils/inventoryHelper.js';
+import { checkSettings } from '../utils/settingsHelper.js';
 
 export async function getAllSettings(req, res) {
     try {
