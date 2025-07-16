@@ -1,5 +1,5 @@
 import User from '../models/User.js';
-import { checkInventory, checkTimezone } from '../utils/inventoryHelper.js';
+import { checkSettings } from '../utils/inventoryHelper.js';
 
 export async function getAllSettings(req, res) {
     try {
@@ -17,10 +17,9 @@ export async function patchSettings(req, res) {
     try {
         const user = await User.findById(req.id, 'settings inventory -_id'); // returns only settings and inventory field, removes _id
         const { timezone, theme, font, ink, parchment } = req.body;
-        const setting = { theme, font, ink, parchment };
+        const settings = { timezone, theme, font, ink, parchment };
 
-        const _updatedTimezone = await checkTimezone(timezone);
-        const updatedSettings = await checkInventory(setting, user.inventory);
+        const updatedSettings = await checkSettings(settings, user.inventory);
 
         if (!updatedSettings)
             return res.status(400).json({ message: 'Settings not found' });
