@@ -11,6 +11,7 @@ import authRoutes from './routes/authRoutes.js';
 import inventoryRoutes from './routes/inventoryRoutes.js';
 import journalRoutes from './routes/journalRoutes.js';
 import { userVerification } from './middleware/authMiddleware.js';
+import { initWord } from './utils/wordHelper.js';
 import coinsRoutes from './routes/coinsRoutes.js';
 import usersRoutes from './routes/usersRoutes.js';
 
@@ -40,5 +41,6 @@ app.use('/coins', userVerification, coinsRoutes);
 app.use('/users', userVerification, usersRoutes);
 
 app.listen(PORT, () => {
+    initWord();
     console.log('Server started on PORT:', PORT);
 });
