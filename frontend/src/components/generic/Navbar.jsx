@@ -1,6 +1,6 @@
 import toast from 'react-hot-toast';
 import { Link } from 'react-router';
-import { Sparkles, BookOpen, Store, Cog } from 'lucide-react';
+import { Sparkles, NotebookPen, Store, Cog } from 'lucide-react';
 
 const Navbar = () => {
 	return (
@@ -26,7 +26,7 @@ const Navbar = () => {
 
 						{/* Journal Icon & Link */}
 						<div className="flex gap-4">
-							<BookOpen
+							<NotebookPen
 								className="text-neutral fill-accent size-8"
 								strokeWidth={1}
 							/>
@@ -71,14 +71,18 @@ const Navbar = () => {
 								</p>
 							</Link>
 						</div>
-						<button
-							className="btn btn-outline btn-primary"
-							onClick={() => {
-								toast.error('Logout not functional yet!');
-							}}
-						>
-							Logout
-						</button>
+
+						{/* This button will remain conditionally not visible for now, until logout can be refactored */}
+						{false && (
+							<button
+								className="btn btn-outline btn-primary"
+								onClick={() => {
+									toast.error('Logout not functional yet!');
+								}}
+							>
+								Logout
+							</button>
+						)}
 					</div>
 				</div>
 			</header>
