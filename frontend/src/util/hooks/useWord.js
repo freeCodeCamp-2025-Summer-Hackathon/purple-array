@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 export const useWord = () => {
-    const [words, setWords] = useState([]);
+	const [words, setWords] = useState([]);
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
@@ -32,13 +32,10 @@ export const useWord = () => {
 		wordIdx = ((daysSince % 30) + 30) % 30;
 	}
 
-    const wordData = words[wordIdx];
+	const wordData = words[wordIdx];
 
-    console.log('Hook Data:', wordData);
-    
-  return {
-    wordData,
-    loading
-  };
+	return {
+		wordData,
+		loading,
+	};
 };
-
