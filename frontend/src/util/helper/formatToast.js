@@ -1,8 +1,6 @@
 const allToasterOptions = {
 	position: 'top-center',
 	styles: {
-		duration: 4000,
-		removeDelay: 500,
 		style: {
 			border: '1px solid #000000',
 			background: '#1affff',
