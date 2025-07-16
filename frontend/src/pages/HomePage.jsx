@@ -2,40 +2,44 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useCookies } from 'react-cookie';
 import api from '../lib/axios';
+import toast from 'react-hot-toast';
 import axios from 'axios';
 import Navbar from '../components/generic/Navbar';
 import WordOfTheDay from '../components/Home/WordOfTheDay';
 
 const HomePage = () => {
 	const navigate = useNavigate();
-	const [cookies, removeCookie] = useCookies([]);
+	const [cookies, removeCookie, updateCookies] = useCookies([], {
+		doNotUpdate: false,
+	});
 
 	useEffect(() => {
 		const verifyCookie = async () => {
 			if (!cookies.token) {
-				// navigate('/login');
-				console.log('there is no token');
+				navigate('/login');
 			}
-
-			const { data } = await axios.post(
-				'http://localhost:5001',
-				{},
-				{
-					withCredentials: true,
+			console.log({ cookies });
+			try {
+				const { data } = await axios.post(
+					'http://localhost:5001/',
+					{},
+					{ withCredentials: true }
+				);
+				const { status } = data;
+				console.log({ status });
+				if (!status) {
+					removeCookie('token'), navigate('/login');
 				}
-			);
-			const { status } = { data };
-			console.log({ status });
-			return (
-				status ? toast(`Hello`) : removeCookie('token'), navigate('/login')
-			);
+			} catch (err) {
+				console.log({ err });
+			}
 		};
 		verifyCookie();
-	}, [cookies, navigate, removeCookie]);
+	}, [navigate, cookies, removeCookie]);
 
-	const Logout = () => {
+	const handleLogout = () => {
 		removeCookie('token');
-		// navigate('/signup');
+		navigate('/login');
 	};
 
 	return (
@@ -47,7 +51,7 @@ const HomePage = () => {
 				</h1>
 			</div>
 			<WordOfTheDay />
-			<button className="btn btn-outline" onClick={Logout}>
+			<button className="btn btn-outline" onClick={handleLogout}>
 				Logout
 			</button>
 		</div>

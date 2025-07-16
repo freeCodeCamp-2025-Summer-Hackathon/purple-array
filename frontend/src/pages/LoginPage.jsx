@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Navbar from '../components/generic/Navbar';
 import { Link, useNavigate } from 'react-router';
 import toast from 'react-hot-toast';
+import api from '../lib/axios';
 
 const LoginPage = () => {
 	const [email, setEmail] = useState('');
@@ -18,24 +19,20 @@ const LoginPage = () => {
 		}
 
 		try {
-			const res = await fetch('http://localhost:5001/login', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({ email, password }),
-			});
-
-			const data = await res.json();
-
-			if (res.ok) {
-				toast.success(data.message || 'Login Successful!');
-				setTimeout(() => {
-					// navigate('/');
-				}, 2000);
+			const { data } = await api.post(
+				'/login',
+				{ email, password },
+				{ withCredentials: true }
+			);
+			console.log({ data });
+			const { success, message } = data;
+			if (success) {
+				toast.success(message || 'Login Successful!');
+				navigate('/');
 			}
-		} catch (err) {
-			toast.error(data.message || 'Login failed. Please try again.');
+		} catch (error) {
+			toast.error('Login failed. Please try again.');
+			console.log(error);
 		}
 	};
 

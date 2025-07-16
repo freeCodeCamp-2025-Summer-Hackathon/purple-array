@@ -1,6 +1,7 @@
 import { useState, useTransition } from 'react';
 import { Link, useNavigate } from 'react-router';
 import Navbar from '../components/generic/Navbar';
+import axios from 'axios';
 import toast from 'react-hot-toast';
 
 const SignupPage = () => {
@@ -23,27 +24,20 @@ const SignupPage = () => {
 		}
 
 		try {
-			const res = await fetch('http://localhost:5001/signup', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-
-				body: JSON.stringify({ email, password }),
-			});
-
-			const data = await res.json();
-
-			if (res.ok) {
-				toast.success('Sign up complete!');
-				setTimeout(() => {
-					navigate('/');
-				}, 2000);
-			} else {
-				alert(data.message || 'Sign up failed.');
+			const { data } = await axios.post(
+				'http://localhost:5001/signup',
+				{ email, password },
+				{ withCredentials: true }
+			);
+			const { success, message } = data;
+			console.log(data);
+			if (success) {
+				toast.success(message || 'Account created successfully!');
+				navigate('/');
 			}
-		} catch (err) {
-			toast.error('An error occurred.');
+		} catch (error) {
+			toast.error('Account creation failed. Please try again');
+			console.log(error);
 		}
 	};
 
