@@ -1,9 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { useCookies } from 'react-cookie';
 import api from '../lib/axios';
-import toast from 'react-hot-toast';
-import axios from 'axios';
 import Navbar from '../components/generic/Navbar';
 import WordOfTheDay from '../components/Home/WordOfTheDay';
 
@@ -17,21 +15,20 @@ const HomePage = () => {
 		const verifyCookie = async () => {
 			if (!cookies.token) {
 				navigate('/login');
+				console.log(`IF: Cookies.token: ` + cookies.token);
 			}
 			console.log({ cookies });
 			try {
-				const { data } = await axios.post(
-					'http://localhost:5001/',
-					{},
-					{ withCredentials: true }
-				);
+				const { data } = await api.post('/', {}, { withCredentials: true });
 				const { status } = data;
 				console.log({ status });
 				if (!status) {
 					removeCookie('token'), navigate('/login');
 				}
 			} catch (err) {
+				console.log(`CATCH: Cookies.token: ` + cookies.token);
 				console.log({ err });
+				navigate('/login');
 			}
 		};
 		verifyCookie();
