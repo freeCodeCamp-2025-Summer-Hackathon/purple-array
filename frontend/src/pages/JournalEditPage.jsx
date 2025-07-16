@@ -1,22 +1,23 @@
-import { ArrowLeftIcon } from 'lucide-react';
-import JournalEntryForm from '../components/journal/JournalEntryForm';
-import { Link } from 'react-router';
-
+import JournalPage from "./JournalPage";
 const JournalEditPage = () => {
-	return (
-		<div className="min-h-screen">
-			<div className="container px-12 py-20">
-				<div className="max-w-6xl mx-auto">
-					<Link to={'/journal'} className="btn btn-outline btn-primary mb-8">
-						<ArrowLeftIcon className="size-5" />
-						Back to Journal
-					</Link>
+	const existingEntry = {
+		primaryPrompt: "Existing primary prompt",
+		addPromptOne: "Existing prompt 1",
+		addPromptTwo: "Existing prompt 2",
+		addPromptThree: "Existing prompt 3",
+	}
+	const onSubmit = () => {
+		console.log('submitted')
+	}
+	const handleDelete = () => {
+		console.log('delete');
+	}
 
-					{/* Form to edit/update journal entry */}
-					<JournalEntryForm />
-				</div>
-			</div>
+	return (
+		<div>
+			<JournalPage initialData={existingEntry} onSubmit={onSubmit} onDelete={handleDelete} />
 		</div>
+
 	);
 };
 
