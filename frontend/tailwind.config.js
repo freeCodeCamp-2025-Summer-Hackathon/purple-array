@@ -7,6 +7,9 @@ export default {
 	theme: {
 		extend: {
 			fontFamily: {},
+			animation: {
+				'spin-slow': 'spin 3s linear infinite',
+			},
 		},
 	},
 	plugins: [typography, daisyui],
