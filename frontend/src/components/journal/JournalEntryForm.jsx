@@ -2,7 +2,7 @@ import { Link } from "react-router";
 import { useState, useEffect } from "react";
 import { formatDate } from "../../util/helper/formatDate";
 import { useWord } from "../../util/hooks/useWord";
-import { Trash2 } from "lucide-react";
+import { Trash2, CircleDollarSign } from "lucide-react";
 
 const JournalEntryForm = (
   {
@@ -62,7 +62,7 @@ const JournalEntryForm = (
     <div className="container">
       <div className="card mx-auto max-w-3xl bg-base-200 p-6">
         <header className="flex flex-col items-start">
-          <span className="text-sm uppercase tracking-widest text-primary font-semibold bg-primary/10 px-3 py-1 rounded-md">
+          <span className="text-xl uppercase tracking-widest text-primary font-semibold bg-primary/10 px-3 py-1 rounded-md">
             {formatDate(new Date())}
           </span>
           {/* <Link to={""} className="btn btn-sm btn-error text-white">
@@ -79,8 +79,12 @@ const JournalEntryForm = (
                 {/* *********************************************************************** */}
                 today?
               </h2>
-              <span className="text-yellow-500 text-sm font-medium flex items-center">
-                🪙 +3
+              <span className="text-base font-bold text-yellow-600 flex items-center gap-1">
+                <CircleDollarSign
+                  className="text-violet-950 fill-yellow-500 size-8"
+                  strokeWidth={1}
+                />{" "}
+                +3
               </span>
             </label>
             <textarea
@@ -95,9 +99,13 @@ const JournalEntryForm = (
 
           <hr className="my-6 border-t border-base-300" />
           <div className="mt-4 flex items-center justify-between">
-            <h3 className="text-m font-semibold">Additional Reflections</h3>
-            <span className="text-yellow-500 text-sm font-medium flex items-center gap-1">
-              🪙 +1
+            <h3 className="text-base font-semibold">Additional Reflections</h3>
+            <span className="text-base text-yellow-600 font-bold flex items-center gap-1">
+              <CircleDollarSign
+                className="text-violet-950 fill-yellow-500 size-8"
+                strokeWidth={1}
+              />{" "}
+              +1
             </span>
           </div>
 
@@ -176,11 +184,16 @@ const JournalEntryForm = (
             />
           </div>
 
-          <div className="flex justify-between items-center mt-6 px-5">
-            <Link to="/journal" className="btn-sm text-primary">
-              ← Back to Journal
-            </Link>
-            <button type="submit" className="btn btn-primary btn-sm mx-5 px-5">
+          <div className="flex justify-between items-center mt-6">
+            <a className="link link-hover">
+              <Link
+                to="/journal"
+                className="text-lg font-semibold btn-u text-primary"
+              >
+                ← Back to Journal
+              </Link>
+            </a>
+            <button type="submit" className="btn btn-primary text-lg px-10">
               Save
             </button>
           </div>
