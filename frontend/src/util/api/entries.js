@@ -14,7 +14,6 @@ export const fetchEntries = async () => {
 			for (let entry of data.data.journal) {
 				entriesArray.push(entry);
 			}
-			console.log(data.data.journal);
 		}
 		return entriesArray;
 	} catch (error) {
