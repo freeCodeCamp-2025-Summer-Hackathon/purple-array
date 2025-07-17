@@ -16,7 +16,8 @@
     "react-cookie": "^8.0.1",
     "react-dom": "^19.1.0",
     "react-hot-toast": "^2.5.2",
-    "react-router": "^7.6.3"
+    "react-router": "^7.6.3",
+    "react-router-dom": "^7.7.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.29.0",

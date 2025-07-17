@@ -162,19 +162,21 @@ const JournalEntry = ({ date }) => {
                 <div className="min-h-24 w-full p-4"></div>
               )}
             </div>{" "}
+            <div className="w-full max-w-3xl mt-4 flex justify-start">
+              <Link
+                to={"/journal/collection"}
+                className="btn btn rounded-full bg-neutral-300 btn-lg mt-2"
+              >
+                Past Journal Entries
+              </Link>
+            </div>
           </div>
+
           {/* </div> */}
           {/* </div> */}
           {/* </div> */}
         </div>
-        <div className="w-full max-w-3xl mt-4 flex justify-center">
-          <Link
-            to={"/journal/collection"}
-            className="btn btn rounded-full bg-neutral-200 btn-lg mt-2"
-          >
-            Past Journal Entries
-          </Link>
-        </div>
+
         {/* </div> */}
       </div>
 
