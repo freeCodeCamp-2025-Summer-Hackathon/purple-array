@@ -183,16 +183,15 @@ const JournalEntryForm = (
 							placeholder="Write your response here..."
 						/>
 					</div>
-
 					<div className="flex justify-between items-center mt-6">
-						<a className="link link-hover">
-							<Link
-								to="/journal"
-								className="text-lg font-semibold btn-u text-primary"
-							>
-								← Back to Journal
-							</Link>
-						</a>
+
+						<Link
+							to="/journal"
+							className="text-lg font-semibold btn-u text-primary hover:underline"
+						>
+							← Back to Journal
+						</Link>
+
 						<button type="submit" className="btn btn-primary text-lg px-10">
 							Save
 						</button>

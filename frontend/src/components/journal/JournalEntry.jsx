@@ -3,14 +3,15 @@ import { useState, useEffect } from 'react';
 import { formatDate } from '../../util/helper/formatDate';
 import { useWord } from '../../util/hooks/useWord';
 import { Pencil, Plus } from 'lucide-react';
+import AnimatePulseLoader from '../generic/AnimatePulseLoader';
 
 const JournalEntry = ({ date }) => {
-	const [response, setResponse] = useState(null);
-	const [loading, setLoading] = useState(true);
-	const hookResult = useWord();
+	const { word, isLoading } = useWord();
 
-	const currentWord = hookResult.wordData?.word || 'WORD';
-	const displayDate = formatDate(new Date());
+	// const [loading, setLoading] = useState(true);
+	// const displayDate = formatDate(new Date());
+
+	const [response, setResponse] = useState(null);
 
 	useEffect(() => {
 		const currentDate = formatDate(new Date());
@@ -23,46 +24,39 @@ const JournalEntry = ({ date }) => {
 					return entryDate === targetDate;
 				});
 				setResponse(targetEntry || null);
-				setLoading(false);
+				// setLoading(false);
 			})
 			.catch((err) => {
 				console.error('Error loading response:', err);
-				setLoading(false);
+				// setLoading(false);
 			});
 	}, []);
 
-	if (loading) {
-		return (
-			<div className="flex justify-center items-center h-64">
-				<div className="card w-full max-w-3xl bg-base-200 p-10 shadow-md animate-pulse">
-					<div className="h-6 bg-base-300 rounded w-1/3 mb-4"></div>
-					<div className="h-4 bg-base-300 rounded w-2/3 mb-2"></div>
-					<div className="h-4 bg-base-300 rounded w-full mb-1"></div>
-					<div className="h-4 bg-base-300 rounded w-5/6"></div>
-				</div>
-			</div>
-		);
-	}
 
 	return (
 		<div className="min-h-screen">
-			<div className="flex flex-col items-center justify-center p-10">
+			{isLoading && <AnimatePulseLoader />}
+
+      <div className="flex flex-col items-center justify-center p-10">
+			<header className="flex justify-center"></header>
+			<div className="flex flex-col items-center justify-center p-4">
+
 				{/*Podium Background*/}
 				{/* <div
         // className="bg-cover bg-center rounded-2xl shadow-2xl p-8 min-w-full min-h-96"
         // style={{ backgroundImage: 'url("../../../assets/woodSurface.jpg")' }}
         > */}
 				<div className="container">
-					<div className="card mx-auto max-w-3xl bg-base-200 p-8 shadow-md">
+					<div className="card mx-auto max-w-3xl bg-base-200 p-6 shadow-md">
 						<div className="grid grid-cols-[auto_1fr_auto] items-center gap-2">
 							<div>
-								<h2 className="text-2xl font-semibold text-secondary">
-									{response?.word || currentWord}
+								<h2 className="mb-2 text-2xl font-semibold text-primary">
+									{word.word}
 								</h2>
 								{/*Ternary option for edit/create*/}
 								<span className="text-xl uppercase tracking-widest text-secondary font-semibold mt-0">
 									{formatDate(new Date())}
-								</span>{' '}
+								</span>
 							</div>
 							<div></div>
 							<div>
@@ -159,22 +153,20 @@ const JournalEntry = ({ date }) => {
 							) : (
 								<div className="min-h-24 w-full p-4"></div>
 							)}
-						</div>{' '}
-						<div className="w-full max-w-3xl mt-4 flex justify-start">
-							<Link
-								to={'/journal/collection'}
-								className="btn btn rounded-full bg-neutral-300 btn-lg mt-2"
-							>
-								Past Journal Entries
-							</Link>
 						</div>
 					</div>
-
 					{/* </div> */}
 					{/* </div> */}
 					{/* </div> */}
 				</div>
-
+				<div className="w-full max-w-3xl mt-4 flex justify-center">
+					<Link
+						to={'/journal/collection'}
+						className="btn rounded-full bg-neutral-200 btn-lg mt-2"
+					>
+						Past Journal Entries
+					</Link>
+				</div>
 				{/* </div> */}
 			</div>
 
