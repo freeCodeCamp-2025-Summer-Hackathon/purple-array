@@ -6,7 +6,7 @@ export const fetchCoins = async () => {
 			withCredentials: true,
 		});
 
-		return data.data;
+		return data.data.coins;
 	} catch (error) {
 		throw error;
 	}

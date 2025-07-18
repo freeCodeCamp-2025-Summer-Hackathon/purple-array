@@ -9,7 +9,6 @@ const useCoins = () => {
 		try {
 			setIsLoading(true);
 			const coins = await fetchCoins();
-			console.log(`hook: `, coins);
 			setData(coins);
 		} catch (error) {
 			setIsLoading(false);
