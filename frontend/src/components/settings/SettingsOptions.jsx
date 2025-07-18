@@ -13,7 +13,7 @@ const SettingsOptions = () => {
 
   return (
     <div className="container">
-      <div className="card mx-auto max-w-3xl bg-base-200 p-6 shadow-md">
+      <div className="card mx-auto max-w-3xl bg-base-200 p-8 shadow-md">
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Using fallback if real settings aren't wired yet */}
           <div>
