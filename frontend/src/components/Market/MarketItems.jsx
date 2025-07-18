@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import useProducts from '../../util/hooks/useProducts';
 import useCoins from '../../util/hooks/useCoins';
+import { CircleDollarSign } from 'lucide-react';
 
 function MarketItems() {
 	/**********************************************************************/
-	// use the products array being fetched in on line 8 to populate the UI
+	// use the products array being fetched in on line 9 to populate the UI
 	const { products, isLoading } = useProducts();
 	const { coins } = useCoins();
 	console.log(coins);
@@ -26,41 +27,53 @@ function MarketItems() {
 				setLoading(false);
 			});
 	}, []);
-
-	/*****************************************************************************/
-	// loading here on line 30 will need to be replaced with isLoading from line 8
-	if (loading) {
-		return <p className="text-center py-10">Loading market items...</p>;
-	}
-
+  
 	return (
-		<>
-			{/* Balance will need to be styled - then this comment can be removed */}
+    <>
+      { isLoading && <p>className="text-center py-10">Loading market items...</p>}
+       
+      {/* Balance will need to be styled - then this comment can be removed */}
 			<div>{`Your Balance: $` + coins.coins}</div>
+    
+		<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4 pt-10">
+			{items.map((item) => (
+				<div
+					key={item._id.$oid}
+					className="card bg-base-100 border border-base-200 shadow-sm transition duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:bg-base-200"
+				>
+					<figure>
+						<img
+							src={`https://picsum.photos/seed/${encodeURIComponent(
+								item.name
+							)}/300/200`}
+							alt={item.name}
+							className="w-full h-48 object-cover"
+						/>
+					</figure>
 
-			<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4 pt-10">
-				{items.map((item) => (
-					<div
-						key={item._id.$oid}
-						className="card bg-base-200 border border-base-300 shadow-md hover:shadow-xl transition-shadow"
-					>
-						<div className="card-body">
-							<h2 className="card-title text-primary">{item.name}</h2>
-							<p className="text-base-content/70">{item.description}</p>
-							<p className="font-semibold text-base-content">
-								💰 ${item.cost.$numberInt}
-							</p>
+					<div className="card-body text-center">
+						<h2 className="card-title justify-center text-primary">
+							{item.name}
+						</h2>
+						<p className="text-sm text-base-content/70">{item.description}</p>
 
-							<div className="flex flex-wrap gap-2 mt-4">
-								{item.tags.map((tag) => (
-									<div
-										key={`${item._id.$oid}-${tag}`}
-										className="badge badge-outline badge-secondary"
-									>
-										{tag}
-									</div>
-								))}
-							</div>
+						<div className="flex items-center font-semibold text-base-content">
+							<CircleDollarSign
+								className="text-violet-950 fill-yellow-500 size-7 pr-1"
+								strokeWidth={1}
+							/>
+							{item.cost.$numberInt}
+						</div>
+
+						<div className="flex flex-wrap justify-center gap-2 mt-3">
+							{item.tags.map((tag) => (
+								<span
+									key={`${item._id.$oid}-${tag}`}
+									className="badge badge-outline"
+								>
+									{tag}
+								</span>
+							))}
 						</div>
 					</div>
 				))}
