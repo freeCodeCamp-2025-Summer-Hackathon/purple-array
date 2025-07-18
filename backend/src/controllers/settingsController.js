@@ -30,7 +30,7 @@ export async function patchSettings(req, res) {
             {
                 settings: user.settings,
             },
-            { new: true }
+            { new: true, select: 'settings -_id' }
         );
 
         return res.status(200).json({
