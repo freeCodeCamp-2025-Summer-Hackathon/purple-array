@@ -37,19 +37,23 @@ function MarketItems() {
 			{items.map((item) => (
 				<div
 					key={item._id.$oid}
-					lassName="card bg-base-100 border border-base-200 shadow-sm transition duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:bg-base-200"
+					className="card bg-base-100 border border-base-200 shadow-sm transition duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:bg-base-200"
 				>
-        <figure>
-					<img
-						src={`https://picsum.photos/seed/${encodeURIComponent(item.name)}/300/200`}
-						alt={item.name}
-						className="w-full h-48 object-cover"
-					/>
-				</figure>            
-            
+					<figure>
+						<img
+							src={`https://picsum.photos/seed/${encodeURIComponent(
+								item.name
+							)}/300/200`}
+							alt={item.name}
+							className="w-full h-48 object-cover"
+						/>
+					</figure>
+
 					<div className="card-body text-center">
-						<h2 className="card-title justify-center text-primary">{item.name}</h2>
-					<p className="text-sm text-base-content/70">{item.description}</p>
+						<h2 className="card-title justify-center text-primary">
+							{item.name}
+						</h2>
+						<p className="text-sm text-base-content/70">{item.description}</p>
 
 						<div className="flex items-center font-semibold text-base-content">
 							<CircleDollarSign
@@ -59,21 +63,21 @@ function MarketItems() {
 							{item.cost.$numberInt}
 						</div>
 
-					<div className="flex flex-wrap justify-center gap-2 mt-3">
-						{item.tags.map((tag) => (
-							<span
-								key={`${item._id.$oid}-${tag}`}
-								className="badge badge-outline"
-							>
-								{tag}
-							</span>
-						))}
+						<div className="flex flex-wrap justify-center gap-2 mt-3">
+							{item.tags.map((tag) => (
+								<span
+									key={`${item._id.$oid}-${tag}`}
+									className="badge badge-outline"
+								>
+									{tag}
+								</span>
+							))}
+						</div>
 					</div>
 				</div>
-			</div>
-		))}
-	</div>
-);
+			))}
+		</div>
+	);
 }
 
 export default MarketItems;
