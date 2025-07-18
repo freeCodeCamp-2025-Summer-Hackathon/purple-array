@@ -16,10 +16,6 @@ export async function getAllSettings(req, res) {
 export async function patchSettings(req, res) {
     try {
         const user = await User.findById(req.id, 'settings inventory -_id'); // returns only settings and inventory field, removes _id
-        // const { timezone, theme, font, ink, parchment } = req.body;
-        // const settings = { timezone, theme, font, ink, parchment };
-
-        console.log(req.body);
 
         const failedUpdates = {};
         await updateSettings(
@@ -28,6 +24,7 @@ export async function patchSettings(req, res) {
             user.settings,
             failedUpdates
         );
+
         const updatedUser = await User.findByIdAndUpdate(
             req.id,
             {

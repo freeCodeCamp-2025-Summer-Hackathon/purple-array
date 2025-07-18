@@ -5,7 +5,10 @@ import { DateTime } from 'luxon';
  * Input: timezone (String representing user's time zone)
  */
 const isValidTimezone = async (timezone) => {
-    return DateTime.local().setZone(timezone).isValid; // "Default" value is the time zone of the machine running the code (server)
+    return (
+        typeof timezone === 'string' &&
+        DateTime.local().setZone(timezone).isValid
+    ); // "Default" value is the time zone of the machine running the code (server)
 };
 
 /* Check whether the setting value passed in is a valid inventory-affecting setting
@@ -33,13 +36,9 @@ const updateInventorySettings = async (
     currentSettings,
     failedUpdates
 ) => {
-    console.log('Input settings:', settings);
-    console.log('Current settings:', currentSettings);
     const settingsKeys = Object.keys(settings);
     const itemsTags = Object.keys(inventory);
-    console.log(settingsKeys, itemsTags);
     settingsKeys.forEach((key) => {
-        console.log(key);
         if (itemsTags.includes(key)) {
             if (isValidInventorySetting(settings[key], inventory[key])) {
                 currentSettings[key] = settings[key];
@@ -58,7 +57,7 @@ export const updateSettings = async (
 ) => {
     if (await isValidTimezone(settings.timezone)) {
         currentSettings.timezone = settings.timezone;
-    } else {
+    } else if (settings.timezone !== undefined) {
         failedUpdates['timezone'] = 'Invalid timezone setting';
     }
     await updateInventorySettings(
@@ -67,6 +66,4 @@ export const updateSettings = async (
         currentSettings,
         failedUpdates
     );
-    console.log(currentSettings);
-    console.log(failedUpdates);
 };
