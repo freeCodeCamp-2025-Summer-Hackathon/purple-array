@@ -12,7 +12,8 @@ export async function getAllProducts(_, res) {
 
 export async function createProduct(req, res) {
     try {
-        const product = await Product.create({ ...req.body });
+        const { name, cost, description, tags } = req.body;
+        const product = await Product.create({ name, cost, description, tags });
         res.status(201).json({ product });
     } catch (error) {
         console.error('Error in product controller');
