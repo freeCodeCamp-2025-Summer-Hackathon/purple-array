@@ -1,8 +1,13 @@
-import axios from 'axios';
+import api from '../../lib/axios';
 
 export const fetchCoins = async () => {
-	const response = await axios.get('http://localhost:5001/coins', {
-		withCredentials: true 
-	});
-	return response.data;
+	try {
+		const data = await api.get('coins', {
+			withCredentials: true,
+		});
+
+		return data.data;
+	} catch (error) {
+		throw error;
+	}
 };

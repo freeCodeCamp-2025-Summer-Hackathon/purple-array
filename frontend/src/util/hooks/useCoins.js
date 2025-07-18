@@ -2,19 +2,18 @@ import { useCallback, useEffect, useState } from 'react';
 import { fetchCoins } from '../api/coins';
 
 const useCoins = () => {
-	const [data, setData] = useState([]);
+	const [data, setData] = useState({});
 	const [isLoading, setIsLoading] = useState(false);
 
 	const getCoins = useCallback(async () => {
 		try {
 			setIsLoading(true);
 			const coins = await fetchCoins();
+			console.log(`hook: `, coins);
 			setData(coins);
-			console.log('Coins from DB:', coins); // logging per ticket scope
 		} catch (error) {
 			setIsLoading(false);
-			setData([]);
-			console.error('Error fetching coins:', error);
+			setData({});
 		} finally {
 			setIsLoading(false);
 		}
