@@ -1,5 +1,5 @@
 import User from '../models/User.js';
-import { checkSettings } from '../utils/settingsHelper.js';
+import { updateSettings } from '../utils/settingsHelper.js';
 
 export async function getAllSettings(req, res) {
     try {
@@ -16,24 +16,30 @@ export async function getAllSettings(req, res) {
 export async function patchSettings(req, res) {
     try {
         const user = await User.findById(req.id, 'settings inventory -_id'); // returns only settings and inventory field, removes _id
-        const { timezone, theme, font, ink, parchment } = req.body;
-        const settings = { timezone, theme, font, ink, parchment };
+        // const { timezone, theme, font, ink, parchment } = req.body;
+        // const settings = { timezone, theme, font, ink, parchment };
 
-        const updatedSettings = await checkSettings(settings, user.inventory);
+        console.log(req.body);
 
-        if (!updatedSettings)
-            return res.status(400).json({ message: 'Settings not found' });
-        else {
-            const updatedUser = await User.findByIdAndUpdate(
-                req.id,
-                {
-                    settings: updatedSettings,
-                },
-                { new: true }
-            );
+        const failedUpdates = {};
+        await updateSettings(
+            req.body,
+            user.inventory,
+            user.settings,
+            failedUpdates
+        );
+        const updatedUser = await User.findByIdAndUpdate(
+            req.id,
+            {
+                settings: user.settings,
+            },
+            { new: true }
+        );
 
-            return res.status(200).json(updatedUser.settings);
-        }
+        return res.status(200).json({
+            settings: updatedUser.settings,
+            invalidInput: failedUpdates,
+        });
     } catch (error) {
         console.error('Error in patchSettings controller', error);
         res.status(500).json({ message: 'Internal server error' });
