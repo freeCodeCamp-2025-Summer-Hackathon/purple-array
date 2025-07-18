@@ -1,8 +1,9 @@
-import React from 'react';
 import useSettings from '../../util/hooks/useSettings';
+import useInventory from '../../util/hooks/useInventory';
 
 const SettingsOptions = () => {
 	const { settings, isLoading } = useSettings();
+	const { inventory /*isLoading*/ } = useInventory();
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -15,7 +16,9 @@ const SettingsOptions = () => {
 		<form onSubmit={handleSubmit} className="space-y-6">
 			{/* Using fallback if real settings aren't wired yet */}
 			<div>
-				<label className="block text-sm font-medium text-gray-700 mb-1">Page Background</label>
+				<label className="block text-sm font-medium text-gray-700 mb-1">
+					Page Background
+				</label>
 				<select className="w-full px-4 py-2 bg-gray-100 rounded-md border border-gray-300 focus:outline-none">
 					{settings?.backgrounds?.map((bg, idx) => (
 						<option key={idx}>{bg}</option>
@@ -30,7 +33,9 @@ const SettingsOptions = () => {
 			</div>
 
 			<div>
-				<label className="block text-sm font-medium text-gray-700 mb-1">Color / Theme</label>
+				<label className="block text-sm font-medium text-gray-700 mb-1">
+					Color / Theme
+				</label>
 				<select className="w-full px-4 py-2 bg-gray-100 rounded-md border border-gray-300 focus:outline-none">
 					{settings?.themes?.map((theme, idx) => (
 						<option key={idx}>{theme}</option>
@@ -45,7 +50,9 @@ const SettingsOptions = () => {
 			</div>
 
 			<div>
-				<label className="block text-sm font-medium text-gray-700 mb-1">Font</label>
+				<label className="block text-sm font-medium text-gray-700 mb-1">
+					Font
+				</label>
 				<select className="w-full px-4 py-2 bg-gray-100 rounded-md border border-gray-300 focus:outline-none">
 					{settings?.fonts?.map((font, idx) => (
 						<option key={idx}>{font}</option>
@@ -68,4 +75,3 @@ const SettingsOptions = () => {
 };
 
 export default SettingsOptions;
-
