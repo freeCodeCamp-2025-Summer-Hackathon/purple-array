@@ -1,8 +1,9 @@
-import React from "react";
-import useSettings from "../../util/hooks/useSettings";
+import useSettings from '../../util/hooks/useSettings';
+import useInventory from '../../util/hooks/useInventory';
 
 const SettingsOptions = () => {
-  const { settings, isLoading } = useSettings();
+	const { settings, isLoading } = useSettings();
+	const { inventory /*isLoading*/ } = useInventory();
 
   const handleSubmit = (e) => {
     e.preventDefault();
