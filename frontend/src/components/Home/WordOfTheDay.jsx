@@ -10,7 +10,10 @@ function WordOfTheDay() {
 
 			<div className="flex justify-center px-4 py-10">
 				<div className="card w-full max-w-3xl bg-base-200 shadow-xl border border-base-300 p-10 text-center space-y-6">
-					<h2 className="text-4xl font-bold text-primary">{word.word}</h2>
+					<h1 className="text-xl font-semibold tracking-tight text-slate-800">
+						Word of the Day
+					</h1>
+					<h2 className="text-6xl font-bold text-primary">{word.word}</h2>
 					<p className="text-md text-neutral italic">{word.pronunciation}</p>
 					<p className="text-lg text-base-content/70 whitespace-pre-line">
 						Definition: <b>{word.definition}</b>

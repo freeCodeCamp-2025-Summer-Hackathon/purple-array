@@ -60,7 +60,7 @@ const JournalEntryForm = (
 
 	return (
 		<div className="container">
-			<div className="card mx-auto max-w-3xl bg-base-200 p-6">
+			<div className="card mx-auto max-w-3xl bg-base-200 p-8">
 				<header className="flex flex-col items-start">
 					<span className="text-xl uppercase tracking-widest text-primary font-semibold bg-primary/10 px-3 py-1 rounded-md">
 						{formatDate(new Date())}
@@ -183,14 +183,15 @@ const JournalEntryForm = (
 							placeholder="Write your response here..."
 						/>
 					</div>
-
 					<div className="flex justify-between items-center mt-6">
+
 						<Link
 							to="/journal"
 							className="text-lg font-semibold btn-u text-primary hover:underline"
 						>
 							← Back to Journal
 						</Link>
+
 						<button type="submit" className="btn btn-primary text-lg px-10">
 							Save
 						</button>
