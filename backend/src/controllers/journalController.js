@@ -172,3 +172,34 @@ export async function getJournal(req, res) {
         res.status(500).json({ message: 'Internal server error' });
     }
 }
+
+export async function deleteJournal(req, res) {
+    try {
+        // STRETCH: Also check previous Journals if entry not found
+
+        const { settings, journal } = await User.findById(
+            req.id,
+            'settings journal -_id'
+        );
+        if (!settings.timezone || !journal) {
+            return res.status(404).json({
+                message: 'Journal or timezone not found',
+                success: false,
+            });
+        }
+
+        // TODO: Check timezone and prevent deletion of current day's entry
+
+        // Currently assumes that the entry is either in the User's journal or doesn't exist
+        const updatedJournal = await User.findByIdAndUpdate(
+            { _id: req.id },
+            { $pull: { journal: { date: req.params.yearMonthDay } } },
+            { new: true, select: 'journal -_id' }
+        ).exec();
+
+        res.status(200).json({ updatedJournal });
+    } catch (error) {
+        console.error('Error in deleteJournal controller', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+}
