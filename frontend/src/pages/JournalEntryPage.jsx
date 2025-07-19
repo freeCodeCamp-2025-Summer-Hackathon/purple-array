@@ -1,9 +1,20 @@
-import React from 'react'
+import { useParams } from 'react-router';
+import { formatDate } from '../util/helper/formatDate';
+import Navbar from '../components/generic/Navbar';
+import JournalEntry from '../components/journal/JournalEntry';
 
 const JournalEntryPage = () => {
-  return (
-    <div>JournalEntryPage</div>
-  )
-}
+	const { id } = useParams();
+	const todayDate = formatDate(new Date());
+	const entryDate = formatDate(new Date(id + 'T00:00:00'));
+	const pastEntry = todayDate !== entryDate;
 
-export default JournalEntryPage
+	return (
+		<>
+			<Navbar />
+			<JournalEntry entry_id={id} entryDate={entryDate} pastEntry={pastEntry} />
+		</>
+	);
+};
+
+export default JournalEntryPage;
