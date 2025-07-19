@@ -18,8 +18,6 @@ export async function getWord(req, res) {
     try {
         const user = await User.findById(req.id);
         const timezone = user.settings.timezone;
-        console.log(timeZoneObj['America/New_York']);
-        console.log(timeZoneObj['Asia/Tokyo']);
         const { word, pronunciation, definition } =
             timeZoneObj[timezone].currentWord;
 
