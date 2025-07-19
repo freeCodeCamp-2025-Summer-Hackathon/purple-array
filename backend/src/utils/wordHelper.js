@@ -37,11 +37,12 @@ export const initWord = async () => {
     }
 
     timeZonesList.forEach((timezone) => {
-        timeZoneObj[timezone] = {
-            previousWord: wordObj.previousWord,
-            currentWord: wordObj.currentWord,
-            nextWord: wordObj.nextWord,
-        };
+        let dt = DateTime.utc()
+            .set({ hour: 0, minute: 0, second: 0 })
+            .setZone(timezone);
+
+        timeZoneObj[timezone] = wordObj;
+        setTimezoneWords(timezone, dt.offset);
     });
 
     scheduleWordUpdate();
@@ -75,38 +76,14 @@ const storeWordHistory = async () => {
     }).exec();
 };
 
-// example of executing the start of every day in the UTC timezone
-// default value of a component is null
-// if minute not explicitly set to 0, rule will run every minute
-// const rule = new schedule.RecurrenceRule();
-// rule.hour = 0;
-// rule.minute = 0;
-// rule.tz = 'Etc/UTC';
-
-// Remove or refactor the following once minimum testing completed
-// const _job = schedule.scheduleJob({ rule }, async function () {
-//     const _words = await Word.findById(wordObj.currentWord._id);
-
-//     storeWordHistory();
-
-//     wordObj.previousWord = wordObj.currentWord;
-//     wordObj.currentWord = wordObj.nextWord;
-//     wordObj.nextWord = await setWord();
-
-//     const newWord = new WordOfTheDay({
-//         previousWord: wordObj.previousWord,
-//         currentWord: wordObj.currentWord,
-//         nextWord: wordObj.nextWord,
-//     });
-//     const _savedWord = await newWord.save();
-// });
-
+// function to handle offsets greater than utc
+// objects with offsets less than utc should be updated on their schedule
 const setTimezoneWords = async (timezone, offset) => {
     if (offset > serverDate.offset) {
         timeZoneObj[timezone] = {
-            previousWord: wordObj.currentWord,
-            currentWord: wordObj.nextWord,
-            nextWord: await setWord(),
+            previousWord: timeZoneObj[timezone]['currentWord'],
+            currentWord: timeZoneObj[timezone]['nextWord'],
+            nextWord: await setWord(), // placeholder until logic to fetch current word of the day is implemented
         };
     } else {
         timeZoneObj[timezone] = {
@@ -118,42 +95,19 @@ const setTimezoneWords = async (timezone, offset) => {
 };
 
 const scheduleWordUpdate = async () => {
-    storeWordHistory();
-    wordObj.previousWord = wordObj.currentWord;
-    wordObj.currentWord = wordObj.nextWord;
-    wordObj.nextWord = await setWord();
-
-    const newWord = new WordOfTheDay({
-        previousWord: wordObj.previousWord,
-        currentWord: wordObj.currentWord,
-        nextWord: wordObj.nextWord,
-    });
-
-    const _savedWord = await newWord.save();
     timeZonesList.forEach((timezone) => {
+        storeWordHistory();
         let dt = DateTime.utc()
             .set({ hour: 0, minute: 0, second: 0 })
             .setZone(timezone);
 
         let rule = new schedule.RecurrenceRule();
-        //rule.hour = dt.hour;
-        //rule.minute = dt.minute;
+        rule.hour = dt.hour;
+        rule.minute = dt.minute;
         rule.tz = timezone;
 
-        if (dt.offset > serverDate.offset) {
-            //console.log(dt, true);
-        }
-
         const _job = schedule.scheduleJob({ rule }, async function () {
-            //console.log(dt.toString());
-            //console.log(timezone, 'Your notification message is here.');
-
             setTimezoneWords(timezone, dt.offset);
-            // timeZoneObj[timezone] = {
-            //     previousWord: wordObj.previousWord,
-            //     currentWord: wordObj.currentWord,
-            //     nextWord: wordObj.nextWord,
-            // };
         });
     });
 };
