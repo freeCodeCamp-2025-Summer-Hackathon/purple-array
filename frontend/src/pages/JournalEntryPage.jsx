@@ -1,9 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 const JournalEntryPage = () => {
-  return (
-    <div>JournalEntryPage</div>
-  )
-}
+	return <div>JournalEntryPage</div>;
+};
 
-export default JournalEntryPage
+export default JournalEntryPage;
