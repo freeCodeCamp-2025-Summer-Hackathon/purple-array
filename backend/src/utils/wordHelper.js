@@ -101,6 +101,22 @@ const storeWordHistory = async () => {
 //     const _savedWord = await newWord.save();
 // });
 
+const setTimezoneWords = async (timezone, offset) => {
+    if (offset > serverDate.offset) {
+        timeZoneObj[timezone] = {
+            previousWord: wordObj.currentWord,
+            currentWord: wordObj.nextWord,
+            nextWord: await setWord(),
+        };
+    } else {
+        timeZoneObj[timezone] = {
+            previousWord: wordObj.previousWord,
+            currentWord: wordObj.currentWord,
+            nextWord: wordObj.nextWord,
+        };
+    }
+};
+
 const scheduleWordUpdate = async () => {
     storeWordHistory();
     wordObj.previousWord = wordObj.currentWord;
@@ -114,26 +130,30 @@ const scheduleWordUpdate = async () => {
     });
 
     const _savedWord = await newWord.save();
-
     timeZonesList.forEach((timezone) => {
         let dt = DateTime.utc()
             .set({ hour: 0, minute: 0, second: 0 })
             .setZone(timezone);
 
         let rule = new schedule.RecurrenceRule();
-        rule.hour = dt.hour;
-        rule.minute = dt.minute;
+        //rule.hour = dt.hour;
+        //rule.minute = dt.minute;
         rule.tz = timezone;
 
-        const _job = schedule.scheduleJob({ rule }, async function () {
-            console.log(dt.toString());
-            console.log(timezone, 'Your notification message is here.');
+        if (dt.offset > serverDate.offset) {
+            //console.log(dt, true);
+        }
 
-            timeZoneObj[timezone] = {
-                previousWord: wordObj.previousWord,
-                currentWord: wordObj.currentWord,
-                nextWord: wordObj.nextWord,
-            };
+        const _job = schedule.scheduleJob({ rule }, async function () {
+            //console.log(dt.toString());
+            //console.log(timezone, 'Your notification message is here.');
+
+            setTimezoneWords(timezone, dt.offset);
+            // timeZoneObj[timezone] = {
+            //     previousWord: wordObj.previousWord,
+            //     currentWord: wordObj.currentWord,
+            //     nextWord: wordObj.nextWord,
+            // };
         });
     });
 };
