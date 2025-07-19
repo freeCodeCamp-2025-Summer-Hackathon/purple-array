@@ -27,65 +27,42 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 			return formatDate(new Date(entry.date + 'T00:00:00')) === todayDate;
 		});
 
-		// check whether this is the journal page or a page entry
-		if (!entry_id) {
-			setCurrentEntry(initialData);
-			// } else if (todayEntry) {
-			// 	setCurrentEntry(todayEntry);
+		const dateEntry = entries.find((entry) => {
+			return formatDate(new Date(entry.date + 'T00:00:00')) === entryDate;
+		});
+
+		if (entry_id) {
+			// if page is a past entry
+			setCurrentEntry(dateEntry);
+		} else if (!entry_id || todayDate) {
+			// not on journal page (no entry-id), but there is a today entry
+			setCurrentEntry(todayEntry);
 		} else {
-			setCurrentEntry(
-				entries.find((entry) => {
-					return formatDate(new Date(entry.date + 'T00:00:00')) === entryDate;
-				})
-			);
+			// not on journal page and no today entry
+			setCurrentEntry(initialData);
 		}
 	}, [entries]);
-
-	const [response, setResponse] = useState(null);
-
-	// if (entry_id) {
-	// 	setCurrentEntry(
-	// 		entries.find((entry) => {
-	// 			return formatDate(new Date(entry.date + 'T00:00:00')) === todayDate;
-	// 		})
-	// 	);
-	// }
-
-	// if (!entry_id && !todayEntry) {
-	// 	setCurrentEntry(initialData);
-	// }
-
-	// journal page - can only be today or empty
-
-	// collection page can only be past entry
-
-	// useEffect(() => {
-	// 	const currentDate = formatDate(new Date());
-	// 	const targetDate = date || currentDate;
-	// 	fetch('/placeholderJournalEntries.json')
-	// 		.then((res) => res.json())
-	// 		.then((data) => {
-	// 			const targetEntry = data.find((entry) => {
-	// 				const entryDate = formatDate(new Date(entry.date + 'T00:00:00'));
-	// 				return entryDate === targetDate;
-	// 			});
-	// 			setResponse(targetEntry || null);
-	// 			// setLoading(false);
-	// 		})
-	// 		.catch((err) => {
-	// 			console.error('Error loading response:', err);
-	// 			// setLoading(false);
-	// 		});
-	// }, []);
 
 	return (
 		<div className="min-h-screen">
 			{/* *********************** Animated Loader *********************** */}
 			{isLoading && <AnimatePulseLoader />}
 
-			<div className="max-w-3xl mx-auto">
+			<div className="max-w-3xl mx-auto mt-12 px-6">
+				{/* *********************** Footer Button Wrapper Header *********************** */}
+				<div className="flex justify-between mb-6 items-center">
+					<div className="text-2xl font-semibold text-slate-700 ml-10">
+						{!entryDate && `Today's Entry`}
+					</div>
+					<Link
+						to={'/journal/collection'}
+						className="btn btn-outline btn-primary rounded-lg btn-lg"
+					>
+						Past Journal Entries
+					</Link>
+				</div>
 				{/* *********************** Journal Entry wrapper *********************** */}
-				<div className="card container mt-12 p-6 bg-base-200">
+				<div className="card container px-6 py-8 bg-base-200">
 					{/* *********************** Journal Entry Header *********************** */}
 					<div className="flex justify-between px-6">
 						<div className="card-title flex-col items-start">
@@ -115,7 +92,7 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 								How did you use today's word?
 							</h3>
 
-							<div className="p-3 min-h-[10rem] border rounded-md border-base-content/20">
+							<div className="p-3 min-h-[10rem] bg-base-100 border rounded-md border-base-content/20">
 								{currentEntry?.response || ''}
 							</div>
 						</div>
@@ -126,7 +103,7 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 								{currentEntry?.optionalPrompt1 ||
 									"What's something that you learned today?"}
 							</h3>
-							<div className="p-3 min-h-[10rem] border rounded-md border-base-content/20">
+							<div className="p-3 min-h-[10rem] bg-base-100 border rounded-md border-base-content/20">
 								{currentEntry?.response1 || ''}
 							</div>
 						</div>
@@ -136,7 +113,7 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 							<h3 className="mb-4 w-full text-lg font-semibold text-secondary">
 								{currentEntry?.optionalPrompt2 || 'What gave you hope today?'}
 							</h3>
-							<div className="p-3 min-h-[10rem] border rounded-md border-base-content/20">
+							<div className="p-3 min-h-[10rem] bg-base-100 border rounded-md border-base-content/20">
 								{currentEntry?.response2 || ''}
 							</div>
 						</div>
@@ -147,20 +124,11 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 								{currentEntry?.optionalPrompt3 ||
 									'How did you show kindness today?'}
 							</h3>
-							<div className="p-3 min-h-[10rem] border rounded-md border-base-content/20">
+							<div className="p-3 min-h-[10rem] bg-base-100 border rounded-md border-base-content/20">
 								{currentEntry?.response3 || ''}
 							</div>
 						</div>
 					</div>
-				</div>
-				{/* *********************** Footer Button Wrapper Header *********************** */}
-				<div className="flex justify-start my-6">
-					<Link
-						to={'/journal/collection'}
-						className="btn btn-outline btn-primary rounded-lg btn-lg"
-					>
-						Past Journal Entries
-					</Link>
 				</div>
 			</div>
 		</div>
