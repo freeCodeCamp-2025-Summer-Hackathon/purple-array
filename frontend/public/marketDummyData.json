@@ -1,26 +1,31 @@
 [
     {
-        "_id": {
-            "$oid": "686d72d968a820c9a52ab307"
-        },
-        "name": "Floral Cover",
-        "cost": {
-            "$numberInt": "5"
-        },
-        "description": "Aesthetic floral cover design for your journal.",
+        "name": "Custom Font Bundle",
+        "cost": 3,
+        "description": "Stylish fonts to personalize your journal entries.",
         "tags": [
-            "style",
-            "cover"
+            "font"
         ]
     },
     {
-        "_id": {
-            "$oid": "686d72d968a820c9a52ab308"
-        },
+        "name": "Vintage Paper",
+        "cost": 5,
+        "description": "Add a retro touch with old-school paper textures.",
+        "tags": [
+            "parchment"
+        ]
+    },
+    {
+        "name": "Floral Design",
+        "cost": 5,
+        "description": "Aesthetic floral design for your journal.",
+        "tags": [
+            "parchment"
+        ]
+    },
+    {
         "name": "Mood Tracker Sticker Pack",
-        "cost": {
-            "$numberInt": "3"
-        },
+        "cost": 3,
         "description": "Track your moods with these colorful stickers.",
         "tags": [
             "tracker",
@@ -28,13 +33,8 @@
         ]
     },
     {
-        "_id": {
-            "$oid": "686d72d968a820c9a52ab309"
-        },
         "name": "Daily Prompt Pack",
-        "cost": {
-            "$numberInt": "4"
-        },
+        "cost": 4,
         "description": "Get inspired with daily writing prompts.",
         "tags": [
             "prompts",
@@ -42,13 +42,8 @@
         ]
     },
     {
-        "_id": {
-            "$oid": "686d72d968a820c9a52ab310"
-        },
         "name": "Minimalist Theme",
-        "cost": {
-            "$numberInt": "6"
-        },
+        "cost": 6,
         "description": "Clean, distraction-free layout for focused journaling.",
         "tags": [
             "style",
@@ -56,13 +51,8 @@
         ]
     },
     {
-        "_id": {
-            "$oid": "686d72d968a820c9a52ab311"
-        },
         "name": "Productivity Sticker Pack",
-        "cost": {
-            "$numberInt": "2"
-        },
+        "cost": 2,
         "description": "Motivational stickers to boost your productivity.",
         "tags": [
             "stickers",
@@ -70,41 +60,8 @@
         ]
     },
     {
-        "_id": {
-            "$oid": "686d72d968a820c9a52ab312"
-        },
-        "name": "Vintage Paper Pack",
-        "cost": {
-            "$numberInt": "5"
-        },
-        "description": "Add a retro touch with old-school paper textures.",
-        "tags": [
-            "style",
-            "paper"
-        ]
-    },
-    {
-        "_id": {
-            "$oid": "686d72d968a820c9a52ab313"
-        },
-        "name": "Custom Font Bundle",
-        "cost": {
-            "$numberInt": "3"
-        },
-        "description": "Stylish fonts to personalize your journal entries.",
-        "tags": [
-            "font",
-            "style"
-        ]
-    },
-    {
-        "_id": {
-            "$oid": "686d72d968a820c9a52ab314"
-        },
         "name": "Gratitude Tracker",
-        "cost": {
-            "$numberInt": "4"
-        },
+        "cost": 4,
         "description": "Encourages daily gratitude journaling habits.",
         "tags": [
             "tracker",
@@ -112,13 +69,8 @@
         ]
     },
     {
-        "_id": {
-            "$oid": "686d72d968a820c9a52ab315"
-        },
         "name": "Dark Mode Theme",
-        "cost": {
-            "$numberInt": "6"
-        },
+        "cost": 6,
         "description": "Sleek dark color scheme for nighttime journaling.",
         "tags": [
             "style",
@@ -126,13 +78,8 @@
         ]
     },
     {
-        "_id": {
-            "$oid": "686d72d968a820c9a52ab316"
-        },
         "name": "Weekly Layout Kit",
-        "cost": {
-            "$numberInt": "4"
-        },
+        "cost": 4,
         "description": "Organize your week with structured layout templates.",
         "tags": [
             "organization",

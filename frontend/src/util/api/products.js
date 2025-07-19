@@ -1,7 +1,7 @@
 import api from '../../lib/axios';
 
 export const fetchProducts = async () => {
-	const url = `products`;
+	const url = `products/`;
 	try {
 		let productsArray = [];
 
@@ -9,14 +9,17 @@ export const fetchProducts = async () => {
 			withCredentials: true,
 		});
 
-		if (data.data.products) {
-			for (let product of data.data.products) {
-				productsArray.push(product);
-			}
-		}
+		if (Array.isArray((data.data))) {
+			productsArray = data.data;
+            return productsArray;
+            
+		} else if (data.data.products) {
+            return data.data.products;
+        }
 
 		return productsArray;
 	} catch (error) {
+        console.log('Fetch product error:', error);
 		throw error;
 	}
 };
