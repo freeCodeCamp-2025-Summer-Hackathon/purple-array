@@ -38,7 +38,6 @@ const userSchema = new mongoose.Schema(
         },
         inventory: {
             // will need to add a new category for each upgrade type
-            pages: [String],
             theme: [String], // stretch goal
             font: [String],
             ink: [String],
