@@ -42,18 +42,21 @@ export async function putProduct(req, res) {
         if (user.coins < product.cost) {
             return res.status(400).json({ message: 'Not enough coins' });
         }
-        user.coins -= product.cost;
 
         for (const tag of product.tags) {
             if (!user.inventory[tag]) {
-                user.inventory[tag] = [];
+                return res.status(400).json({ message: 'Invalid tag' });
             }
-
-            if (!user.inventory[tag].includes(product.name)) {
-                user.inventory[tag].push(product.name);
-                user.inventory[tag].sort();
+            if (user.inventory[tag].includes(product.name)) {
+                return res
+                    .status(400)
+                    .json({ message: 'Product already in inventory' });
             }
+            user.inventory[tag].push(product.name);
+            user.inventory[tag].sort();
         }
+
+        user.coins -= product.cost;
 
         await user.save();
 
@@ -61,6 +64,7 @@ export async function putProduct(req, res) {
             message: 'Purchase successful',
             coins: user.coins,
             inventory: user.inventory,
+            success: true,
         });
     } catch (error) {
         console.error('Error in getAllProducts controller', error);
