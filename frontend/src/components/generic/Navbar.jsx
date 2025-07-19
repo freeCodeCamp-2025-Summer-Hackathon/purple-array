@@ -1,5 +1,5 @@
 import toast from 'react-hot-toast';
-import { Link } from 'react-router';
+import { NavLink } from 'react-router';
 import { Sparkles, NotebookPen, Store, Cog } from 'lucide-react';
 
 const Navbar = () => {
@@ -10,75 +10,95 @@ const Navbar = () => {
 					<div className="flex items-center justify-between">
 						{/* Logo & Site Title  */}
 						<div className="flex gap-4">
-							<Sparkles
-								className="text-neutral fill-accent size-10"
-								strokeWidth={1}
-							/>
-							<Link
+							<NavLink
 								to={'/'}
-								className="text-2xl font-bold text-neutral font-sans tracking-normal"
+								className={({ isActive }) =>
+									isActive
+										? 'text-2xl text-primary bg-gradient-to-b from-primary/10 to-transparent px-6 py-2 rounded-t-xl'
+										: 'text-2xl font-semibold text-secondary px-6 py-2'
+								}
 							>
-								<p className=" hover:opacity-75 hover:scale-105 transition-all ease-in-out duration-300">
+								<div className="flex items-center gap-4 hover:opacity-75 hover:scale-105 transition-all ease-in-out duration-300">
+									<Sparkles
+										className="text-neutral fill-accent size-8"
+										strokeWidth={1}
+									/>
 									WriteLight
-								</p>
-							</Link>
+								</div>
+							</NavLink>
 						</div>
 
 						{/* Journal Icon & Link */}
 						<div className="flex gap-4">
-							<NotebookPen
-								className="text-neutral fill-accent size-8"
-								strokeWidth={1}
-							/>
-							<Link
+							<NavLink
 								to={'/journal'}
-								className="text-2xl font-semibold text-secondary font-sans tracking-normal"
+								className={({ isActive }) =>
+									isActive
+										? 'text-2xl text-primary bg-gradient-to-b from-primary/10 to-transparent px-6 py-2 rounded-t-xl'
+										: 'text-2xl font-semibold text-secondary px-6 py-2'
+								}
 							>
-								<p className="hover:opacity-75 hover:scale-105 transition-all ease-in-out duration-300">
+								<div className="flex items-center gap-4 hover:opacity-75 hover:scale-105 transition-all ease-in-out duration-300">
+									<NotebookPen
+										className="text-neutral fill-accent size-8"
+										strokeWidth={1}
+									/>
 									Journal
-								</p>
-							</Link>
+								</div>
+							</NavLink>
 						</div>
 
 						{/* Market Icon & Link */}
 						<div className="flex gap-4">
-							<Store
-								className="text-neutral fill-accent size-8"
-								strokeWidth={1}
-							/>
-							<Link
+							<NavLink
 								to={'/market'}
-								className="text-2xl font-semibold text-secondary font-sans tracking-normal"
+								className={({ isActive }) =>
+									isActive
+										? 'text-2xl text-primary bg-gradient-to-b from-primary/10 to-transparent px-6 py-2 rounded-t-xl'
+										: 'text-2xl font-semibold text-secondary px-6 py-2'
+								}
 							>
-								<p className="hover:opacity-75 hover:scale-105 transition-all ease-in-out duration-300">
+								<div className="flex items-center gap-4 hover:opacity-75 hover:scale-105 transition-all ease-in-out duration-300">
+									<Store
+										className="text-neutral fill-accent size-8"
+										strokeWidth={1}
+									/>
 									Market
-								</p>
-							</Link>
+								</div>
+							</NavLink>
 						</div>
 
 						{/* Settings Icon & Link */}
 						<div className="flex gap-4">
-							<Cog
-								className="text-neutral fill-accent size-8"
-								strokeWidth={1}
-							/>
-							<Link
+							<NavLink
 								to={'/settings'}
-								className="text-2xl font-semibold text-secondary font-sans tracking-normal"
+								className={({ isActive }) =>
+									isActive
+										? 'text-2xl text-primary bg-gradient-to-b from-primary/10 to-transparent px-6 py-2 rounded-t-xl'
+										: 'text-2xl font-semibold text-secondary px-6 py-2'
+								}
 							>
-								<p className="hover:opacity-75 hover:scale-105 transition-all ease-in-out duration-300">
+								<div className="flex items-center gap-4 hover:opacity-75 hover:scale-105 transition-all ease-in-out duration-300">
+									<Cog
+										className="text-neutral fill-accent size-8"
+										strokeWidth={1}
+									/>
 									Settings
-								</p>
-							</Link>
+								</div>
+							</NavLink>
 						</div>
-						<button
-							className="btn btn-outline btn-primary"
-							onClick={() => {
-								toast.error('Logout not functional yet!');
-							}}
-						>
-							Logout
-						</button>
+
+						{/* This button will remain conditionally not visible for now, until logout can be refactored */}
+						{false && (
+							<button
+								className="btn btn-outline btn-primary"
+								onClick={() => {
+									toast.error('Logout not functional yet!');
+								}}
+							>
+								Logout
+							</button>
+						)}
 					</div>
 				</div>
 			</header>

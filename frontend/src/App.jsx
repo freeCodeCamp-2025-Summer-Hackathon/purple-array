@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router';
 import HomePage from './pages/HomePage';
-import SignUpPage from './pages/SignUpPage';
-import SignInPage from './pages/SignInPage';
+import LoginPage from './pages/LoginPage';
+import SignupPage from './pages/SignupPage';
 import JournalDisplayPage from './pages/JournalDisplayPage';
 import JournalCollectionPage from './pages/JournalCollectionPage';
 import JournalEntryPage from './pages/JournalEntryPage';
@@ -16,8 +16,8 @@ const App = () => {
 			<Routes>
 				{/* Pathnames for some of these routes will need to be updated, once we get the real endpoints */}
 				<Route path="/" element={<HomePage />} />
-				<Route path="/signup" element={<SignUpPage />} />
-				<Route path="/signin" element={<SignInPage />} />
+				<Route path="/login" element={<LoginPage />} />
+				<Route path="/signup" element={<SignupPage />} />
 				<Route path="/journal" element={<JournalDisplayPage />} />
 				<Route path="/journal/collection" element={<JournalCollectionPage />} />
 				<Route path="/journal/collection/:id" element={<JournalEntryPage />} />

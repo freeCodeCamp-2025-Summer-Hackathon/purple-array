@@ -68,7 +68,7 @@ function calculatePoints(journal) {
 
 export async function writeJournal(req, res) {
     try {
-        // TODO: validate date, determine whether requested journal entry is in current month (User) or previous (Journal)
+        // STRETCH: validate date, determine whether requested journal entry is in current month (User) or previous (Journal)
         const user = await User.findById(req.id, 'coins journal rewards');
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
@@ -169,6 +169,45 @@ export async function getJournal(req, res) {
         res.status(200).json(journal);
     } catch (error) {
         console.error('Error in getJournal controller', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+}
+
+export async function deleteJournal(req, res) {
+    try {
+        // STRETCH: Also check previous Journals if entry not found
+
+        const { settings, journal } = await User.findById(
+            req.id,
+            'settings journal -_id'
+        );
+        if (!settings.timezone || !journal) {
+            return res.status(404).json({
+                message: 'Journal or timezone not found',
+                success: false,
+            });
+        }
+
+        // TODO: Check timezone and prevent deletion of current day's entry
+
+        // Currently assumes that the entry is either in the User's journal or doesn't exist
+        if (!journal.find(({ date }) => date === req.params.yearMonthDay))
+            return res.status(404).json({
+                message: `Did not find entry with date ${req.params.yearMonthDay}`,
+                success: false,
+            });
+        const updatedJournal = await User.findByIdAndUpdate(
+            { _id: req.id },
+            { $pull: { journal: { date: req.params.yearMonthDay } } },
+            { new: true, select: 'journal -_id' }
+        ).exec();
+
+        res.status(200).json({
+            journal: updatedJournal.journal,
+            success: true,
+        });
+    } catch (error) {
+        console.error('Error in deleteJournal controller', error);
         res.status(500).json({ message: 'Internal server error' });
     }
 }

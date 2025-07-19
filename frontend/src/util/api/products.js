@@ -5,7 +5,9 @@ export const fetchProducts = async () => {
 	try {
 		let productsArray = [];
 
-		const data = await api.get(url);
+		const data = await api.get(url, {
+			withCredentials: true,
+		});
 
 		if (data.data.products) {
 			for (let product of data.data.products) {

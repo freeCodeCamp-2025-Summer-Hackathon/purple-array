@@ -11,6 +11,7 @@ import authRoutes from './routes/authRoutes.js';
 import inventoryRoutes from './routes/inventoryRoutes.js';
 import journalRoutes from './routes/journalRoutes.js';
 import { userVerification } from './middleware/authMiddleware.js';
+import { initWord } from './utils/wordHelper.js';
 import coinsRoutes from './routes/coinsRoutes.js';
 import usersRoutes from './routes/usersRoutes.js';
 
@@ -23,7 +24,13 @@ const PORT = process.env.PORT || 5001;
 
 // middleware
 if (process.env.NODE_ENV !== 'production') {
-    app.use(cors({ origin: 'http://localhost:5173' }));
+    app.use(
+        cors({
+            origin: 'http://localhost:5173',
+            methods: ['GET', 'POST', 'PUT', 'DELETE'],
+            credentials: true,
+        })
+    );
 }
 
 app.use(cookieParser());
@@ -40,5 +47,6 @@ app.use('/coins', userVerification, coinsRoutes);
 app.use('/users', userVerification, usersRoutes);
 
 app.listen(PORT, () => {
+    initWord();
     console.log('Server started on PORT:', PORT);
 });
