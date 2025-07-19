@@ -1,13 +1,15 @@
+import api from '../../lib/axios';
+
 export const fetchSettings = async () => {
+	const url = `settings`;
+
 	try {
-		const response = await fetch('/settingsDummyData.json'); // placeholder for now
-		if (!response.ok) {
-			throw new Error('Failed to fetch settings');
-		}
-		const data = await response.json();
-		return data;
+		const data = await api.get(url, {
+			withCredentials: true,
+		});
+
+		return data.data.settings;
 	} catch (error) {
-		console.error('Error fetching settings:', error);
 		throw error;
 	}
 };
