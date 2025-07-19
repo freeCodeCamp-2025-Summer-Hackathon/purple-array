@@ -5,7 +5,7 @@ const CollectionListCard = (props) => {
 	return (
 		<Link
 			to={props.to}
-			className="flex flex-1 basis-1/3 m-1 min-w-fit p-6 bg-base-100 rounded-md opacity-85 hover:scale-[1.02] hover:opacity-100 transition-all ease-in-out duration-300"
+			className="flex flex-1 basis-1/3 m-1 min-w-fit p-6 bg-base-100 rounded-md opacity-80 hover:scale-[1.03] hover:opacity-100 transition-all ease-in-out duration-500"
 		>
 			<div className="flex justify-between w-full">
 				<div className="flex gap-3">

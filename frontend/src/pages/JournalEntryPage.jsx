@@ -10,10 +10,10 @@ const JournalEntryPage = () => {
 	const pastEntry = todayDate !== entryDate;
 
 	return (
-		<>
+		<div className="min-h-screen">
 			<Navbar />
 			<JournalEntry entry_id={id} entryDate={entryDate} pastEntry={pastEntry} />
-		</>
+		</div>
 	);
 };
 
