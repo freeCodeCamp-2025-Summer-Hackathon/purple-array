@@ -1,11 +1,21 @@
 import { Word, WordOfTheDay } from '../models/Word.js';
 import schedule from 'node-schedule';
+import { DateTime, Settings } from 'luxon';
 
+// overriding luxon global default zone for consistent timezone operations
+Settings.defaultZone = 'utc';
+export const timeZonesList = Intl.supportedValuesOf('timeZone');
+export const serverDate = DateTime.utc();
+
+// default word structure and storage object for consistency across timezones
 export const wordObj = {
     previousWord: {},
     currentWord: {},
     nextWord: {},
 };
+
+// an object to store each supported timezone keys and wordObj values
+export const timeZoneObj = {};
 
 // Currently selects new words every time server resets
 // TODO: Check WordoftheDay to pull down the previousWord/currentWord/nextWord matching the current date
@@ -25,6 +35,16 @@ export const initWord = async () => {
         });
         const _savedWord = await newWord.save();
     }
+
+    timeZonesList.forEach((timezone) => {
+        timeZoneObj[timezone] = {
+            previousWord: wordObj.previousWord,
+            currentWord: wordObj.currentWord,
+            nextWord: wordObj.nextWord,
+        };
+    });
+
+    scheduleWordUpdate();
 };
 
 // Currently selects a word not equal to the previousWord or currentWord
@@ -58,16 +78,31 @@ const storeWordHistory = async () => {
 // example of executing the start of every day in the UTC timezone
 // default value of a component is null
 // if minute not explicitly set to 0, rule will run every minute
-const rule = new schedule.RecurrenceRule();
-rule.hour = 0;
-rule.minute = 0;
-rule.tz = 'Etc/UTC';
+// const rule = new schedule.RecurrenceRule();
+// rule.hour = 0;
+// rule.minute = 0;
+// rule.tz = 'Etc/UTC';
 
-const _job = schedule.scheduleJob({ rule }, async function () {
-    const _words = await Word.findById(wordObj.currentWord._id);
+// Remove or refactor the following once minimum testing completed
+// const _job = schedule.scheduleJob({ rule }, async function () {
+//     const _words = await Word.findById(wordObj.currentWord._id);
 
+//     storeWordHistory();
+
+//     wordObj.previousWord = wordObj.currentWord;
+//     wordObj.currentWord = wordObj.nextWord;
+//     wordObj.nextWord = await setWord();
+
+//     const newWord = new WordOfTheDay({
+//         previousWord: wordObj.previousWord,
+//         currentWord: wordObj.currentWord,
+//         nextWord: wordObj.nextWord,
+//     });
+//     const _savedWord = await newWord.save();
+// });
+
+const scheduleWordUpdate = async () => {
     storeWordHistory();
-
     wordObj.previousWord = wordObj.currentWord;
     wordObj.currentWord = wordObj.nextWord;
     wordObj.nextWord = await setWord();
@@ -77,5 +112,28 @@ const _job = schedule.scheduleJob({ rule }, async function () {
         currentWord: wordObj.currentWord,
         nextWord: wordObj.nextWord,
     });
+
     const _savedWord = await newWord.save();
-});
+
+    timeZonesList.forEach((timezone) => {
+        let dt = DateTime.utc()
+            .set({ hour: 0, minute: 0, second: 0 })
+            .setZone(timezone);
+
+        let rule = new schedule.RecurrenceRule();
+        rule.hour = dt.hour;
+        rule.minute = dt.minute;
+        rule.tz = timezone;
+
+        const _job = schedule.scheduleJob({ rule }, async function () {
+            console.log(dt.toString());
+            console.log(timezone, 'Your notification message is here.');
+
+            timeZoneObj[timezone] = {
+                previousWord: wordObj.previousWord,
+                currentWord: wordObj.currentWord,
+                nextWord: wordObj.nextWord,
+            };
+        });
+    });
+};
