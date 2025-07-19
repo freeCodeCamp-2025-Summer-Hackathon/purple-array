@@ -4,15 +4,8 @@ import { formatDate } from '../../util/helper/formatDate';
 import { useWord } from '../../util/hooks/useWord';
 import { Trash2, CircleDollarSign } from 'lucide-react';
 
-const JournalEntryForm = (
-	{
-		//   initialData = {},
-		//   onSubmit = () => {},
-		//   onDelete = null,
-	}
-) => {
-	const { wordData, loading } = useWord();
-	const wordOfTheDay = wordData?.word || 'your word';
+const JournalEntryForm = () => {
+	const { word, isLoading } = useWord();
 
 	const [primaryPrompt, setPrimaryPrompt] = useState('');
 	const [addPromptOne, setAddPromptOne] = useState('');
@@ -50,7 +43,7 @@ const JournalEntryForm = (
 		// });
 	};
 
-	if (loading) {
+	if (isLoading) {
 		return (
 			<div className="flex justify-center items-center min-h-screen">
 				<span className="loading loading-spinner loading-lg text-primary"></span>
@@ -75,7 +68,7 @@ const JournalEntryForm = (
 						<label className="label font-semibold">
 							<h2 className="mt-4 text-lg font-semibold">
 								How did you use the word{' '}
-								<span className="text-primary font-bold">{wordOfTheDay}</span>{' '}
+								<span className="text-primary font-bold">{word.word}</span>{' '}
 								{/* *********************************************************************** */}
 								today?
 							</h2>
@@ -93,7 +86,7 @@ const JournalEntryForm = (
 							className="textarea textarea-bordered mt-2"
 							rows={4}
 							//   *************************************************************************
-							placeholder={`Write about how you used ${wordOfTheDay} today...`}
+							placeholder={`Write about how you used ${word.word} today...`}
 						/>
 					</div>
 
@@ -184,7 +177,6 @@ const JournalEntryForm = (
 						/>
 					</div>
 					<div className="flex justify-between items-center mt-6">
-
 						<Link
 							to="/journal"
 							className="text-lg font-semibold btn-u text-primary hover:underline"
