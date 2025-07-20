@@ -37,7 +37,7 @@ const SettingsOptions = () => {
 				throw error;
 			}
 		} catch (error) {
-			console.log(error);
+			console.log(error); // remove log after testing
 			toast.error('Settings update failed. Please try again.');
 		}
 	};
@@ -46,7 +46,7 @@ const SettingsOptions = () => {
 
 	/* ******************************************************************* */
 	/* From is currently only showing placeholder values - will need to be */
-	/* updated with dat from useInventory() Hook                           */
+	/* updated with data from useInventory() Hook                           */
 	/* ******************************************************************* */
 
 	return (
