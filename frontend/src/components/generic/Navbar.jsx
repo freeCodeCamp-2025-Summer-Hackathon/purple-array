@@ -2,7 +2,7 @@ import toast from 'react-hot-toast';
 import { NavLink } from 'react-router';
 import { Sparkles, NotebookPen, Store, Cog } from 'lucide-react';
 
-const Navbar = () => {
+const Navbar = ({ logout }) => {
 	return (
 		<div>
 			<header className="bg-base-200 border-b border-base-content/10">
@@ -89,16 +89,10 @@ const Navbar = () => {
 						</div>
 
 						{/* This button will remain conditionally not visible for now, until logout can be refactored */}
-						{false && (
-							<button
-								className="btn btn-outline btn-primary"
-								onClick={() => {
-									toast.error('Logout not functional yet!');
-								}}
-							>
-								Logout
-							</button>
-						)}
+
+						<button className="btn btn-outline btn-primary" onClick={logout}>
+							Logout
+						</button>
 					</div>
 				</div>
 			</header>
