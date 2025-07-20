@@ -2,7 +2,7 @@ export function validate(password) {
     if (typeof password != 'string') {
         return false;
     }
-    if (password.length < 8) {
+    if (password.length < 8 || password.length > 32) {
         return false;
     }
     if (!/[a-z]/.test(password)) {
@@ -14,7 +14,7 @@ export function validate(password) {
     if (!/[0-9]/.test(password)) {
         return false;
     }
-    if (!/[^a-zA-Z0-9]/.test(password)) {
+    if (!/[~`!@#$%^&*()_\-+={[}\]|:;"'<,>.?/]/.test(password)) {
         return false;
     }
     return true;
