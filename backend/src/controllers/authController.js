@@ -19,12 +19,10 @@ export async function signup(req, res, next) {
             return res.status(400).json({ message: 'User already exists' });
         }
         if (validate(password) === false) {
-            return res
-                .status(400)
-                .json({
-                    message:
-                        'Invalid password. Your password must include lowercase and uppercase letters, numbers, and a symbol.',
-                });
+            return res.status(400).json({
+                message:
+                    'Invalid password. Your password must be between 8 - 32 characters and include lowercase and uppercase letters, numbers, and a symbol.',
+            });
         }
         const user = await User.create({ email, password });
         setCookie(res, user._id);
