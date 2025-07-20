@@ -2,16 +2,16 @@ import { useCallback, useEffect, useState } from 'react';
 import { fetchSettings } from '../api/settings';
 
 const useSettings = () => {
-	const [settings, setSettings] = useState([]);
+	const [data, setData] = useState({});
 	const [isLoading, setIsLoading] = useState(false);
 
 	const getSettings = useCallback(async () => {
 		try {
 			setIsLoading(true);
 			const data = await fetchSettings();
-			setSettings(data);
+			setData(data);
 		} catch (err) {
-			setSettings([]);
+			setData({});
 			throw err;
 		} finally {
 			setIsLoading(false);
@@ -20,9 +20,9 @@ const useSettings = () => {
 
 	useEffect(() => {
 		getSettings();
-	}, [getSettings]);
+	}, []);
 
-	return { settings, isLoading };
+	return { settings: data, isLoading };
 };
 
 export default useSettings;
