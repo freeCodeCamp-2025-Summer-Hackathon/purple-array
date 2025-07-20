@@ -3,6 +3,7 @@ import Navbar from '../components/generic/Navbar';
 import { Link, useNavigate } from 'react-router';
 import toast from 'react-hot-toast';
 import api from '../lib/axios';
+import { loginUser } from '../util/api/auth';
 
 const LoginPage = () => {
 	const [email, setEmail] = useState('');
@@ -19,17 +20,23 @@ const LoginPage = () => {
 		}
 
 		try {
-			const { data } = await api.post(
-				'/login',
-				{ email, password },
-				{ withCredentials: true }
-			);
-
+			const { data } = await loginUser(email, password);
 			const { success, message } = data;
 			if (success) {
 				toast.success(message || 'Login Successful!');
 				navigate('/');
 			}
+			// const { data } = await api.post(
+			// 	'/login',
+			// 	{ email, password },
+			// 	{ withCredentials: true }
+			// );
+
+			// const { success, message } = data;
+			// if (success) {
+			// 	toast.success(message || 'Login Successful!');
+			// 	navigate('/');
+			// }
 		} catch (error) {
 			toast.error('Login failed. Please try again.');
 			console.log(error);
