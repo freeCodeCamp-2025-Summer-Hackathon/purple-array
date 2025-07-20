@@ -1,7 +1,7 @@
-import { useState, useTransition } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router';
 import Navbar from '../components/generic/Navbar';
-import axios from 'axios';
+import { signupUser } from '../util/api/auth';
 import toast from 'react-hot-toast';
 
 const SignupPage = () => {
@@ -24,13 +24,9 @@ const SignupPage = () => {
 		}
 
 		try {
-			const { data } = await axios.post(
-				'http://localhost:5001/signup',
-				{ email, password },
-				{ withCredentials: true }
-			);
+			const { data } = await signupUser(email, password);
 			const { success, message } = data;
-			console.log(data);
+
 			if (success) {
 				toast.success(message || 'Account created successfully!');
 				navigate('/');
