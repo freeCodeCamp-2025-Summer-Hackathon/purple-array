@@ -1,5 +1,5 @@
-import { Loader } from 'lucide-react';
 import useEntries from '../../util/hooks/useEntries';
+import { Loader } from 'lucide-react';
 import CollectionListCard from './CollectionListCard';
 import EntriesNotFound from './EntriesNotFound';
 
