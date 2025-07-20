@@ -1,3 +1,4 @@
+import React from 'react';
 import Navbar from '../components/generic/Navbar';
 import useAuth from '../util/hooks/useAuth';
 import { useParams } from 'react-router';
