@@ -2,12 +2,11 @@ import { useState } from 'react';
 import Navbar from '../components/generic/Navbar';
 import { Link, useNavigate } from 'react-router';
 import toast from 'react-hot-toast';
-import api from '../lib/axios';
+import { loginUser } from '../util/api/auth';
 
 const LoginPage = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-
 	const navigate = useNavigate();
 
 	const handleSubmit = async (e) => {
@@ -19,13 +18,9 @@ const LoginPage = () => {
 		}
 
 		try {
-			const { data } = await api.post(
-				'/login',
-				{ email, password },
-				{ withCredentials: true }
-			);
-
+			const { data } = await loginUser(email, password);
 			const { success, message } = data;
+
 			if (success) {
 				toast.success(message || 'Login Successful!');
 				navigate('/');
