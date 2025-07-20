@@ -14,7 +14,6 @@ const App = () => {
 	return (
 		<div data-theme="writeLight">
 			<Routes>
-				{/* Pathnames for some of these routes will need to be updated, once we get the real endpoints */}
 				<Route path="/" element={<HomePage />} />
 				<Route path="/login" element={<LoginPage />} />
 				<Route path="/signup" element={<SignupPage />} />

@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+	/* outline: solid 1px #463aa2; */
+}
+
+@font-face {
+	font-family: 'Caveat';
+	/* font-weight: 400;
+	font-style: normal; */
+	src: local('Caveat-Regular'),
+		url('../assets/fonts/Caveat-Regular.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'League Script';
+	src: local('LeagueScript-Regular'),
+		url('../assets/fonts/LeagueScript-Regular.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'Fredericka the Great';
+	src: local('FrederickatheGreat-Regular'),
+		url('../assets/fonts/FrederickatheGreat-Regular.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'Special Elite';
+	src: local('SpecialElite-Regular'),
+		url('../assets/fonts/SpecialElite-Regular.ttf') format('truetype');
+}

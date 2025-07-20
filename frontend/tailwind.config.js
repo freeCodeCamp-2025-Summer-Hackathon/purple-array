@@ -6,7 +6,12 @@ export default {
 	content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
 	theme: {
 		extend: {
-			fontFamily: {},
+			fontFamily: {
+				handwritten: ['Caveat'],
+				chalkboard: ['"Fredericka the Great"'],
+				cursive: ['"League Script"'],
+				typewriter: ['"Special Elite"'],
+			},
 			animation: {
 				'spin-slow': 'spin 3s linear infinite',
 			},
@@ -17,6 +22,14 @@ export default {
 		themes: [
 			'cupcake',
 			'wireframe',
+			'valentine',
+			'garden',
+			'pastel',
+			'dracula',
+			'night',
+			'coffee',
+			'winter',
+			'sunset',
 			{
 				writeLight: {
 					primary: '#463aa2',

@@ -1,9 +1,8 @@
-import { useState, useTransition } from "react";
-import { Link, useNavigate } from "react-router";
-import Navbar from "../components/generic/Navbar";
-import axios from "axios";
-import toast from "react-hot-toast";
-import WordOfTheDay from "../components/Home/WordOfTheDay";
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router';
+import Navbar from '../components/generic/Navbar';
+import { signupUser } from '../util/api/auth';
+import toast from 'react-hot-toast';
 
 const SignupPage = () => {
   const [email, setEmail] = useState("");
@@ -24,23 +23,19 @@ const SignupPage = () => {
       return;
     }
 
-    try {
-      const { data } = await axios.post(
-        "http://localhost:5001/signup",
-        { email, password },
-        { withCredentials: true }
-      );
-      const { success, message } = data;
-      console.log(data);
-      if (success) {
-        toast.success(message || "Account created successfully!");
-        navigate("/");
-      }
-    } catch (error) {
-      toast.error("Account creation failed. Please try again");
-      console.log(error);
-    }
-  };
+		try {
+			const { data } = await signupUser(email, password);
+			const { success, message } = data;
+
+			if (success) {
+				toast.success(message || 'Account created successfully!');
+				navigate('/');
+			}
+		} catch (error) {
+			toast.error('Account creation failed. Please try again');
+			console.log(error);
+		}
+	};
 
   return (
     <div className="flex flex-col min-h-screen">
