@@ -21,6 +21,12 @@ export async function getWord(req, res) {
         const { word, pronunciation, definition } =
             timeZoneObj[timezone].currentWord;
 
+        // console.log(timeZoneObj['Pacific/Midway']);
+        // console.log(timeZoneObj['America/Chicago']);
+        // console.log(timeZoneObj['Atlantic/Reykjavik']);
+        // console.log(timeZoneObj['Africa/Lagos']);
+        // console.log(timeZoneObj['Asia/Karachi']);
+        // console.log(timeZoneObj['Pacific/Kiritimati']);
         res.status(200).json({ word, pronunciation, definition });
     } catch (error) {
         console.error('Error in getWord controller', error);
