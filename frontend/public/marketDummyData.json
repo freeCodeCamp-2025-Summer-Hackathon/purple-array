@@ -1,142 +1,98 @@
 [
     {
-        "_id": {
-            "$oid": "686d72d968a820c9a52ab307"
-        },
-        "name": "Floral Cover",
-        "cost": {
-            "$numberInt": "5"
-        },
-        "description": "Aesthetic floral cover design for your journal.",
+        "name": "Chalkboard",
+        "cost": 20,
+        "description": "Chalkboard background design for your journal.",
         "tags": [
-            "style",
-            "cover"
+            "parchment"
         ]
     },
     {
-        "_id": {
-            "$oid": "686d72d968a820c9a52ab308"
-        },
-        "name": "Mood Tracker Sticker Pack",
-        "cost": {
-            "$numberInt": "3"
-        },
-        "description": "Track your moods with these colorful stickers.",
-        "tags": [
-            "tracker",
-            "stickers"
-        ]
-    },
-    {
-        "_id": {
-            "$oid": "686d72d968a820c9a52ab309"
-        },
-        "name": "Daily Prompt Pack",
-        "cost": {
-            "$numberInt": "4"
-        },
-        "description": "Get inspired with daily writing prompts.",
-        "tags": [
-            "prompts",
-            "writing"
-        ]
-    },
-    {
-        "_id": {
-            "$oid": "686d72d968a820c9a52ab310"
-        },
-        "name": "Minimalist Theme",
-        "cost": {
-            "$numberInt": "6"
-        },
-        "description": "Clean, distraction-free layout for focused journaling.",
-        "tags": [
-            "style",
-            "theme"
-        ]
-    },
-    {
-        "_id": {
-            "$oid": "686d72d968a820c9a52ab311"
-        },
-        "name": "Productivity Sticker Pack",
-        "cost": {
-            "$numberInt": "2"
-        },
-        "description": "Motivational stickers to boost your productivity.",
-        "tags": [
-            "stickers",
-            "productivity"
-        ]
-    },
-    {
-        "_id": {
-            "$oid": "686d72d968a820c9a52ab312"
-        },
-        "name": "Vintage Paper Pack",
-        "cost": {
-            "$numberInt": "5"
-        },
+        "name": "Weathered Paper",
+        "cost": 15,
         "description": "Add a retro touch with old-school paper textures.",
         "tags": [
-            "style",
-            "paper"
+            "parchment"
         ]
     },
     {
-        "_id": {
-            "$oid": "686d72d968a820c9a52ab313"
-        },
-        "name": "Custom Font Bundle",
-        "cost": {
-            "$numberInt": "3"
-        },
-        "description": "Stylish fonts to personalize your journal entries.",
+        "name": "Spiral Bound Notebook",
+        "cost": 15,
+        "description": "Give your journal that notebook feel",
         "tags": [
-            "font",
-            "style"
+            "parchment"
         ]
     },
     {
-        "_id": {
-            "$oid": "686d72d968a820c9a52ab314"
-        },
-        "name": "Gratitude Tracker",
-        "cost": {
-            "$numberInt": "4"
-        },
-        "description": "Encourages daily gratitude journaling habits.",
+        "name": "Post-It Notes",
+        "cost": 20,
+        "description": "Track your notes like you track your day with sticky notes",
         "tags": [
-            "tracker",
-            "mental health"
+            "parchment"
         ]
     },
     {
-        "_id": {
-            "$oid": "686d72d968a820c9a52ab315"
-        },
-        "name": "Dark Mode Theme",
-        "cost": {
-            "$numberInt": "6"
-        },
-        "description": "Sleek dark color scheme for nighttime journaling.",
+        "name": "Blue Ink",
+        "cost": 7,
+        "description": "Blue colored ink",
         "tags": [
-            "style",
-            "theme"
+            "ink"
         ]
     },
     {
-        "_id": {
-            "$oid": "686d72d968a820c9a52ab316"
-        },
-        "name": "Weekly Layout Kit",
-        "cost": {
-            "$numberInt": "4"
-        },
-        "description": "Organize your week with structured layout templates.",
+        "name": "Green Ink",
+        "cost": 6,
+        "description": "Green Ink",
         "tags": [
-            "organization",
-            "layout"
+            "ink"
+        ]
+    },
+    {
+        "name": "Red Ink",
+        "cost": 6,
+        "description": "Red ink",
+        "tags": [
+            "ink"
+        ]
+    },
+    {
+        "name": "Purple Ink",
+        "cost": 7,
+        "description": "Purple Ink",
+        "tags": [
+            "ink"
+        ]
+    },
+    {
+        "name": "Cursive Script",
+        "cost": 6,
+        "description": "Sleek cursive style font.",
+        "tags": [
+            "font"
+        ]
+    },
+    {
+        "name": "Handwritten",
+        "cost": 4,
+        "description": "Feel More natural with this handwritten style font.",
+        "tags": [
+            "font"
+        ]
+    },
+    {
+        "name": "Typewriter",
+        "cost": 4,
+        "description": "Old schoold techy vibe-out with the typewrite font.",
+        "tags": [
+            "font"
+        ]
+    },
+    {
+        "name": "Chalkboard",
+        "cost": 4,
+        "description": "Get back to class with this chalkboard font.",
+        "tags": [
+            "font"
         ]
     }
 ]

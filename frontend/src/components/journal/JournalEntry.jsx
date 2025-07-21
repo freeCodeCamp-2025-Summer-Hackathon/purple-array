@@ -82,7 +82,7 @@ const JournalEntry = ({ date }) => {
                 className="bg-cover bg-center flex-1 p-6 space-y-6"
                 style={
                   {
-                    // backgroundImage: 'url("../../../assets/parchmentPaper.png")',
+                    // backgroundImage: 'url("../../../assets/parchment/parchmentPaper.png")',
                   }
                 }
               > */}
