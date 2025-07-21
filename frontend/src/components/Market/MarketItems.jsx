@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
-import useProducts from '../../util/hooks/useProducts';
+import useProducts from '../../util/hooks/useProducts.js';
 import { CircleDollarSign } from 'lucide-react';
 
 function MarketItems() {
 	/**********************************************************************/
 	// use the products array being fetched in on line 7 to populate the UI
 	const { products, isLoading } = useProducts();
-	console.log({ products, isLoading });
+	console.log('Component received - products', products, 'isLoading', isLoading);
 
-	/**********************************************************************/
+	/*
 	// Lines 12 - 26 will be replaced with the destructured values from line 7
 	const [items, setItems] = useState([]);
 	const [loading, setLoading] = useState(true);
@@ -26,15 +26,15 @@ function MarketItems() {
 			});
 	}, []);
 
-	/*****************************************************************************/
+    */
 	// loading here on line 30 will need to be replaced with isLoading from line 7
-	if (loading) {
+	if (isLoading) {
 		return <p className="text-center py-10">Loading market items...</p>;
 	}
 
 	return (
 		<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4 pt-10">
-			{items.map((item) => (
+			{products.map((item) => (
 				<div
 					key={item._id.$oid}
 					className="card bg-base-100 border border-base-200 shadow-sm transition duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:bg-base-200"

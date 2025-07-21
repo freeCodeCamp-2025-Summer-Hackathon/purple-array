@@ -1,22 +1,27 @@
 import api from '../../lib/axios';
 
 export const fetchProducts = async () => {
-	const url = `products`;
+	const url = `products/`;
 	try {
 		let productsArray = [];
 
 		const data = await api.get(url, {
 			withCredentials: true,
 		});
+        
+		if (Array.isArray((data.data))) {
+			productsArray = data.data;
+            return productsArray;
 
-		if (data.data.products) {
-			for (let product of data.data.products) {
-				productsArray.push(product);
-			}
-		}
+		} else if (data.data.products) {
+            return data.data.products;
+        } 
+        
+        return productsArray;
 
-		return productsArray;
-	} catch (error) {
+    
+        } catch (error) {
+        console.log('Fetch product error:', error)
 		throw error;
 	}
 };
