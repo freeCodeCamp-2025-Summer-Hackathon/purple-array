@@ -120,6 +120,14 @@ npm install
 npm run dev
 ```
 
+## Environment Variables
+
+Create a `.env` file in the root of the project and include the following:
+
+```env
+PORT=5001
+JWT_SECRET=yourSuperSecretKey
+
 ### Contributors to this Repository
 
 - [Mystel](https://github.com/Mystel)
