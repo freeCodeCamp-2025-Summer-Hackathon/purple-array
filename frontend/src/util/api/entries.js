@@ -32,32 +32,27 @@ export const updateEntry = async (entryId, updatedData) => {
 				title: updatedData.title,
 				body: updatedData.body,
 				mood: updatedData.mood,
-				tags: updatedData.tags,
-				updatedAt: new Date(),
+				tags: updatedData.tags, 
+				updatedAt: new Date(), 
 			},
 			{
 				withCredentials: true,
 			}
 		);
-
+  
 		return response;
 	} catch (error) {
-		console.error(`Failed to update journal entry with ID ${entryId}:`, error); // Log the error
+    console.error('Failed to delete journal entry:', error); // Log the error
 		throw error;
-	}
-};
-
+	};
+ 
 export const deleteEntry = async (entryId) => {
 	const url = `journal/${entryId}`;
 
 	try {
-		const response = await api.delete(url, {
-			withCredentials: true,
-		});
-
-		return response;
-	} catch (error) {
-		console.error('Failed to delete journal entry:', error); // Log the error
-		throw error;
-	}
-};
+		const response = await api.delete(url, { withCredentials: true})
+    
+    } catch(error) {
+     console.log(error); 
+    };
+  }

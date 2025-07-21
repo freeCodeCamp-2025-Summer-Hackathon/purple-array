@@ -28,7 +28,7 @@ const useAuth = () => {
 
 	useEffect(() => {
 		authenticateUser();
-	});
+	}, []);
 
 	const handleLogout = () => {
 		removeCookie('token');
