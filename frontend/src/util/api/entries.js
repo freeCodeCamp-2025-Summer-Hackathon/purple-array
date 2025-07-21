@@ -20,3 +20,28 @@ export const fetchEntries = async () => {
 		throw error;
 	}
 };
+
+export const updateEntry = async (entryId, updatedData) => {
+	const url = `journal/${entryId}`;
+
+	try {
+		const response = await api.put(
+			url,
+			{
+				
+				title: updatedData.title,
+				body: updatedData.body,
+				mood: updatedData.mood,
+				tags: updatedData.tags, 
+				updatedAt: new Date(), 
+			},
+			{
+				withCredentials: true,
+			}
+		);
+
+		return response;
+	} catch (error) {
+		throw error;
+	}
+};
