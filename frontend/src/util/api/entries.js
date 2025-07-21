@@ -20,3 +20,17 @@ export const fetchEntries = async () => {
 		throw error;
 	}
 };
+
+export const deleteEntry = async (entryId) => {
+	const url = `journal/${entryId}`;
+
+	try {
+		const response = await api.delete(url, {
+			withCredentials: true,
+		});
+
+		return response;
+	} catch (error) {
+		throw error;
+	}
+};
