@@ -85,19 +85,22 @@ mongodb+srv://<YOUR_USERNAME>:<YOUR_PASSWORD>@<CLUSTER_NAME>.iva3yfn.mongodb.net
 mongodb+srv://<your_username>:<your_password>@<cluster_name>.iva3yfn.mongodb.net/<ADD_DB_NAME_HERE>?retryWrites=true&w=majority$appName=<cluster_name>
 ```
 
-6. Now add your PORT variable to the .env file and set it to whatever you want
-   e.g `PORT=5001`
+6. Now add your PORT variable to the .env file and set it to `PORT=5001`
 
 7. Now add the following variable to your .env as well: `NODE_ENV=development`
+
+8. Now add the following variable to your .env as well: `JWT_SECRET=yourSuperSecretKey`
 
 **_Please ensure that you now have all of the following environment variables in your .env file, including the Node environment variable with value set to `development` as shown below._**
 
 ```
 MONGO_URI=<Your_Mongo_URI>
 
-PORT=<Your_designated_PORT>
+PORT=5001
 
 NODE_ENV=development
+
+JWT_SECRET=:<yourSuperSecretKey>
 ```
 
 ## 🔧 Run the Backend
