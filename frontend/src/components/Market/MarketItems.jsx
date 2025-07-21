@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+//import { useState, useEffect } from 'react';
 import useProducts from '../../util/hooks/useProducts.js';
 import { CircleDollarSign } from 'lucide-react';
 
@@ -6,8 +6,8 @@ function MarketItems() {
 	/**********************************************************************/
 	// use the products array being fetched in on line 7 to populate the UI
 	const { products, isLoading } = useProducts();
-	console.log('Component received - products', products, 'isLoading', isLoading);
 
+	/*
 	/*
 	// Lines 12 - 26 will be replaced with the destructured values from line 7
 	const [items, setItems] = useState([]);
@@ -28,6 +28,7 @@ function MarketItems() {
 
     */
 	// loading here on line 30 will need to be replaced with isLoading from line 7
+	
 	if (isLoading) {
 		return <p className="text-center py-10">Loading market items...</p>;
 	}
