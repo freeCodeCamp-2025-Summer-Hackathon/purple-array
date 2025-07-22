@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const fetchTimezones = async () => {
-	const url = `../../../public/timezones.json`;
+	const url = `./timezones.json`;
 	try {
 		let timezonesArray = [];
 
