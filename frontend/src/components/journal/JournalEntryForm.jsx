@@ -3,10 +3,20 @@ import { useState, useEffect } from 'react';
 import { formatDate } from '../../util/helper/formatDate';
 import { useWord } from '../../util/hooks/useWord';
 import { Trash2, CircleDollarSign } from 'lucide-react';
+import { fetchEntries } from '../../util/api/entries';
+
+// Helper to compare dates (not time)
+const isSameDay = (date1, date2) => {
+	return (
+		date1.getDate() === date2.getDate() &&
+		date1.getMonth() === date2.getMonth() &&
+		date1.getFullYear() === date2.getFullYear()
+	);
+};
 
 const JournalEntryForm = () => {
 	const { word, isLoading } = useWord();
-
+	const [entryLoaded, setEntryLoaded] = useState(false);
 	const [primaryPrompt, setPrimaryPrompt] = useState('');
 	const [addPromptOne, setAddPromptOne] = useState('');
 	const [addPromptTwo, setAddPromptTwo] = useState('');
@@ -16,15 +26,36 @@ const JournalEntryForm = () => {
 	const [addPromptTwoResponse, setAddPromptTwoResponse] = useState('');
 	const [addPromptThreeResponse, setAddPromptThreeResponse] = useState('');
 
-	//   useEffect(() => {
-	//     setPrimaryPrompt(initialData.primaryPrompt?.trim() || "");
-	//     setAddPromptOne(initialData.addPromptOne || "");
-	//     setAddPromptTwo(initialData.addPromptTwo || "");
-	//     setAddPromptThree(initialData.addPromptThree || "");
-	//     setAddPromptOneResponse(initialData.addPromptOneResponse || "");
-	//     setAddPromptTwoResponse(initialData.addPromptTwoResponse || "");
-	//     setAddPromptThreeResponse(initialData.addPromptThreeResponse || "");
-	//   }, [initialData]);
+	useEffect(() => {
+		const loadEntryIfExists = async () => {
+			try {
+				const entries = await fetchEntries();
+				const today = new Date();
+
+				const existingEntry = entries.find(entry =>
+					isSameDay(new Date(entry.date), today)
+				);
+
+				if (existingEntry) {
+					// Prefill form with existing entry
+					setPrimaryPrompt(existingEntry.body || '');
+					setAddPromptOne(existingEntry.prompt1 || '');
+					setAddPromptTwo(existingEntry.prompt2 || '');
+					setAddPromptThree(existingEntry.prompt3 || '');
+					setAddPromptOneResponse(existingEntry.response1 || '');
+					setAddPromptTwoResponse(existingEntry.response2 || '');
+					setAddPromptThreeResponse(existingEntry.response3 || '');
+				}
+			} catch (err) {
+				console.error('Failed to load entry:', err);
+			} finally {
+				setEntryLoaded(true);
+			}
+		};
+
+		loadEntryIfExists();
+	}, []);
+
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -43,13 +74,14 @@ const JournalEntryForm = () => {
 		// });
 	};
 
-	if (isLoading) {
-		return (
-			<div className="flex justify-center items-center min-h-screen">
-				<span className="loading loading-spinner loading-lg text-primary"></span>
-			</div>
-		);
-	}
+	if (isLoading || !entryLoaded) {
+	return (
+		<div className="flex justify-center items-center min-h-screen">
+			<span className="loading loading-spinner loading-lg text-primary"></span>
+		</div>
+	);
+}
+
 
 	return (
 		<div className="container">
