@@ -1,12 +1,14 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import useSettings from '../../util/hooks/useSettings';
 import useInventory from '../../util/hooks/useInventory';
 import { updateSettings } from '../../util/api/settings';
 import { toast } from 'react-hot-toast';
+import useTimezones from '../../util/hooks/useTimezones';
 
 const SettingsOptions = () => {
 	const { settings, isLoading } = useSettings();
 	const { inventory /*isLoading*/ } = useInventory();
+	const { timezones } = useTimezones();
 	const [formData, setFormData] = useState({});
 
 	const handleChange = (e) => {
@@ -56,6 +58,27 @@ const SettingsOptions = () => {
 					<div>
 						{/* Option Select for Journal Font Settings */}
 						<label className="block text-sm font-medium text-gray-700 mb-1">
+							Timezone
+						</label>
+						<select
+							onChange={handleChange}
+							name="timezone"
+							className="w-full px-4 py-2 bg-gray-100 rounded-md border border-gray-300 focus:outline-none"
+						>
+							<>
+								<option>Default</option>
+								{timezones
+									.sort((a, b) => a.location.localeCompare(b.location))
+									.map((e) => {
+										return <option key={e.location}>{e.location}</option>;
+									})}
+							</>
+						</select>
+					</div>
+
+					<div>
+						{/* Option Select for Journal Font Settings */}
+						<label className="block text-sm font-medium text-gray-700 mb-1">
 							Journal Font
 						</label>
 						<select
@@ -63,17 +86,13 @@ const SettingsOptions = () => {
 							name="font"
 							className="w-full px-4 py-2 bg-gray-100 rounded-md border border-gray-300 focus:outline-none"
 						>
-							{/* {settings?.backgrounds?.map((bg, idx) => (
-								<option key={idx}>{bg}</option>
-							)) || ( */}
 							<>
 								<option>Default</option>
 								<option>Handwritten</option>
 								<option>Cursive</option>
-								<option>Typewriter Mist</option>
+								<option>Typewriter</option>
 								<option>Chalk</option>
 							</>
-							{/* )} */}
 						</select>
 					</div>
 
@@ -87,9 +106,6 @@ const SettingsOptions = () => {
 							name="ink"
 							className="w-full px-4 py-2 bg-gray-100 rounded-md border border-gray-300 focus:outline-none"
 						>
-							{/* {settings?.themes?.map((theme, idx) => (
-								<option key={idx}>{theme}</option>
-							)) || ( */}
 							<>
 								<option>Default</option>
 								<option>Blue</option>
@@ -97,7 +113,6 @@ const SettingsOptions = () => {
 								<option>Purple</option>
 								<option>Red</option>
 							</>
-							{/* )} */}
 						</select>
 					</div>
 
@@ -111,9 +126,6 @@ const SettingsOptions = () => {
 							name="parchment"
 							className="w-full px-4 py-2 bg-gray-100 rounded-md border border-gray-300 focus:outline-none"
 						>
-							{/* {settings?.fonts?.map((font, idx) => (
-								<option key={idx}>{font}</option>
-							)) || ( */}
 							<>
 								<option>Default</option>
 								<option>Lined Notebook paper</option>
@@ -121,7 +133,6 @@ const SettingsOptions = () => {
 								<option>Chalkboard</option>
 								<option>Post-It Note</option>
 							</>
-							{/* )} */}
 						</select>
 					</div>
 
