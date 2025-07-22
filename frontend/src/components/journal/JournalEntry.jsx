@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 import { useState, useEffect } from 'react';
-import { formatDate } from '../../util/helper/formatDate';
+import { formatDate, formatUTCDate } from '../../util/helper/formatDate';
 import useWord from '../../util/hooks/useWord';
 import useEntries from '../../util/hooks/useEntries';
 import { CloudUpload, Pencil, Plus } from 'lucide-react';
@@ -10,6 +10,7 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 	const { word, isLoading } = useWord();
 	const { entries } = useEntries();
 	const [currentEntry, setCurrentEntry] = useState({});
+	// const todayDate = formatDate(new Date());
 	const todayDate = formatDate(new Date());
 	const initialData = {
 		optionalPrompt1: '',
@@ -20,6 +21,10 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 		response2: '',
 		response3: '',
 	};
+
+	console.log({ todayDate });
+	console.log(formatUTCDate(new Date()));
+	console.log(entries);
 
 	// Determine which entry to load
 	useEffect(() => {

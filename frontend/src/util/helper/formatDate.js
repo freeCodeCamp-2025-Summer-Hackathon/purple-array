@@ -5,3 +5,9 @@ export function formatDate(date) {
 		year: 'numeric',
 	});
 }
+
+export function formatUTCDate(date) {
+	return `${date.getUTCFullYear()}-${
+		date.getUTCMonth() + 1
+	}-${date.getUTCDate()}`;
+}

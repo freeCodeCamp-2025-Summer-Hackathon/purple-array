@@ -13,6 +13,9 @@ const JournalEntryPage = () => {
 	const entryDate = formatDate(new Date(id + 'T00:00:00'));
 	const pastEntry = todayDate !== entryDate;
 
+	// console.log({ todayDate });
+	// const date = new Date();
+
 	return (
 		<div className="min-h-screen">
 			<Navbar logout={handleLogout} />
