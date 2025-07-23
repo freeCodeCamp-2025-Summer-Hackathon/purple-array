@@ -6,26 +6,42 @@ import { toast } from 'react-hot-toast';
 import useTimezones from '../../util/hooks/useTimezones';
 
 const SettingsOptions = () => {
-	const { settings, isLoading } = useSettings();
-	const { inventory /*isLoading*/ } = useInventory();
+	const { settings, /*isLoading*/ } = useSettings();
+	const { inventory, isLoading } = useInventory();
 	const { timezones } = useTimezones();
 	const [formData, setFormData] = useState({});
+	const [ink, setInk] = useState([]);
+
+	
+	// useEffect(() => {
+	// 	setInk(inventory.ink);
+	// 	console.log(inventory.ink);
+	// },[inventory,isLoading]);
+	
+	//console.log(ink);
+
 
 	const handleChange = (e) => {
-		const { name, value } = e.target;
-		console.log(name, value); // remove log after testing
-		// setFormData()
+		const {name, value} = e.target;
+		setFormData(prior => ({
+			...prior,
+			[name]: value
+
+		}));
 	};
+	console.log({formData});
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+
+		
 
 		try {
 			/* ******************************************************************* */
 			// This is just placeholder data until we have the form set up correctly
 			let data = {
 				timezone: 'America/New_York',
-				theme: 'cupcake',
+				theme: 'cupcake', // skip for now
 				font: 'inter',
 				ink: 'indigo',
 				parchment: 'notebook',
@@ -54,9 +70,9 @@ const SettingsOptions = () => {
 	return (
 		<div className="container">
 			<div className="card mx-auto max-w-3xl bg-base-200 p-8 shadow-md">
-				<form onSubmit={handleSubmit} className="space-y-6">
+				{!isLoading && <form onSubmit={handleSubmit} className="space-y-6">
 					<div>
-						{/* Option Select for Journal Font Settings */}
+						{/* Option Select for Time Zone Settings */}
 						<label className="block text-sm font-medium text-gray-700 mb-1">
 							Timezone
 						</label>
@@ -88,10 +104,14 @@ const SettingsOptions = () => {
 						>
 							<>
 								<option>Default</option>
-								<option>Handwritten</option>
+								{!isLoading && inventory?.font?.map((e)=>{
+									 return <option key={e}>{e}</option>;
+								})}
+								<option>Handwritten</option> 
 								<option>Cursive</option>
 								<option>Typewriter</option>
 								<option>Chalk</option>
+								
 							</>
 						</select>
 					</div>
@@ -108,6 +128,9 @@ const SettingsOptions = () => {
 						>
 							<>
 								<option>Default</option>
+								{!isLoading && inventory?.ink?.map((e)=>{
+									 return <option key={e}>{e}</option>;
+								})}
 								<option>Blue</option>
 								<option>Green</option>
 								<option>Purple</option>
@@ -128,6 +151,9 @@ const SettingsOptions = () => {
 						>
 							<>
 								<option>Default</option>
+								{!isLoading && inventory?.parchment?.map((e)=>{
+									 return <option key={e}>{e}</option>;
+								})}
 								<option>Lined Notebook paper</option>
 								<option>Weathered Parchment</option>
 								<option>Chalkboard</option>
@@ -139,7 +165,7 @@ const SettingsOptions = () => {
 					<button type="submit" className="btn btn-primary text-base">
 						Save Settings
 					</button>
-				</form>
+				</form>}
 			</div>
 		</div>
 	);
