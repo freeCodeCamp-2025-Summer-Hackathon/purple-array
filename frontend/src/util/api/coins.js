@@ -5,9 +5,10 @@ export const fetchCoins = async () => {
 		const data = await api.get('coins', {
 			withCredentials: true,
 		});
-
+        
 		return data.data.coins;
 	} catch (error) {
+        console.log('Fetch coins error:', error);
 		throw error;
 	}
 };

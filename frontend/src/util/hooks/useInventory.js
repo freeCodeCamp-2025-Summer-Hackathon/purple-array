@@ -19,11 +19,15 @@ const useInventory = () => {
 		}
 	}, []);
 
+    const refreshInventory = useCallback(() => {
+        getInventory();
+    },[getInventory]);
+
 	useEffect(() => {
 		getInventory();
 	}, []);
 
-	return { inventory: inventory.inventory, isLoading };
+	return { inventory: inventory.inventory, isLoading, refreshInventory };
 };
 
 export default useInventory;

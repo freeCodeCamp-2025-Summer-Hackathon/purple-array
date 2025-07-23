@@ -40,6 +40,7 @@ export const purchaseProduct = async (productId) => {
 
 		return response;
 	} catch (error) {
+        console.log('Purchase product error:', error);
 		throw error;
 	}
 };
