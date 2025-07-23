@@ -5,9 +5,9 @@ import { CircleDollarSign } from 'lucide-react';
 
 function MarketItems() {
 	const { products, isLoading } = useProducts();
-    const { inventory, inventoryLoading } = useInventory();
+    const { inventory } = useInventory();
 
-    if (isLoading || inventoryLoading) {
+    if (isLoading || !inventory) {
 		return <p className="text-center py-10">Loading market items...</p>;
 	}
     console.log(products);
