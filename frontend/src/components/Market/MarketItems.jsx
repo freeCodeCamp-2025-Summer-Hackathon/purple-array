@@ -1,4 +1,3 @@
-//import { useState, useEffect } from 'react';
 import useProducts from '../../util/hooks/useProducts.js';
 import useInventory from '../../util/hooks/useInventory.js'
 import { CircleDollarSign } from 'lucide-react';
@@ -36,11 +35,8 @@ function MarketItems() {
 						/>
 					</figure>
 
-					<div className="card-body text-center">
-						<h2 className="card-title justify-center text-primary">
-							{item.name}
-						</h2>
-						<p className="text-sm text-base-content/70">{item.description}</p>
+			{/* Balance will need to be styled - then this comment can be removed */}
+			<div>{`Your Balance: $` + coins}</div>
 
 						<div className="flex items-center justify-evenly font-semibold text-base-content">
 							<div className="flex items-center justify-center">
@@ -58,15 +54,18 @@ function MarketItems() {
 									{tag}
 								</span>
 							))}
+
 						</div>
 
 						<div className="flex flex-wrap justify-center gap-2 mt-3">
 							
 						</div>
 					</div>
+
 				</div>
             ))}
 		</div>
+
 	);
 }
 

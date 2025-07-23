@@ -25,3 +25,21 @@ export const fetchProducts = async () => {
 		throw error;
 	}
 };
+
+export const purchaseProduct = async (productId) => {
+	const url = `products/${productId}`;
+
+	try {
+		const response = await api.put(
+			url,
+			{},
+			{
+				withCredentials: true,
+			}
+		);
+
+		return response;
+	} catch (error) {
+		throw error;
+	}
+};

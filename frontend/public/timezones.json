@@ -1,0 +1,199 @@
+[
+	{
+		"location": "Pacific/Honolulu",
+		"offset": "UTC-10"
+	},
+
+	{
+		"location": "America/Los_Angeles",
+		"offset": "UTC-8",
+		"DST": "UTC-7"
+	},
+	{
+		"location": "America/Vancouver",
+		"offset": "UTC-8",
+		"DST": "UTC-7"
+	},
+	{
+		"location": "America/Denver",
+		"offset": "UTC-7",
+		"DST": "UTC-6"
+	},
+	{
+		"location": "America/Chicago",
+		"offset": "UTC-6",
+		"DST": "UTC-5"
+	},
+	{
+		"location": "America/Mexico_City",
+		"offset": "UTC-6"
+	},
+	{
+		"location": "America/Bogota",
+		"offset": "UTC-5"
+	},
+	{
+		"location": "America/New_York",
+		"offset": "UTC-5",
+		"DST": "UTC-4"
+	},
+	{
+		"location": "America/Toronto",
+		"offset": "UTC-5",
+		"DST": "UTC-4"
+	},
+	{
+		"location": "America/Lima",
+		"offset": "UTC-5"
+	},
+	{
+		"location": "America/Buenos_Aires",
+		"offset": "UTC-3"
+	},
+	{
+		"location": "America/Sao_Paulo",
+		"offset": "UTC-3"
+	},
+	{
+		"location": "Africa/Accra",
+		"offset": "UTC-0"
+	},
+	{
+		"location": "Europe/London",
+		"offset": "UTC+0",
+		"DST": "UTC+1"
+	},
+	{
+		"location": "Africa/Abidjan",
+		"offset": "UTC+0"
+	},
+	{
+		"location": "Europe/Paris",
+		"offset": "UTC+1",
+		"DST": "UTC+2"
+	},
+	{
+		"location": "Europe/Berlin",
+		"offset": "UTC+1",
+		"DST": "UTC+2"
+	},
+	{
+		"location": "Europe/Rome",
+		"offset": "UTC+1",
+		"DST": "UTC+2"
+	},
+	{
+		"location": "Europe/Madrid",
+		"offset": "UTC+1",
+		"DST": "UTC+2"
+	},
+	{
+		"location": "Europe/Amsterdam",
+		"offset": "UTC+1",
+		"DST": "UTC+2"
+	},
+	{
+		"location": "Africa/Lagos",
+		"offset": "UTC+1"
+	},
+	{
+		"location": "Africa/Casablanca",
+		"offset": "UTC+1"
+	},
+	{
+		"location": "Africa/Cairo",
+		"offset": "UTC+2"
+	},
+	{
+		"location": "Africa/Johannesburg",
+		"offset": "UTC+2"
+	},
+	{
+		"location": "Asia/Riyadh",
+		"offset": "UTC+3"
+	},
+	{
+		"location": "Europe/Moscow",
+		"offset": "UTC+3"
+	},
+	{
+		"location": "Europe/Istanbul",
+		"offset": "UTC+3"
+	},
+	{
+		"location": "Asia/Tehran",
+		"offset": "UTC+3:30"
+	},
+	{
+		"location": "Asia/Dubai",
+		"offset": "UTC+4"
+	},
+	{
+		"location": "Asia/Karachi",
+		"offset": "UTC+5"
+	},
+	{
+		"location": "Asia/Kolkata",
+		"offset": "UTC+5:30"
+	},
+	{
+		"location": "Asia/Dhaka",
+		"offset": "UTC+6"
+	},
+	{
+		"location": "Asia/Bangkok",
+		"offset": "UTC+7"
+	},
+	{
+		"location": "Asia/Jakarta",
+		"offset": "UTC+7"
+	},
+	{
+		"location": "Australia/Perth",
+		"offset": "UTC+8"
+	},
+	{
+		"location": "Asia/Shanghai",
+		"offset": "UTC+8"
+	},
+	{
+		"location": "Asia/Hong_Kong",
+		"offset": "UTC+8"
+	},
+	{
+		"location": "Asia/Manila",
+		"offset": "UTC+8"
+	},
+	{
+		"location": "Asia/Singapore",
+		"offset": "UTC+8"
+	},
+	{
+		"location": "Asia/Tokyo",
+		"offset": "UTC+9"
+	},
+	{
+		"location": "Asia/Seoul",
+		"offset": "UTC+9"
+	},
+	{
+		"location": "Australia/Sydney",
+		"offset": "UTC+10",
+		"DST": "UTC+11"
+	},
+	{
+		"location": "Australia/Melbourne",
+		"offset": "UTC+10",
+		"DST": "UTC+11"
+	},
+	{
+		"location": "Pacific/Fiji",
+		"offset": "UTC+12",
+		"DST": "UTC+13"
+	},
+	{
+		"location": "Pacific/Auckland",
+		"offset": "UTC+12",
+		"DST": "UTC+13"
+	}
+]

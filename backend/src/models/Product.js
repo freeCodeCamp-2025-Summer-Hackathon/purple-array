@@ -5,6 +5,7 @@ const productSchema = new mongoose.Schema(
         name: {
             type: String,
             required: true,
+            unique: [true, 'Item name has been used'],
         },
         cost: {
             type: Number,
