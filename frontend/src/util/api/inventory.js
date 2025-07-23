@@ -8,7 +8,7 @@ export const fetchInventory = async () => {
 
 		return data.data;
 	} catch (err) {
-		console.error('Error fetching inventory:', err);
+		console.error('Fetch inventory error:', err);
 		throw err;
 	}
 };

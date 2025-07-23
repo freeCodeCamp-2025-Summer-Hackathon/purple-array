@@ -2,17 +2,18 @@ import { useCallback, useEffect, useState } from 'react';
 import { fetchCoins } from '../api/coins';
 
 const useCoins = () => {
-	const [data, setData] = useState({});
+	const [coins, setCoins] = useState({});
 	const [isLoading, setIsLoading] = useState(false);
-
+    
 	const getCoins = useCallback(async () => {
 		try {
 			setIsLoading(true);
-			const coins = await fetchCoins();
-			setData(coins);
+			const data = await fetchCoins();
+			setCoins(data);
 		} catch (error) {
+            console.log('Error getting coins:', error);
 			setIsLoading(false);
-			setData({});
+			setCoins({});
 		} finally {
 			setIsLoading(false);
 		}
@@ -22,7 +23,7 @@ const useCoins = () => {
 		getCoins();
 	}, []);
 
-	return { coins: data, isLoading };
+	return { coins: coins, isLoading };
 };
 
 export default useCoins;
