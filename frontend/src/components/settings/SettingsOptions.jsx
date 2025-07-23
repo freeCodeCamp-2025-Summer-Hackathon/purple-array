@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import useSettings from '../../util/hooks/useSettings';
 import useInventory from '../../util/hooks/useInventory';
 import { updateSettings } from '../../util/api/settings';
