@@ -7,7 +7,10 @@ export function formatDate(date) {
 }
 
 export function formatUTCDate(date) {
-	return `${date.getUTCFullYear()}-${
-		date.getUTCMonth() + 1
-	}-${date.getUTCDate()}`;
+	let year = date.getUTCFullYear().toString();
+	let month = (date.getUTCMonth() + 1).toString();
+	month.length < 2 ? (month = '0' + month) : month;
+	let day = date.getUTCDate().toString();
+	day.length < 2 ? (day = '0' + day) : day;
+	return `${year}-${month}-${day}`;
 }
