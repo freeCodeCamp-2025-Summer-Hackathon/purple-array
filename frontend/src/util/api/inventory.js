@@ -2,7 +2,7 @@ import api from '../../lib/axios';
 
 export const fetchInventory = async () => {
 	try {
-		const data = await api.get('inventory', {
+		const data = await api.get('inventory/', {
 			withCredentials: true,
 		});
 

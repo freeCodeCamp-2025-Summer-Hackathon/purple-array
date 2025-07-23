@@ -2,17 +2,17 @@ import { useCallback, useEffect, useState } from 'react';
 import { fetchProducts } from '../api/products';
 
 const useProducts = () => {
-	const [data, setData] = useState([]);
+	const [products, setProducts] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 
 	const getProducts = useCallback(async () => {
 		try {
 			setIsLoading(true);
-			const products = await fetchProducts();
-			setData(products);
+			const data = await fetchProducts();
+			setProducts(data);
 		} catch (error) {
 			setIsLoading(false);
-			setData([]);
+			setProducts([]);
 			throw error;
 		} finally {
 			setIsLoading(false);
@@ -23,7 +23,7 @@ const useProducts = () => {
 		getProducts();
 	}, []);
 
-	return { products: data, isLoading };
+	return { products, isLoading };
 };
 
 export default useProducts;

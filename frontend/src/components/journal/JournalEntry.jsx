@@ -48,6 +48,7 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 			{/* *********************** Animated Loader *********************** */}
 			{isLoading && <AnimatePulseLoader />}
 
+
 			<div className="max-w-3xl mx-auto mt-12 px-6 pb-12">
 				{/* *********************** Footer Button Wrapper Header *********************** */}
 				<div className="flex justify-between mb-6 items-center">

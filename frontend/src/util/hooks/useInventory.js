@@ -2,16 +2,18 @@ import { useCallback, useEffect, useState } from 'react';
 import { fetchInventory } from '../api/inventory';
 
 const useInventory = () => {
-	const [data, setData] = useState({});
+	const [inventory, setInventory] = useState({});
 	const [isLoading, setIsLoading] = useState(false);
+
 
 	const getInventory = useCallback(async () => {
 		try {
 			setIsLoading(true);
-			const inventory = await fetchInventory();
-			setData(inventory);
+			const data = await fetchInventory();
+			setInventory(data);
 		} catch (error) {
-			setData({});
+            console.log('Error getting inventory:', error);
+			setInventory({});
 		} finally {
 			setIsLoading(false);
 		}
@@ -21,7 +23,7 @@ const useInventory = () => {
 		getInventory();
 	}, []);
 
-	return { inventory: data, isLoading };
+	return { inventory: inventory.inventory, isLoading };
 };
 
 export default useInventory;
