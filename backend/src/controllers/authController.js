@@ -1,5 +1,6 @@
 import User from '../models/User.js';
 import { createToken } from '../utils/auth.js';
+import { validate } from '../utils/passwordValidation.js';
 import bcrypt from 'bcrypt';
 
 function setCookie(res, userId) {
@@ -16,6 +17,12 @@ export async function signup(req, res, next) {
         const existingUser = await User.findOne({ email });
         if (existingUser) {
             return res.status(400).json({ message: 'User already exists' });
+        }
+        if (validate(password) === false) {
+            return res.status(400).json({
+                message:
+                    'Invalid password. Your password must be between 8 - 32 characters and include lowercase and uppercase letters, numbers, and a symbol.',
+            });
         }
         const user = await User.create({ email, password });
         setCookie(res, user._id);
