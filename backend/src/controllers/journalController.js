@@ -68,7 +68,11 @@ function calculatePoints(journal) {
 
 export async function writeJournal(req, res) {
     try {
-        // STRETCH: validate date, determine whether requested journal entry is in current month (User) or previous (Journal)
+        // STRETCH: determine whether requested journal entry is in current month (User) or previous (Journal)
+        // STRETCH: Prevent user from deleting and recreating current day's post for more points (timezone-dependent)
+        // STRETCH: Prevent user from getting points by updating old entries (timezone-dependent)
+        // STRETCH: Prevent user from creating a new entry for a day that is not their current day (timezone-dependent)
+
         const user = await User.findById(req.id, 'coins journal rewards');
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
@@ -76,11 +80,12 @@ export async function writeJournal(req, res) {
 
         // determine whether the date is in the journal array
         const journalIndex = user.journal.findIndex(
-            (entry) => entry.date == req.body.date
+            (entry) => entry && entry.date == req.body.date
         );
 
         // Entry does NOT exist
         if (journalIndex == -1) {
+            // Check if the user is trying to create an entry prior to the most recent entry (including deleted entries)
             if (
                 user.rewards.length > 0 &&
                 req.body.date < user.rewards[user.rewards.length - 1].date
@@ -102,7 +107,7 @@ export async function writeJournal(req, res) {
             /* Add new journal entry to end of journal; add new reward entry to end of rewards; update coins
              * Return updated journal and coins
              */
-            let newJournalAndCoins = await User.findOneAndUpdate(
+            const newJournalAndCoins = await User.findOneAndUpdate(
                 { _id: user.id },
                 {
                     $push: {
@@ -120,7 +125,10 @@ export async function writeJournal(req, res) {
                 }
             ).exec();
 
-            res.status(201).json(newJournalAndCoins);
+            const filteredNewJournalAndCoins =
+                newJournalAndCoins.journal.filter((entry) => entry);
+
+            res.status(201).json(filteredNewJournalAndCoins);
         }
 
         // Entry does exist
@@ -159,7 +167,7 @@ export async function writeJournal(req, res) {
             );
 
             res.status(200).json({
-                journal: newJournal.journal,
+                journal: newJournal.journal.filter((entry) => entry),
                 rewards: newReward.rewards,
                 coins: newCoins.coins,
             });
@@ -172,10 +180,11 @@ export async function writeJournal(req, res) {
 
 export async function getJournal(req, res) {
     try {
-        const journal = await User.findById(req.id, 'journal -_id'); // returns only journal field, removes _id
+        const { journal } = await User.findById(req.id, 'journal -_id'); // returns only journal field, removes _id
         if (!journal)
             return res.status(404).json({ message: 'Journal not found' });
-        res.status(200).json(journal);
+        const filteredJournal = journal.filter((entry) => entry);
+        res.status(200).json(filteredJournal);
     } catch (error) {
         console.error('Error in getJournal controller', error);
         res.status(500).json({ message: 'Internal server error' });
@@ -197,22 +206,28 @@ export async function deleteJournal(req, res) {
             });
         }
 
-        // TODO: Check timezone and prevent deletion of current day's entry
+        // STRETCH: Check timezone and prevent deletion of current day's entry (timezone-dependent)
 
         // Currently assumes that the entry is either in the User's journal or doesn't exist
-        if (!journal.find(({ date }) => date === req.params.yearMonthDay))
+        const journalIndex = journal.findIndex(
+            (entry) => entry && entry.date == req.params.yearMonthDay
+        );
+        if (journalIndex === -1)
             return res.status(404).json({
                 message: `Did not find entry with date ${req.params.yearMonthDay}`,
                 success: false,
             });
-        const updatedJournal = await User.findByIdAndUpdate(
-            { _id: req.id },
-            { $pull: { journal: { date: req.params.yearMonthDay } } },
+
+        // Set value of deleted journal to null (maintains matching journal and rewards index)
+        let updatedJournal = await User.findOneAndUpdate(
+            { _id: req.id, 'journal._id': journal[journalIndex]._id },
+            { $set: { 'journal.$': null } },
             { new: true, select: 'journal -_id' }
         ).exec();
 
+        // Filter out null journal entry values before returning
         res.status(200).json({
-            journal: updatedJournal.journal,
+            journal: updatedJournal.journal.filter((entry) => entry),
             success: true,
         });
     } catch (error) {
