@@ -28,7 +28,10 @@ const timeZones = ['EST', 'JST'];
 const coins = [100, 500];
 const password = 'password123';
 const userInventory = { theme: [], font: [], ink: [], parchment: [] };
-const purchasedItems = marketItems.slice(0, 3);
+const indices = [0, 4, 8];
+const purchasedItems = indices
+    .map((index) => marketItems[index])
+    .filter(Boolean);
 
 // Create a reference point for jounral entries
 const today = new Date();
