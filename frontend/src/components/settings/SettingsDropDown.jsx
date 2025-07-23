@@ -2,7 +2,6 @@ const SettingsDropDown = (props) => {
 	return (
 		<>
 			<div>
-				{/* Option Select for Journal Font Settings */}
 				<label className="block text-sm font-medium text-gray-700 mb-1">
 					{props.label}
 				</label>
