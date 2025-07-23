@@ -81,6 +81,15 @@ export async function writeJournal(req, res) {
 
         // Entry does NOT exist
         if (journalIndex == -1) {
+            if (
+                user.rewards.length > 0 &&
+                req.body.date < user.rewards[user.rewards.length - 1].date
+            ) {
+                return res.status(400).json({
+                    message:
+                        'Cannot create a new entry that predates and existing or previously existing journal entry',
+                });
+            }
             const newEntry = buildJournalEntry(req.body); // input validation will be handled here
             if (!newEntry)
                 res.status(400).json({
