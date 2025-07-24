@@ -9,7 +9,6 @@ const JournalDisplayPage = () => {
 		<div className="min-h-screen">
 			<Navbar logout={handleLogout} />
 			<div className="max-w-4xl mx-auto py-5">
-				{/* Component for list of past entries should be place on this page as well */}
 				<JournalEntry />
 			</div>
 		</div>

@@ -22,16 +22,18 @@ const JournalEntriesList = () => {
 						{!isLoading && entries.length === 0 && <EntriesNotFound />}
 
 						{entries.length > 0 &&
-							entries.map((entry) => {
-								return (
-									<CollectionListCard
-										key={entry._id}
-										to={`${entry.date}`}
-										date={entry.date}
-										word={entry.word}
-									/>
-								);
-							})}
+							entries
+								.sort((a, b) => (a.date < b.date ? 1 : -1))
+								.map((entry) => {
+									return (
+										<CollectionListCard
+											key={entry._id}
+											to={`${entry.date}`}
+											date={entry.date}
+											word={entry.word}
+										/>
+									);
+								})}
 					</div>
 				</div>
 			</div>

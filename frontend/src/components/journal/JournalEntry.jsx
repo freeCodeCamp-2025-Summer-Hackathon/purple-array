@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 import { useState, useEffect } from 'react';
-import { formatDate } from '../../util/helper/formatDate';
+import { formatUTCDate, formatDate } from '../../util/helper/formatDate';
 import useWord from '../../util/hooks/useWord';
 import useEntries from '../../util/hooks/useEntries';
 import { CloudUpload, Pencil, Plus } from 'lucide-react';
@@ -10,7 +10,9 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 	const { word, isLoading } = useWord();
 	const { entries } = useEntries();
 	const [currentEntry, setCurrentEntry] = useState({});
-	const todayDate = formatDate(new Date());
+	const [entryExists, setEntryExists] = useState(false);
+	const todayDate = formatUTCDate(new Date());
+
 	const initialData = {
 		optionalPrompt1: '',
 		optionalPrompt2: '',
@@ -23,23 +25,33 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 
 	// Determine which entry to load
 	useEffect(() => {
+		// set entry for today if one exists
 		const todayEntry = entries.find((entry) => {
-			return formatDate(new Date(entry.date + 'T00:00:00')) === todayDate;
+			/************************************************************ */
+			// remove these logs after testing *****************************
+			/************************************************************ */
+			console.log({ 'entry date': entry.date, todayDate });
+			console.log(entry.date === todayDate);
+			return entry.date === todayDate;
 		});
 
+		// set date of past entry if one exits
 		const dateEntry = entries.find((entry) => {
-			return formatDate(new Date(entry.date + 'T00:00:00')) === entryDate;
+			return entry.date === entryDate;
 		});
 
 		if (entry_id) {
 			// if page is a past entry
 			setCurrentEntry(dateEntry);
-		} else if (!entry_id || todayDate) {
-			// not on journal page (no entry-id), but there is a today entry
+			setEntryExists(true);
+		} else if (!entry_id && todayEntry) {
+			// not past journal entry (no entry-id), but there is a today entry
 			setCurrentEntry(todayEntry);
+			setEntryExists(true);
 		} else {
 			// not on journal page and no today entry
 			setCurrentEntry(initialData);
+			setEntryExists(false);
 		}
 	}, [entries]);
 
@@ -71,17 +83,24 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 								{currentEntry?.word || word.word}
 							</h2>
 							<span className="text-xl uppercase tracking-widest text-secondary font-semibold">
-								{!pastEntry ? todayDate : entryDate}
+								{!pastEntry
+									? formatDate(new Date(todayDate + `T00:00:00`))
+									: formatDate(new Date(entryDate + `T00:00:00`))}
 							</span>
 						</div>
 
 						<div>
-							<Link
-								to={'/edit'}
-								className="btn btn-circle bg-neutral-300 btn-lg"
-							>
-								<Pencil />
-							</Link>
+							<div className="flex gap-4 items-center bg-base-100 px-2 py-2 rounded-full">
+								<span className="text-primary font-semibold text-xl ml-4">
+									{entryExists ? 'Edit' : 'Write'}
+								</span>
+								<Link
+									to={'/edit'}
+									className="btn btn-circle bg-neutral-300 btn-lg"
+								>
+									<Pencil />
+								</Link>
+							</div>
 						</div>
 					</div>
 
