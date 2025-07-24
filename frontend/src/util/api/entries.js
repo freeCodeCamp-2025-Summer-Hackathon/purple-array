@@ -17,23 +17,27 @@ export const fetchEntries = async () => {
 		}
 		return entriesArray;
 	} catch (error) {
-		console.error('Failed to fetch journal entries:', error); // Log the error
+		console.error('Failed to fetch journal entries:', error);
 		throw error;
 	}
 };
 
-export const updateEntry = async (entryId, updatedData) => {
-	const url = `journal/${entryId}`;
+export const updateEntry = async (entry) => {
+	const url = `journal`;
 
 	try {
 		const response = await api.put(
 			url,
 			{
-				title: updatedData.title,
-				body: updatedData.body,
-				mood: updatedData.mood,
-				tags: updatedData.tags,
-				updatedAt: new Date(),
+				date: entry.date,
+				word: entry.word,
+				response: entry.response,
+				optionalPrompt1: entry.optionalPrompt1,
+				response1: entry.response1,
+				optionalPrompt2: entry.optionalPrompt2,
+				response2: entry.response2,
+				optionalPrompt3: entry.optionalPrompt3,
+				response3: entry.response3,
 			},
 			{
 				withCredentials: true,
@@ -42,7 +46,7 @@ export const updateEntry = async (entryId, updatedData) => {
 
 		return response;
 	} catch (error) {
-		console.error('Failed to delete journal entry:', error); // Log the error
+		console.error('Failed to update journal entry:', error);
 		throw error;
 	}
 };

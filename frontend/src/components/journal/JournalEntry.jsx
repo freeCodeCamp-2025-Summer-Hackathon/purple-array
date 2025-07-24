@@ -13,6 +13,7 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 	const [currentEntry, setCurrentEntry] = useState({});
 	const [entryExists, setEntryExists] = useState(false);
 	const todayDate = formatUTCDate(new Date());
+	const [entryLink, setEntryLink] = useState('');
 
 	const { settings } = useSettings();
 	const [fontStyle, setFontStyle] = useState('');
@@ -88,6 +89,7 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 	}, [settings.font, fontStyle]);
 
 	const initialData = {
+		word: word.word,
 		optionalPrompt1: '',
 		optionalPrompt2: '',
 		optionalPrompt3: '',
@@ -112,14 +114,18 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 		if (entry_id) {
 			// if page is a past entry
 			setCurrentEntry(dateEntry);
+			// set link id to past entry id
+			setEntryLink(entry_id);
 			setEntryExists(true);
 		} else if (!entry_id && todayEntry) {
 			// not past journal entry (no entry-id), but there is a today entry
 			setCurrentEntry(todayEntry);
+			// set link id to current date
 			setEntryExists(true);
 		} else {
 			// not on journal page and no today entry
 			setCurrentEntry(initialData);
+			setEntryLink(todayDate);
 			setEntryExists(false);
 		}
 	}, [entries]);
@@ -133,50 +139,49 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 				<AnimatePulseLoader />
 			</div>
 		);
-
 	return (
-		!isLoading && (
-			<div className="min-h-screen">
-				<div className="max-w-3xl mx-auto mt-12 px-6 pb-12">
-					{/* *********************** Footer Button Wrapper Header *********************** */}
-					<div className="flex justify-between mb-6 items-center">
-						<div className="text-2xl font-semibold text-slate-700 ml-10">
-							{!entryDate && `Today's Entry`}
-						</div>
-						<Link
-							to={'/journal/collection'}
-							className="btn btn-outline btn-primary rounded-lg btn-lg"
-						>
-							Past Journal Entries
-						</Link>
+		<div className="min-h-screen">
+			<div className="max-w-3xl mx-auto mt-12 px-6 pb-12">
+				{/* *********************** Footer Button Wrapper Header *********************** */}
+				<div className="flex justify-between mb-6 items-center">
+					<div className="text-2xl font-semibold text-slate-700 ml-10">
+						{!entryDate && `Today's Entry`}
 					</div>
-					{/* *********************** Journal Entry wrapper *********************** */}
-					<div className="card container px-6 py-8 bg-base-200">
-						{/* *********************** Journal Entry Header *********************** */}
-						<div className="flex justify-between px-6">
-							<div className="card-title flex-col items-start">
-								<h2 className=" text-2xl font-semibold text-primary w-full">
-									{currentEntry?.word || word.word}
-								</h2>
-								<span className="text-xl uppercase tracking-widest text-secondary font-semibold">
-									{!pastEntry
-										? formatDate(new Date(todayDate + `T00:00:00`))
-										: formatDate(new Date(entryDate + `T00:00:00`))}
-								</span>
-							</div>
-
+					<Link
+						to={'/journal/collection'}
+						className="btn btn-outline btn-primary rounded-lg btn-lg"
+					>
+						Past Journal Entries
+					</Link>
+				</div>
+				{/* *********************** Journal Entry wrapper *********************** */}
+				<div className="card container px-6 py-8 bg-base-200">
+					{/* *********************** Journal Entry Header *********************** */}
+					<div className="flex justify-between px-6">
+						<div className="card-title flex-col items-start">
+							<h2 className=" text-2xl font-semibold text-primary w-full">
+								{currentEntry?.word || word.word}
+							</h2>
+							<span className="text-xl uppercase tracking-widest text-secondary font-semibold">
+								{!pastEntry
+									? formatDate(new Date(todayDate + `T00:00:00`))
+									: formatDate(new Date(entryDate + `T00:00:00`))}
+							</span>
+	        </div>
+												
 							<div>
 								<div className="flex gap-4 items-center bg-base-100 px-2 py-2 rounded-full">
 									<span className="text-primary font-semibold text-xl ml-4">
 										{entryExists ? 'Edit' : 'Write'}
 									</span>
-									<Link
-										to={'/edit'}
-										className="btn btn-circle bg-neutral-300 btn-lg"
-									>
-										<Pencil />
-									</Link>
-								</div>
+								<Link
+									to={`/edit/${entryLink}`}
+									className="btn btn-circle bg-neutral-300 btn-lg"
+								>
+									<Pencil />
+								</Link>
+
+	              </div>
 							</div>
 						</div>
 
