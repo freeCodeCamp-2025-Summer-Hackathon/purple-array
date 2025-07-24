@@ -77,19 +77,23 @@
 .notebook {
 	background: url('../../public/assets/parchment/lined-paper.jpg') center
 		no-repeat;
+	background-size: cover;
 }
 
 .parchment {
 	background: url('../../public/assets/parchment/weathered-paper.png') center
 		no-repeat;
+	background-size: cover;
 }
 
 .post-it {
-	background: url('../../public/assets/parchment/post-it-note2.png') center
+	background: url('../../public/assets/parchment/post-it-note1.png') center
 		no-repeat;
+	background-size: cover;
 }
 
 .chalkboard {
 	background: url('../../public/assets/parchment/chalkboard.png') center
 		no-repeat;
+	background-size: cover;
 }

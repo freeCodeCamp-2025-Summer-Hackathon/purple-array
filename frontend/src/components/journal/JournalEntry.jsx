@@ -82,12 +82,6 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 						break;
 				}
 			}
-			console.log(settings.font);
-			console.log({ fontStyle });
-			console.log(settings.ink);
-			console.log({ inkStyle });
-			console.log(settings.parchment);
-			console.log({ background });
 		};
 
 		styleChoice();
@@ -187,16 +181,16 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 						</div>
 
 						{/* *********************** Journal Entry Body *********************** */}
-						<div className="card border-base-content/20 p-2 mt-6">
+						<div
+							className={`card border-base-content/20 p-2 mt-6 bg-base-100 ${background}`}
+						>
 							{/* ******************** Question/Response 1 ******************** */}
 							<div className="p-4">
 								<h3 className="mb-4 w-full text-lg font-semibold text-secondary">
 									How did you use today's word?
 								</h3>
 
-								<div
-									className={`p-3 min-h-[10rem] bg-base-100 border rounded-md border-base-content/20m ${background}`}
-								>
+								<div className="min-h-[4rem]">
 									{fontStyle && inkStyle && (
 										<p className={`${fontStyle} ${inkStyle}`}>
 											{currentEntry?.response || ''}
@@ -211,9 +205,7 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 									{currentEntry?.optionalPrompt1 ||
 										"What's something that you learned today?"}
 								</h3>
-								<div
-									className={`p-3 min-h-[10rem] bg-base-100 border rounded-md border-base-content/20 ${background}`}
-								>
+								<div className="min-h-[4rem]">
 									{fontStyle && inkStyle && (
 										<p className={`${fontStyle} ${inkStyle}`}>
 											{currentEntry?.response1 || ''}
@@ -227,9 +219,7 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 								<h3 className="mb-4 w-full text-lg font-semibold text-secondary">
 									{currentEntry?.optionalPrompt2 || 'What gave you hope today?'}
 								</h3>
-								<div
-									className={`p-3 min-h-[10rem] bg-base-100 border rounded-md border-base-content/20 ${background}`}
-								>
+								<div className="min-h-[4rem]">
 									{fontStyle && inkStyle && (
 										<p className={`${fontStyle} ${inkStyle}`}>
 											{currentEntry?.response2 || ''}
@@ -244,9 +234,7 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 									{currentEntry?.optionalPrompt3 ||
 										'How did you show kindness today?'}
 								</h3>
-								<div
-									className={`p-3 min-h-[10rem] bg-base-100 border rounded-md border-base-content/20 ${background}`}
-								>
+								<div className="min-h-[4rem]">
 									{fontStyle && inkStyle && (
 										<p className={`${fontStyle} ${inkStyle}`}>
 											{currentEntry?.response3 || ''}
