@@ -8,8 +8,8 @@ import { CloudUpload, Pencil, Plus } from 'lucide-react';
 import AnimatePulseLoader from '../generic/AnimatePulseLoader';
 
 const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
-	const { word, isLoading } = useWord();
-	const { entries } = useEntries();
+	const { word } = useWord();
+	const { entries, isLoading } = useEntries();
 	const [currentEntry, setCurrentEntry] = useState({});
 	const [entryExists, setEntryExists] = useState(false);
 	const todayDate = formatUTCDate(new Date());
@@ -20,7 +20,7 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 	const [background, setBackground] = useState('');
 
 	useEffect(() => {
-		//set up style customizations using State based on useSettings
+		//set up style customizations pulling state based on useSettings
 		const styleChoice = async () => {
 			if (settings.font) {
 				const font = await settings.font?.toLowerCase();
@@ -66,7 +66,7 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 				const ink = await settings.parchment?.toLowerCase();
 				switch (ink) {
 					case 'default':
-						setInkStyle(`default`);
+						setBackground(`default`);
 						break;
 					case 'lined notebook paper':
 						setBackground(`notebook`);
@@ -107,11 +107,6 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 	useEffect(() => {
 		// set entry for today if one exists
 		const todayEntry = entries.find((entry) => {
-			/************************************************************ */
-			// remove these logs after testing *****************************
-			/************************************************************ */
-			// console.log({ 'entry date': entry.date, todayDate });
-			// console.log(entry.date === todayDate);
 			return entry.date === todayDate;
 		});
 

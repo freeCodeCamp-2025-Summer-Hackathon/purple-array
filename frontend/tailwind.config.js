@@ -8,10 +8,10 @@ export default {
 	theme: {
 		extend: {
 			fontFamily: {
-				caveat: ['Caveat'], //handwritten
-				fre: ['"Fredericka the Great"'], //chalk
-				league: ['"League Script"'], // cursive
-				type: ['"Special Elite"'], // typewriter
+				caveat: ['Caveat'], //handwritten, written as font-caveat
+				fred: ['"Fredericka the Great"'], //chalk, written as font-fred
+				league: ['"League Script"'], // cursive, written as font-league
+				type: ['"Special Elite"'], // typewriter, written as font-type
 			},
 			animation: {
 				'spin-slow': 'spin 3s linear infinite',
