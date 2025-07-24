@@ -22,7 +22,6 @@ export async function signup(req, res, next) {
         res.status(201).json({
             message: 'Sign up and sign in successful',
             success: true,
-            user,
         });
         next();
     } catch (error) {
