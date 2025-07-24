@@ -8,29 +8,32 @@ import { CircleDollarSign } from 'lucide-react';
 function MarketItems() {
 	const { products, isLoading } = useProducts();
 	const { inventory, refreshInventory } = useInventory();
-    const { purchaseItem, error} = usePurchase();
-    const { coins } = useCoins();
+	const { purchaseItem, error } = usePurchase();
+	const { coins } = useCoins();
 
-    const handlePurchase = async(item) => {
-        if (item.cost > coins) {
-            toast.error('Not enough coins for this purchase!')
-        } else {
-            if (window.confirm(`Buy ${item.name} for ${item.cost} coins?`)) {
-                try {
-                    await purchaseItem(item._id);
-                    refreshInventory();
-                    toast.success(`Your have successfully purchased ${item.name}`);
-                } catch (error) {
-                    toast.error('Purchase Failed');
-                }
-            }
-        }
-    };
+	const handlePurchase = async (item) => {
+		if (item.cost > coins) {
+			toast.error('Not enough coins for this purchase!');
+		} else {
+			if (window.confirm(`Buy ${item.name} for ${item.cost} coins?`)) {
+				try {
+					await purchaseItem(item._id);
+					toast.success(`Your have successfully purchased ${item.name}`);
+					// after successful purchase reload page
+					setTimeout(() => {
+						window.location.reload();
+					}, 2000);
+				} catch (error) {
+					toast.error('Purchase Failed');
+				}
+			}
+		}
+	};
 
 	if (isLoading || !inventory) {
 		return <p className="text-center py-10">Loading market items...</p>;
 	}
-	
+
 	const marketItems = products.filter((product) => {
 		return !product.tags.some((tag) => inventory[tag]?.includes(product.name));
 	});
@@ -77,13 +80,13 @@ function MarketItems() {
 						</div>
 
 						<div className="flex flex-wrap justify-center gap-2 mt-3">
-                            <button
-                            className="btn btn-outline btn-primary btn-sm btn-wide"
-                            onClick={() => handlePurchase(item)}
-                            >
-                                Buy
-                            </button>
-                        </div>
+							<button
+								className="btn btn-outline btn-primary btn-sm btn-wide"
+								onClick={() => handlePurchase(item)}
+							>
+								Buy
+							</button>
+						</div>
 					</div>
 				</div>
 			))}

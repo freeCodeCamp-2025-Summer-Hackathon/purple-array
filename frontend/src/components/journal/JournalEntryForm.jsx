@@ -1,98 +1,96 @@
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { useState, useEffect } from 'react';
+import useEntries from '../../util/hooks/useEntries';
+import useWord from '../../util/hooks/useWord';
+import { updateEntry } from '../../util/api/entries';
+import AnimatePulseLoader from '../generic/AnimatePulseLoader';
 import { formatDate } from '../../util/helper/formatDate';
-import { useWord } from '../../util/hooks/useWord';
-import { Trash2, CircleDollarSign } from 'lucide-react';
-import { fetchEntries } from '../../util/api/entries';
+import { CircleDollarSign, ArrowLeft } from 'lucide-react';
+import JournalEntryFormDropDown from './JournalEntryFormDropDown';
+import JournalEntryFormTextArea from './JournalEntryFormTextArea';
+import toast from 'react-hot-toast';
 
-// Helper to compare dates (not time)
-const isSameDay = (date1, date2) => {
-	return (
-		date1.getDate() === date2.getDate() &&
-		date1.getMonth() === date2.getMonth() &&
-		date1.getFullYear() === date2.getFullYear()
-	);
-};
-
-const JournalEntryForm = () => {
-	const { word, isLoading } = useWord();
-	const [entryLoaded, setEntryLoaded] = useState(false);
-	const [primaryPrompt, setPrimaryPrompt] = useState('');
-	const [addPromptOne, setAddPromptOne] = useState('');
-	const [addPromptTwo, setAddPromptTwo] = useState('');
-	const [addPromptThree, setAddPromptThree] = useState('');
-
-	const [addPromptOneResponse, setAddPromptOneResponse] = useState('');
-	const [addPromptTwoResponse, setAddPromptTwoResponse] = useState('');
-	const [addPromptThreeResponse, setAddPromptThreeResponse] = useState('');
+const JournalEntryForm = ({ entry_id }) => {
+	const { word } = useWord();
+	const { entries, isLoading } = useEntries();
+	const entryDate = entry_id.id;
+	const navigate = useNavigate();
+	const [isSaving, setIsSaving] = useState(false);
+	const [journalEntryData, setJournalEntryData] = useState({
+		date: entryDate,
+		word: '',
+		response: '',
+		optionalPrompt1: '',
+		response1: '',
+		optionalPrompt2: '',
+		response2: '',
+		optionalPrompt3: '',
+		response3: '',
+	});
 
 	useEffect(() => {
-		const loadEntryIfExists = async () => {
-			try {
-				const entries = await fetchEntries();
-				const today = new Date();
+		// load current entry if it exists
+		const entry = entries.find((entry) => {
+			return entry.date === entryDate;
+		});
+		// load data if present
+		if (entry) {
+			setJournalEntryData((prev) => ({
+				...prev,
+				word: entry.word,
+				response: entry.response,
+				optionalPrompt1: entry.optionalPrompt1,
+				response1: entry.response1,
+				optionalPrompt2: entry.optionalPrompt2,
+				response2: entry.response2,
+				optionalPrompt3: entry.optionalPrompt3,
+				response3: entry.response3,
+			}));
+		} else {
+			setJournalEntryData((prev) => ({
+				...prev,
+				word: word.word,
+			}));
+		}
+	}, [entries]);
 
-				const existingEntry = entries.find(entry =>
-					isSameDay(new Date(entry.date), today)
-				);
-
-				if (existingEntry) {
-					// Prefill form with existing entry
-					setPrimaryPrompt(existingEntry.body || '');
-					setAddPromptOne(existingEntry.prompt1 || '');
-					setAddPromptTwo(existingEntry.prompt2 || '');
-					setAddPromptThree(existingEntry.prompt3 || '');
-					setAddPromptOneResponse(existingEntry.response1 || '');
-					setAddPromptTwoResponse(existingEntry.response2 || '');
-					setAddPromptThreeResponse(existingEntry.response3 || '');
-				}
-			} catch (err) {
-				console.error('Failed to load entry:', err);
-			} finally {
-				setEntryLoaded(true);
-			}
-		};
-
-		loadEntryIfExists();
-	}, []);
-
-
-	const handleSubmit = (event) => {
-		event.preventDefault();
-		console.log(primaryPrompt);
-		console.log(addPromptOneResponse);
-		console.log(addPromptTwoResponse);
-		console.log(addPromptThreeResponse);
-		// onSubmit({
-		//   primaryPrompt: primaryPrompt.trim(),
-		//   addPromptOne,
-		//   addPromptOneResponse,
-		//   addPromptTwo,
-		//   addPromptTwoResponse,
-		//   addPromptThree,
-		//   addPromptThreeResponse,
-		// });
+	const handleChange = (e) => {
+		const { name, value } = e.target;
+		setJournalEntryData((prev) => ({
+			...prev,
+			[name]: value,
+		}));
 	};
 
-	if (isLoading || !entryLoaded) {
-	return (
-		<div className="flex justify-center items-center min-h-screen">
-			<span className="loading loading-spinner loading-lg text-primary"></span>
-		</div>
-	);
-}
+	const handleSubmit = async (e) => {
+		e.preventDefault();
 
+		setIsSaving(true);
+		try {
+			const response = await updateEntry(journalEntryData);
+			if (response.status === 200 || 201) toast.success('Journal Entry Saved!');
+			setTimeout(() => {
+				navigate(`/journal/collection/${entryDate}`);
+			}, 1000);
+		} catch (error) {
+			console.log(error);
+			toast.error('Error saving journal entry. Please try again.');
+		} finally {
+			setIsSaving(false);
+		}
+	};
+
+	if (isLoading) {
+		return <AnimatePulseLoader />;
+	}
 
 	return (
-		<div className="container">
-			<div className="card mx-auto max-w-3xl bg-base-200 p-8">
+		<div className="card mx-auto">
+			<div className="card mx-auto max-w-3xl min-w-[48rem] bg-base-200 p-8">
 				<header className="flex flex-col items-start">
 					<span className="text-xl uppercase tracking-widest text-primary font-semibold bg-primary/10 px-3 py-1 rounded-md">
-						{formatDate(new Date())}
+						{formatDate(new Date(entryDate + `T00:00:00`))}
 					</span>
-					{/* <Link to={""} className="btn btn-sm btn-error text-white">
-            <Trash2 />
-          </Link> */}
 				</header>
 
 				<form onSubmit={handleSubmit} className="space-y-6">
@@ -100,10 +98,12 @@ const JournalEntryForm = () => {
 						<label className="label font-semibold">
 							<h2 className="mt-4 text-lg font-semibold">
 								How did you use the word{' '}
-								<span className="text-primary font-bold">{word.word}</span>{' '}
-								{/* *********************************************************************** */}
+								<span className="text-primary font-bold">
+									{journalEntryData?.word}
+								</span>{' '}
 								today?
 							</h2>
+
 							<span className="text-base font-bold text-yellow-600 flex items-center gap-1">
 								<CircleDollarSign
 									className="text-violet-950 fill-yellow-500 size-8"
@@ -112,13 +112,13 @@ const JournalEntryForm = () => {
 								+3
 							</span>
 						</label>
-						<textarea
-							value={primaryPrompt}
-							onChange={(e) => setPrimaryPrompt(e.target.value)}
-							className="textarea textarea-bordered mt-2"
-							rows={4}
-							//   *************************************************************************
-							placeholder={`Write about how you used ${word.word} today...`}
+						{/* ************************ Form Block 1 ************************ */}
+						{/* ************************************************************** */}
+						<JournalEntryFormTextArea
+							name={'response'}
+							value={journalEntryData?.response}
+							onChange={handleChange}
+							placeholder={`Write about how you used ${journalEntryData?.word} today...`}
 						/>
 					</div>
 
@@ -129,95 +129,88 @@ const JournalEntryForm = () => {
 							<CircleDollarSign
 								className="text-violet-950 fill-yellow-500 size-8"
 								strokeWidth={1}
-							/>{' '}
+							/>
 							+1
 						</span>
 					</div>
 
+					{/* ************************ Form Block 2 ************************ */}
+					{/* ************************************************************** */}
 					<div className="form-control">
-						<select
-							value={addPromptOne}
-							onChange={(e) => setAddPromptOne(e.target.value)}
-							className="select select-bordered"
-						>
-							<option value="What gave you hope today?">
-								What gave you hope today?
-							</option>
-							<option value="How did you show kindness today?">
-								How did you show kindness today?
-							</option>
-							<option value="What are you grateful for today?">
-								What are you grateful for today?
-							</option>
-						</select>
-						<textarea
-							value={addPromptOneResponse}
-							onChange={(e) => setAddPromptOneResponse(e.target.value)}
-							className="textarea textarea-bordered mt-2"
-							rows={4}
-							placeholder="Write your response here..."
+						<JournalEntryFormDropDown
+							disabled={isLoading}
+							defaultValue={journalEntryData?.optionalPrompt1}
+							name={'optionalPrompt1'}
+							onChange={handleChange}
+							option1={`What gave you hope today?`}
+							option2={`How did you show kindness today?`}
+							option3={`What are you grateful for today?`}
+						/>
+						<JournalEntryFormTextArea
+							name={'response1'}
+							value={journalEntryData?.response1}
+							onChange={handleChange}
+							placeholder={'Write your response here...'}
 						/>
 					</div>
 
+					{/* ************************ Form Block 3 ************************ */}
+					{/* ************************************************************** */}
 					<div className="form-control">
-						<select
-							value={addPromptTwo}
-							onChange={(e) => setAddPromptTwo(e.target.value)}
-							className="select select-bordered"
-						>
-							<option value="How did you challenge yourself today?">
-								How did you challenge yourself today?
-							</option>
-							<option value="When did you feel at peace today?">
-								When did you feel at peace today?
-							</option>
-							<option value="Who made your day better today and why?">
-								Who made your day better today and why?
-							</option>
-						</select>
-						<textarea
-							value={addPromptTwoResponse}
-							onChange={(e) => setAddPromptTwoResponse(e.target.value)}
-							className="textarea textarea-bordered mt-2"
-							rows={4}
-							placeholder="Write your response here..."
+						<JournalEntryFormDropDown
+							disabled={isLoading}
+							defaultValue={journalEntryData?.optionalPrompt2}
+							name={'optionalPrompt2'}
+							onChange={handleChange}
+							option1={`How did you challenge yourself today?`}
+							option2={`When did you feel at peace today?`}
+							option3={`Who made your day better today and why?`}
+						/>
+						<JournalEntryFormTextArea
+							name={'response2'}
+							value={journalEntryData?.response2}
+							onChange={handleChange}
+							placeholder={'Write your response here...'}
 						/>
 					</div>
 
+					{/* ************************ Form Block 4 ************************ */}
+					{/* ************************************************************** */}
 					<div className="form-control">
-						<select
-							value={addPromptThree}
-							onChange={(e) => setAddPromptThree(e.target.value)}
-							className="select select-bordered"
-						>
-							<option value="What's something that you learned today?">
-								What's something that you learned today?
-							</option>
-							<option value="What challenge are you ready to face tomorrow?">
-								What challenge are you ready to face tomorrow?
-							</option>
-							<option value="What song would be the soundtrack to your day?">
-								What song would be the soundtrack to your day?
-							</option>
-						</select>
-						<textarea
-							value={addPromptThreeResponse}
-							onChange={(e) => setAddPromptThreeResponse(e.target.value)}
-							className="textarea textarea-bordered mt-2"
-							rows={4}
-							placeholder="Write your response here..."
+						<JournalEntryFormDropDown
+							disabled={isLoading}
+							defaultValue={journalEntryData?.optionalPrompt3}
+							name={'optionalPrompt3'}
+							onChange={handleChange}
+							option1={`What's something that you learned today?`}
+							option2={`What challenge are you ready to face tomorrow?`}
+							option3={`What song would be the soundtrack to your day?`}
+						/>
+						<JournalEntryFormTextArea
+							name={'response3'}
+							value={journalEntryData?.response3}
+							onChange={handleChange}
+							placeholder={'Write your response here...'}
 						/>
 					</div>
+
+					{/* ************************ Form Footer  ************************ */}
+					{/* ************************************************************** */}
 					<div className="flex justify-between items-center mt-6">
 						<Link
-							to="/journal"
-							className="text-lg font-semibold btn-u text-primary hover:underline"
+							to={`/journal/collection/${entryDate}`}
+							className="flex gap-2 btn btn-outline btn-primary rounded-lg btn-md"
 						>
-							← Back to Journal
+							<ArrowLeft />
+							Back to Journal Entry
 						</Link>
 
-						<button type="submit" className="btn btn-primary text-lg px-10">
-							Save
+						<button
+							type="submit"
+							disabled={isSaving}
+							className="btn btn-primary text-lg px-10"
+						>
+							{isSaving ? `Saving...` : `Save`}
 						</button>
 					</div>
 				</form>

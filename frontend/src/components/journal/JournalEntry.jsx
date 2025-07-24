@@ -12,8 +12,10 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 	const [currentEntry, setCurrentEntry] = useState({});
 	const [entryExists, setEntryExists] = useState(false);
 	const todayDate = formatUTCDate(new Date());
+	const [entryLink, setEntryLink] = useState('');
 
 	const initialData = {
+		word: word.word,
 		optionalPrompt1: '',
 		optionalPrompt2: '',
 		optionalPrompt3: '',
@@ -27,11 +29,6 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 	useEffect(() => {
 		// set entry for today if one exists
 		const todayEntry = entries.find((entry) => {
-			/************************************************************ */
-			// remove these logs after testing *****************************
-			/************************************************************ */
-			console.log({ 'entry date': entry.date, todayDate });
-			console.log(entry.date === todayDate);
 			return entry.date === todayDate;
 		});
 
@@ -43,24 +40,34 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 		if (entry_id) {
 			// if page is a past entry
 			setCurrentEntry(dateEntry);
+			// set link id to past entry id
+			setEntryLink(entry_id);
 			setEntryExists(true);
 		} else if (!entry_id && todayEntry) {
 			// not past journal entry (no entry-id), but there is a today entry
 			setCurrentEntry(todayEntry);
+			// set link id to current date
 			setEntryExists(true);
 		} else {
 			// not on journal page and no today entry
 			setCurrentEntry(initialData);
+			setEntryLink(todayDate);
 			setEntryExists(false);
 		}
 	}, [entries]);
 
+	/* *********************** Animated Loader *********************** */
+
+	if (isLoading) {
+		return (
+			<div className="min-h-screen">
+				<AnimatePulseLoader />;
+			</div>
+		);
+	}
+
 	return (
 		<div className="min-h-screen">
-			{/* *********************** Animated Loader *********************** */}
-			{isLoading && <AnimatePulseLoader />}
-
-
 			<div className="max-w-3xl mx-auto mt-12 px-6 pb-12">
 				{/* *********************** Footer Button Wrapper Header *********************** */}
 				<div className="flex justify-between mb-6 items-center">
@@ -95,7 +102,7 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 									{entryExists ? 'Edit' : 'Write'}
 								</span>
 								<Link
-									to={'/edit'}
+									to={`/edit/${entryLink}`}
 									className="btn btn-circle bg-neutral-300 btn-lg"
 								>
 									<Pencil />
