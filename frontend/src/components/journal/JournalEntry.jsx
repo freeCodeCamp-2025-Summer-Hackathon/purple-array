@@ -5,12 +5,15 @@ import useWord from '../../util/hooks/useWord';
 import useEntries from '../../util/hooks/useEntries';
 import { CloudUpload, Pencil, Plus } from 'lucide-react';
 import AnimatePulseLoader from '../generic/AnimatePulseLoader';
+import { useJournalTheme } from '../../context/SettingsContext'; // ← add this
+
 
 const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 	const { word, isLoading } = useWord();
 	const { entries } = useEntries();
 	const [currentEntry, setCurrentEntry] = useState({});
 	const [entryExists, setEntryExists] = useState(false);
+	const { font, ink, parchment } = useJournalTheme();
 	const todayDate = formatUTCDate(new Date());
 
 	const initialData = {
@@ -75,7 +78,7 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 					</Link>
 				</div>
 				{/* *********************** Journal Entry wrapper *********************** */}
-				<div className="card container px-6 py-8 bg-base-200">
+				<div className={`card container px-6 py-8 ${parchment} ${font} ${ink}`}>
 					{/* *********************** Journal Entry Header *********************** */}
 					<div className="flex justify-between px-6">
 						<div className="card-title flex-col items-start">
@@ -120,11 +123,10 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 						{/* ******************** Question/Response 2 ******************** */}
 						<div className="p-4">
 							<h3 className="mb-4 w-full text-lg font-semibold text-secondary">
-								{currentEntry?.optionalPrompt1 ||
-									"What's something that you learned today?"}
+ 								{currentEntry?.optionalPrompt1 || "What's something that you learned today?"}
 							</h3>
-							<div className="p-3 min-h-[10rem] bg-base-100 border rounded-md border-base-content/20">
-								{currentEntry?.response1 || ''}
+							<div className={`p-3 min-h-[10rem] border rounded-md border-base-content/20 ${parchment} ${ink} ${font}`}>
+  								{currentEntry?.response1 || ''}
 							</div>
 						</div>
 

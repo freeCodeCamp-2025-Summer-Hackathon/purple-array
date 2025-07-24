@@ -9,9 +9,12 @@ import JournalCreatePage from './pages/JournalCreatePage';
 import JournalEditPage from './pages/JournalEditPage';
 import MarketPage from './pages/MarketPage';
 import SettingsPage from './pages/SettingsPage';
+import { SettingsProvider } from './context/SettingsContext';
+
 
 const App = () => {
 	return (
+		<SettingsProvider>
 		<div data-theme="writeLight">
 			<Routes>
 				<Route path="/" element={<HomePage />} />
@@ -26,6 +29,7 @@ const App = () => {
 				<Route path="/settings" element={<SettingsPage />} />
 			</Routes>
 		</div>
+		</SettingsProvider>
 	);
 };
 
