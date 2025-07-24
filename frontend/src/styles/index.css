@@ -31,3 +31,65 @@
 	src: local('SpecialElite-Regular'),
 		url('../assets/fonts/SpecialElite-Regular.ttf') format('truetype');
 }
+
+/******* Font Choices *******/
+/* ************************ */
+.handwritten {
+	font-family: 'Caveat' !important;
+}
+
+.cursive {
+	font-family: 'League Script' !important;
+}
+
+.typewriter {
+	font-family: 'Fredericka the Great' !important;
+}
+
+.chalk {
+	font-family: 'Special Elite' !important;
+}
+
+/******* Color Choices *******/
+/* ************************* */
+.red {
+	color: red !important;
+}
+
+.purple {
+	color: purple !important;
+}
+
+.blue {
+	color: blue !important;
+}
+
+.green {
+	color: green !important;
+}
+
+.white {
+	color: white !important;
+}
+
+/******* Color Choices *******/
+/* ************************* */
+.notebook {
+	background: url('../../public/assets/parchment/lined-paper.jpg') center
+		no-repeat;
+}
+
+.parchment {
+	background: url('../../public/assets/parchment/weathered-paper.png') center
+		no-repeat;
+}
+
+.post-it {
+	background: url('../../public/assets/parchment/post-it-note2.png') center
+		no-repeat;
+}
+
+.chalkboard {
+	background: url('../../public/assets/parchment/chalkboard.png') center
+		no-repeat;
+}

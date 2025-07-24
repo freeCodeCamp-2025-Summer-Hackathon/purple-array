@@ -4,13 +4,14 @@ import daisyui from 'daisyui';
 /** @type {import('tailwindcss').Config} */
 export default {
 	content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+	important: true,
 	theme: {
 		extend: {
 			fontFamily: {
-				handwritten: ['Caveat'],
-				chalkboard: ['"Fredericka the Great"'],
-				cursive: ['"League Script"'],
-				typewriter: ['"Special Elite"'],
+				caveat: ['Caveat'], //handwritten
+				fre: ['"Fredericka the Great"'], //chalk
+				league: ['"League Script"'], // cursive
+				type: ['"Special Elite"'], // typewriter
 			},
 			animation: {
 				'spin-slow': 'spin 3s linear infinite',

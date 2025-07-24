@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { formatUTCDate, formatDate } from '../../util/helper/formatDate';
 import useWord from '../../util/hooks/useWord';
 import useEntries from '../../util/hooks/useEntries';
+import useSettings from '../../util/hooks/useSettings';
 import { CloudUpload, Pencil, Plus } from 'lucide-react';
 import AnimatePulseLoader from '../generic/AnimatePulseLoader';
 
@@ -12,6 +13,85 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 	const [currentEntry, setCurrentEntry] = useState({});
 	const [entryExists, setEntryExists] = useState(false);
 	const todayDate = formatUTCDate(new Date());
+
+	const { settings } = useSettings();
+	const [fontStyle, setFontStyle] = useState('');
+	const [inkStyle, setInkStyle] = useState('');
+	const [background, setBackground] = useState('');
+
+	useEffect(() => {
+		//set up style customizations using State based on useSettings
+		const styleChoice = async () => {
+			if (settings.font) {
+				const font = await settings.font?.toLowerCase();
+				switch (font) {
+					case 'default':
+						setFontStyle(`default`);
+						break;
+					case 'handwritten':
+						setFontStyle(`handwritten`);
+						break;
+					case 'cursive':
+						setFontStyle(`cursive`);
+						break;
+					case 'typewriter':
+						setFontStyle(`typewriter`);
+						break;
+					case 'chalk':
+						setFontStyle(`chalk`);
+						break;
+				}
+			}
+			if (settings.ink) {
+				const ink = await settings.ink?.toLowerCase();
+				switch (ink) {
+					case 'default':
+						setInkStyle(`default`);
+						break;
+					case 'blue ink':
+						setInkStyle(`blue`);
+						break;
+					case 'green ink':
+						setInkStyle(`green`);
+						break;
+					case 'purple ink':
+						setInkStyle(`purple`);
+						break;
+					case 'red ink':
+						setInkStyle(`red`);
+						break;
+				}
+			}
+			if (settings.parchment) {
+				const ink = await settings.parchment?.toLowerCase();
+				switch (ink) {
+					case 'default':
+						setInkStyle(`default`);
+						break;
+					case 'lined notebook paper':
+						setBackground(`notebook`);
+						break;
+					case 'weathered parchment':
+						setBackground(`parchment`);
+						break;
+					case 'post-it note':
+						setBackground(`post-it`);
+						break;
+					case 'chalkboard':
+						setBackground(`chalkboard`);
+						break;
+				}
+			}
+			console.log(settings.font);
+			console.log({ fontStyle });
+			console.log(settings.ink);
+			console.log({ inkStyle });
+			console.log(settings.parchment);
+			console.log({ background });
+		};
+
+		styleChoice();
+	}, [settings.font, fontStyle]);
 
 	const initialData = {
 		optionalPrompt1: '',
@@ -30,8 +110,8 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 			/************************************************************ */
 			// remove these logs after testing *****************************
 			/************************************************************ */
-			console.log({ 'entry date': entry.date, todayDate });
-			console.log(entry.date === todayDate);
+			// console.log({ 'entry date': entry.date, todayDate });
+			// console.log(entry.date === todayDate);
 			return entry.date === todayDate;
 		});
 
@@ -55,103 +135,135 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 		}
 	}, [entries]);
 
+	{
+		/* *********************** Animated Loader *********************** */
+	}
+	if (isLoading)
+		return (
+			<div className="min-h-screen">
+				<AnimatePulseLoader />
+			</div>
+		);
+
 	return (
-		<div className="min-h-screen">
-			{/* *********************** Animated Loader *********************** */}
-			{isLoading && <AnimatePulseLoader />}
-
-
-			<div className="max-w-3xl mx-auto mt-12 px-6 pb-12">
-				{/* *********************** Footer Button Wrapper Header *********************** */}
-				<div className="flex justify-between mb-6 items-center">
-					<div className="text-2xl font-semibold text-slate-700 ml-10">
-						{!entryDate && `Today's Entry`}
-					</div>
-					<Link
-						to={'/journal/collection'}
-						className="btn btn-outline btn-primary rounded-lg btn-lg"
-					>
-						Past Journal Entries
-					</Link>
-				</div>
-				{/* *********************** Journal Entry wrapper *********************** */}
-				<div className="card container px-6 py-8 bg-base-200">
-					{/* *********************** Journal Entry Header *********************** */}
-					<div className="flex justify-between px-6">
-						<div className="card-title flex-col items-start">
-							<h2 className=" text-2xl font-semibold text-primary w-full">
-								{currentEntry?.word || word.word}
-							</h2>
-							<span className="text-xl uppercase tracking-widest text-secondary font-semibold">
-								{!pastEntry
-									? formatDate(new Date(todayDate + `T00:00:00`))
-									: formatDate(new Date(entryDate + `T00:00:00`))}
-							</span>
+		!isLoading && (
+			<div className="min-h-screen">
+				<div className="max-w-3xl mx-auto mt-12 px-6 pb-12">
+					{/* *********************** Footer Button Wrapper Header *********************** */}
+					<div className="flex justify-between mb-6 items-center">
+						<div className="text-2xl font-semibold text-slate-700 ml-10">
+							{!entryDate && `Today's Entry`}
 						</div>
-
-						<div>
-							<div className="flex gap-4 items-center bg-base-100 px-2 py-2 rounded-full">
-								<span className="text-primary font-semibold text-xl ml-4">
-									{entryExists ? 'Edit' : 'Write'}
+						<Link
+							to={'/journal/collection'}
+							className="btn btn-outline btn-primary rounded-lg btn-lg"
+						>
+							Past Journal Entries
+						</Link>
+					</div>
+					{/* *********************** Journal Entry wrapper *********************** */}
+					<div className="card container px-6 py-8 bg-base-200">
+						{/* *********************** Journal Entry Header *********************** */}
+						<div className="flex justify-between px-6">
+							<div className="card-title flex-col items-start">
+								<h2 className=" text-2xl font-semibold text-primary w-full">
+									{currentEntry?.word || word.word}
+								</h2>
+								<span className="text-xl uppercase tracking-widest text-secondary font-semibold">
+									{!pastEntry
+										? formatDate(new Date(todayDate + `T00:00:00`))
+										: formatDate(new Date(entryDate + `T00:00:00`))}
 								</span>
-								<Link
-									to={'/edit'}
-									className="btn btn-circle bg-neutral-300 btn-lg"
+							</div>
+
+							<div>
+								<div className="flex gap-4 items-center bg-base-100 px-2 py-2 rounded-full">
+									<span className="text-primary font-semibold text-xl ml-4">
+										{entryExists ? 'Edit' : 'Write'}
+									</span>
+									<Link
+										to={'/edit'}
+										className="btn btn-circle bg-neutral-300 btn-lg"
+									>
+										<Pencil />
+									</Link>
+								</div>
+							</div>
+						</div>
+
+						{/* *********************** Journal Entry Body *********************** */}
+						<div className="card border-base-content/20 p-2 mt-6">
+							{/* ******************** Question/Response 1 ******************** */}
+							<div className="p-4">
+								<h3 className="mb-4 w-full text-lg font-semibold text-secondary">
+									How did you use today's word?
+								</h3>
+
+								<div
+									className={`p-3 min-h-[10rem] bg-base-100 border rounded-md border-base-content/20m ${background}`}
 								>
-									<Pencil />
-								</Link>
+									{fontStyle && inkStyle && (
+										<p className={`${fontStyle} ${inkStyle}`}>
+											{currentEntry?.response || ''}
+										</p>
+									)}
+								</div>
 							</div>
-						</div>
-					</div>
 
-					{/* *********************** Journal Entry Body *********************** */}
-					<div className="card border-base-content/20 p-2 mt-6">
-						{/* ******************** Question/Response 1 ******************** */}
-						<div className="p-4">
-							<h3 className="mb-4 w-full text-lg font-semibold text-secondary">
-								How did you use today's word?
-							</h3>
-
-							<div className="p-3 min-h-[10rem] bg-base-100 border rounded-md border-base-content/20">
-								{currentEntry?.response || ''}
+							{/* ******************** Question/Response 2 ******************** */}
+							<div className="p-4">
+								<h3 className="mb-4 w-full text-lg font-semibold text-secondary">
+									{currentEntry?.optionalPrompt1 ||
+										"What's something that you learned today?"}
+								</h3>
+								<div
+									className={`p-3 min-h-[10rem] bg-base-100 border rounded-md border-base-content/20 ${background}`}
+								>
+									{fontStyle && inkStyle && (
+										<p className={`${fontStyle} ${inkStyle}`}>
+											{currentEntry?.response1 || ''}
+										</p>
+									)}
+								</div>
 							</div>
-						</div>
 
-						{/* ******************** Question/Response 2 ******************** */}
-						<div className="p-4">
-							<h3 className="mb-4 w-full text-lg font-semibold text-secondary">
-								{currentEntry?.optionalPrompt1 ||
-									"What's something that you learned today?"}
-							</h3>
-							<div className="p-3 min-h-[10rem] bg-base-100 border rounded-md border-base-content/20">
-								{currentEntry?.response1 || ''}
+							{/* ******************** Question/Response 3 ******************** */}
+							<div className="p-4">
+								<h3 className="mb-4 w-full text-lg font-semibold text-secondary">
+									{currentEntry?.optionalPrompt2 || 'What gave you hope today?'}
+								</h3>
+								<div
+									className={`p-3 min-h-[10rem] bg-base-100 border rounded-md border-base-content/20 ${background}`}
+								>
+									{fontStyle && inkStyle && (
+										<p className={`${fontStyle} ${inkStyle}`}>
+											{currentEntry?.response2 || ''}
+										</p>
+									)}
+								</div>
 							</div>
-						</div>
 
-						{/* ******************** Question/Response 3 ******************** */}
-						<div className="p-4">
-							<h3 className="mb-4 w-full text-lg font-semibold text-secondary">
-								{currentEntry?.optionalPrompt2 || 'What gave you hope today?'}
-							</h3>
-							<div className="p-3 min-h-[10rem] bg-base-100 border rounded-md border-base-content/20">
-								{currentEntry?.response2 || ''}
-							</div>
-						</div>
-
-						{/* ******************** Question/Response 4 ******************** */}
-						<div className="p-4">
-							<h3 className="mb-4 w-full text-lg font-semibold text-secondary">
-								{currentEntry?.optionalPrompt3 ||
-									'How did you show kindness today?'}
-							</h3>
-							<div className="p-3 min-h-[10rem] bg-base-100 border rounded-md border-base-content/20">
-								{currentEntry?.response3 || ''}
+							{/* ******************** Question/Response 4 ******************** */}
+							<div className="p-4">
+								<h3 className="mb-4 w-full text-lg font-semibold text-secondary">
+									{currentEntry?.optionalPrompt3 ||
+										'How did you show kindness today?'}
+								</h3>
+								<div
+									className={`p-3 min-h-[10rem] bg-base-100 border rounded-md border-base-content/20 ${background}`}
+								>
+									{fontStyle && inkStyle && (
+										<p className={`${fontStyle} ${inkStyle}`}>
+											{currentEntry?.response3 || ''}
+										</p>
+									)}
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		)
 	);
 };
 

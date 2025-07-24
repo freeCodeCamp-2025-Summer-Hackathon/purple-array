@@ -10,8 +10,8 @@ export const fetchEntries = async () => {
 			withCredentials: true,
 		});
 
-		if (data.data.journal) {
-			for (let entry of data.data.journal) {
+		if (data.data) {
+			for (let entry of data.data) {
 				entriesArray.push(entry);
 			}
 		}
