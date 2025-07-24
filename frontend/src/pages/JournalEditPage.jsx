@@ -1,28 +1,16 @@
-import JournalStyleCreateEdit from "../components/journal/JournalStyleCreateEdit";
+import JournalEntryForm from '../components/journal/JournalEntryForm';
+import { useParams } from 'react-router';
 
 const JournalEditPage = () => {
-  const existingEntry = {
-    primaryPrompt: "",
-    addPromptOne: "Existing prompt 1",
-    addPromptTwo: "Existing prompt 2",
-    addPromptThree: "Existing prompt 3",
-  };
-  const onSubmit = () => {
-    console.log("submitted");
-  };
-  const handleDelete = () => {
-    console.log("delete");
-  };
+	const id = useParams();
 
-  return (
-    <div>
-      <JournalStyleCreateEdit
-        initialData={existingEntry}
-        onSubmit={onSubmit}
-        onDelete={handleDelete}
-      />
-    </div>
-  );
+	return (
+		<>
+			<div className="min-h-screen p-20">
+				<JournalEntryForm entry_id={id} />
+			</div>
+		</>
+	);
 };
 
 export default JournalEditPage;

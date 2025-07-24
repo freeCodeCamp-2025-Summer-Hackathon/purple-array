@@ -10,7 +10,6 @@ const MarketPage = () => {
 			<Navbar logout={handleLogout} />
 			<div className="max-w-4xl mx-auto py-5">
 				<MarketItems />
-				{/* Items Shop to go here */}
 			</div>
 		</div>
 	);

@@ -1,4 +1,3 @@
-import React from 'react';
 import Navbar from '../components/generic/Navbar';
 import useAuth from '../util/hooks/useAuth';
 import { useParams } from 'react-router';
@@ -12,7 +11,6 @@ const JournalEntryPage = () => {
 	const todayDate = formatUTCDate(new Date());
 	const entryDate = id;
 	const pastEntry = todayDate !== entryDate;
-	console.log({ todayDate, entryDate, pastEntry });
 
 	return (
 		<div className="min-h-screen">
