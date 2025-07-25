@@ -153,20 +153,19 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
             <div className="text-3xl font-semibold text-base-content/80 ml-2">
               {!entryDate && `Today's Entry`}
             </div>
-            {!entryDate && (
-              <div className="inline-flex items-center gap-2 text-md tracking-wide uppercase text-primary font-semibold mt-2 ml-3">
-                <div className="flex gap-2">
-                  <p>Your coins: </p>
-                  <div className="flex">
-                    <CircleDollarSign
-                      className="text-violet-950 fill-yellow-500 size-6"
-                      strokeWidth={1}
-                    />
-                    {coins && `${coins}`}
-                  </div>
+
+            <div className="inline-flex items-center gap-2 text-md tracking-wide uppercase text-primary font-semibold mt-2 ml-3">
+              <div className="flex gap-2">
+                <p>Your coins: </p>
+                <div className="flex">
+                  <CircleDollarSign
+                    className="text-violet-950 fill-yellow-500 size-6"
+                    strokeWidth={1}
+                  />
+                  {coins && `${coins}`}
                 </div>
               </div>
-            )}
+            </div>
           </div>
           <Link
             to={"/journal/collection"}
