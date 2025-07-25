@@ -1,98 +1,80 @@
 [
-    {
-        "name": "Chalkboard",
-        "cost": 20,
-        "description": "Chalkboard background design for your journal.",
-        "tags": [
-            "parchment"
-        ]
-    },
-    {
-        "name": "Weathered Paper",
-        "cost": 15,
-        "description": "Add a retro touch with old-school paper textures.",
-        "tags": [
-            "parchment"
-        ]
-    },
-    {
-        "name": "Spiral Bound Notebook",
-        "cost": 15,
-        "description": "Give your journal that notebook feel",
-        "tags": [
-            "parchment"
-        ]
-    },
-    {
-        "name": "Post-It Notes",
-        "cost": 20,
-        "description": "Track your notes like you track your day with sticky notes",
-        "tags": [
-            "parchment"
-        ]
-    },
-    {
-        "name": "Blue Ink",
-        "cost": 7,
-        "description": "Blue colored ink",
-        "tags": [
-            "ink"
-        ]
-    },
-    {
-        "name": "Green Ink",
-        "cost": 6,
-        "description": "Green Ink",
-        "tags": [
-            "ink"
-        ]
-    },
-    {
-        "name": "Red Ink",
-        "cost": 6,
-        "description": "Red ink",
-        "tags": [
-            "ink"
-        ]
-    },
-    {
-        "name": "Purple Ink",
-        "cost": 7,
-        "description": "Purple Ink",
-        "tags": [
-            "ink"
-        ]
-    },
-    {
-        "name": "Cursive Script",
-        "cost": 6,
-        "description": "Sleek cursive style font.",
-        "tags": [
-            "font"
-        ]
-    },
-    {
-        "name": "Handwritten",
-        "cost": 4,
-        "description": "Feel More natural with this handwritten style font.",
-        "tags": [
-            "font"
-        ]
-    },
-    {
-        "name": "Typewriter",
-        "cost": 4,
-        "description": "Old school techy vibe-out with the typewrite font.",
-        "tags": [
-            "font"
-        ]
-    },
-    {
-        "name": "Chalkboard",
-        "cost": 4,
-        "description": "Get back to class with this chalkboard font.",
-        "tags": [
-            "font"
-        ]
-    }
+	{
+		"name": "Chalkboard",
+		"cost": 15,
+		"description": "Chalkboard background design for your journal.",
+		"tags": ["parchment"]
+	},
+	{
+		"name": "Weathered Paper",
+		"cost": 15,
+		"description": "Add a retro touch with old-school paper textures.",
+		"tags": ["parchment"]
+	},
+	{
+		"name": "Post-It Notes",
+		"cost": 15,
+		"description": "Track your notes like you track your day with sticky notes.",
+		"tags": ["parchment"]
+	},
+	{
+		"name": "Lined Notebook Paper",
+		"cost": 15,
+		"description": "Keep track of your thoughts on paper with a familiar feel.",
+		"tags": ["parchment"]
+	},
+	{
+		"name": "Blue Ink",
+		"cost": 5,
+		"description": "Blue colored ink.",
+		"tags": ["ink"]
+	},
+	{
+		"name": "Green Ink",
+		"cost": 5,
+		"description": "Green colored ink.",
+		"tags": ["ink"]
+	},
+	{
+		"name": "Red Ink",
+		"cost": 5,
+		"description": "Red colored ink.",
+		"tags": ["ink"]
+	},
+	{
+		"name": "Purple Ink",
+		"cost": 5,
+		"description": "Purple colored ink.",
+		"tags": ["ink"]
+	},
+	{
+		"name": "White Ink",
+		"cost": 5,
+		"description": "White colored ink.",
+		"tags": ["ink"]
+	},
+	{
+		"name": "Cursive Script",
+		"cost": 8,
+		"description": "Sleek cursive style font.",
+		"tags": ["font"]
+	},
+	{
+		"name": "Handwritten",
+		"cost": 8,
+		"description": "Feel more natural with this handwritten style font.",
+		"tags": ["font"]
+	},
+	{
+		"name": "Typewriter",
+		"cost": 8,
+		"description": "Old school techy vibe-out with this typewriter font.",
+		"tags": ["font"]
+	},
+	{
+		"name": "Chalk",
+		"cost": 8,
+		"description": "Get back to class with this chalkboard font.",
+		"tags": ["font"]
+	}
 ]
