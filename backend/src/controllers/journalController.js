@@ -165,7 +165,8 @@ export async function writeJournal(req, res) {
                 { new: true, select: 'journal -_id' }
             ).exec();
 
-            let newReward = await User.findOneAndUpdate(
+            // let newReward =
+            await User.findOneAndUpdate(
                 { _id: user.id, 'rewards._id': user.rewards[journalIndex]._id }, // index should be same for rewards
                 { $set: { 'rewards.$.reward': points } },
                 { new: true, select: 'rewards -_id' }
@@ -179,7 +180,6 @@ export async function writeJournal(req, res) {
 
             res.status(200).json({
                 journal: newJournal.journal.filter((entry) => entry),
-                rewards: newReward.rewards,
                 coins: newCoins.coins,
             });
         }
