@@ -3,16 +3,90 @@ import { useState, useEffect } from 'react';
 import { formatUTCDate, formatDate } from '../../util/helper/formatDate';
 import useWord from '../../util/hooks/useWord';
 import useEntries from '../../util/hooks/useEntries';
+import useSettings from '../../util/hooks/useSettings';
 import { CloudUpload, Pencil, Plus } from 'lucide-react';
 import AnimatePulseLoader from '../generic/AnimatePulseLoader';
 
 const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
-	const { word, isLoading } = useWord();
-	const { entries } = useEntries();
+	const { word } = useWord();
+	const { entries, isLoading } = useEntries();
 	const [currentEntry, setCurrentEntry] = useState({});
 	const [entryExists, setEntryExists] = useState(false);
 	const todayDate = formatUTCDate(new Date());
 	const [entryLink, setEntryLink] = useState('');
+
+	const { settings } = useSettings();
+	const [fontStyle, setFontStyle] = useState('');
+	const [inkStyle, setInkStyle] = useState('');
+	const [background, setBackground] = useState('');
+
+	useEffect(() => {
+		//set up style customizations pulling state based on useSettings
+		const styleChoice = async () => {
+			if (settings.font) {
+				const font = await settings.font?.toLowerCase();
+				switch (font) {
+					case 'default':
+						setFontStyle(`default`);
+						break;
+					case 'handwritten':
+						setFontStyle(`handwritten`);
+						break;
+					case 'cursive':
+						setFontStyle(`cursive`);
+						break;
+					case 'typewriter':
+						setFontStyle(`typewriter`);
+						break;
+					case 'chalk':
+						setFontStyle(`chalk`);
+						break;
+				}
+			}
+			if (settings.ink) {
+				const ink = await settings.ink?.toLowerCase();
+				switch (ink) {
+					case 'default':
+						setInkStyle(`default`);
+						break;
+					case 'blue ink':
+						setInkStyle(`blue`);
+						break;
+					case 'green ink':
+						setInkStyle(`green`);
+						break;
+					case 'purple ink':
+						setInkStyle(`purple`);
+						break;
+					case 'red ink':
+						setInkStyle(`red`);
+						break;
+				}
+			}
+			if (settings.parchment) {
+				const ink = await settings.parchment?.toLowerCase();
+				switch (ink) {
+					case 'default':
+						setBackground(`default`);
+						break;
+					case 'lined notebook paper':
+						setBackground(`notebook`);
+						break;
+					case 'weathered parchment':
+						setBackground(`parchment`);
+						break;
+					case 'post-it note':
+						setBackground(`post-it`);
+						break;
+					case 'chalkboard':
+						setBackground(`chalkboard`);
+						break;
+				}
+			}
+		};
+
+		styleChoice();
+	}, [settings.font, fontStyle]);
 
 	const initialData = {
 		word: word.word,
@@ -57,14 +131,12 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 	}, [entries]);
 
 	/* *********************** Animated Loader *********************** */
-
-	if (isLoading) {
+	if (isLoading)
 		return (
 			<div className="min-h-screen">
-				<AnimatePulseLoader />;
+				<AnimatePulseLoader />
 			</div>
 		);
-	}
 
 	return (
 		<div className="min-h-screen">
@@ -96,31 +168,35 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 							</span>
 						</div>
 
-						<div>
-							<div className="flex gap-4 items-center bg-base-100 px-2 py-2 rounded-full">
-								<span className="text-primary font-semibold text-xl ml-4">
-									{entryExists ? 'Edit' : 'Write'}
-								</span>
-								<Link
-									to={`/edit/${entryLink}`}
-									className="btn btn-circle bg-neutral-300 btn-lg"
-								>
-									<Pencil />
-								</Link>
-							</div>
+						<div className="flex gap-4 items-center bg-base-100 px-2 py-2 rounded-full">
+							<span className="text-primary font-semibold text-xl ml-4">
+								{entryExists ? 'Edit' : 'Write'}
+							</span>
+							<Link
+								to={`/edit/${entryLink}`}
+								className="btn btn-circle bg-neutral-300 btn-lg"
+							>
+								<Pencil />
+							</Link>
 						</div>
 					</div>
 
 					{/* *********************** Journal Entry Body *********************** */}
-					<div className="card border-base-content/20 p-2 mt-6">
+					<div
+						className={`card border-base-content/20 p-2 mt-6 bg-base-100 ${background}`}
+					>
 						{/* ******************** Question/Response 1 ******************** */}
 						<div className="p-4">
 							<h3 className="mb-4 w-full text-lg font-semibold text-secondary">
 								How did you use today's word?
 							</h3>
 
-							<div className="p-3 min-h-[10rem] bg-base-100 border rounded-md border-base-content/20">
-								{currentEntry?.response || ''}
+							<div className="min-h-[4rem]">
+								{fontStyle && inkStyle && (
+									<p className={`${fontStyle} ${inkStyle}`}>
+										{currentEntry?.response || ''}
+									</p>
+								)}
 							</div>
 						</div>
 
@@ -130,8 +206,12 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 								{currentEntry?.optionalPrompt1 ||
 									"What's something that you learned today?"}
 							</h3>
-							<div className="p-3 min-h-[10rem] bg-base-100 border rounded-md border-base-content/20">
-								{currentEntry?.response1 || ''}
+							<div className="min-h-[4rem]">
+								{fontStyle && inkStyle && (
+									<p className={`${fontStyle} ${inkStyle}`}>
+										{currentEntry?.response1 || ''}
+									</p>
+								)}
 							</div>
 						</div>
 
@@ -140,8 +220,12 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 							<h3 className="mb-4 w-full text-lg font-semibold text-secondary">
 								{currentEntry?.optionalPrompt2 || 'What gave you hope today?'}
 							</h3>
-							<div className="p-3 min-h-[10rem] bg-base-100 border rounded-md border-base-content/20">
-								{currentEntry?.response2 || ''}
+							<div className="min-h-[4rem]">
+								{fontStyle && inkStyle && (
+									<p className={`${fontStyle} ${inkStyle}`}>
+										{currentEntry?.response2 || ''}
+									</p>
+								)}
 							</div>
 						</div>
 
@@ -151,8 +235,12 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 								{currentEntry?.optionalPrompt3 ||
 									'How did you show kindness today?'}
 							</h3>
-							<div className="p-3 min-h-[10rem] bg-base-100 border rounded-md border-base-content/20">
-								{currentEntry?.response3 || ''}
+							<div className="min-h-[4rem]">
+								{fontStyle && inkStyle && (
+									<p className={`${fontStyle} ${inkStyle}`}>
+										{currentEntry?.response3 || ''}
+									</p>
+								)}
 							</div>
 						</div>
 					</div>
