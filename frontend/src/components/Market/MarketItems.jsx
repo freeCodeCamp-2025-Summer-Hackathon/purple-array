@@ -10,7 +10,6 @@ function MarketItems() {
   const { inventory, refreshInventory } = useInventory();
   const { purchaseItem, error } = usePurchase();
   const { coins } = useCoins();
-  console.log("Coins object:", coins);
 
   const handlePurchase = async (item) => {
     if (item.cost > coins) {
@@ -43,13 +42,18 @@ function MarketItems() {
     <>
       <div className="px-4 pt-10">
         <div className="inline-flex items-center gap-2 text-md tracking-wide uppercase text-primary font-semibold bg-primary/10 px-3 py-1 rounded-md ml-5">
-          <span>Your Coins:</span>
-          <CircleDollarSign
-            className="text-violet-950 fill-yellow-500 size-6"
-            strokeWidth={1}
-          />
-          <span>{typeof coins === "number" ? coins : "-"}</span>
+          <div className="flex gap-2">
+            <p>Your coins: </p>
+            <div className="flex">
+              <CircleDollarSign
+                className="text-violet-950 fill-yellow-500 size-6"
+                strokeWidth={1}
+              />
+              {coins && `${coins}`}
+            </div>
+          </div>
         </div>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1 px-4 pt-10">
           {marketItems.map((item) => (
             <div

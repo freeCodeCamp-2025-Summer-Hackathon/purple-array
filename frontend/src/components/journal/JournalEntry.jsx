@@ -154,13 +154,17 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
               {!entryDate && `Today's Entry`}
             </div>
             {!entryDate && (
-              <div className="inline-flex items-center gap-2 text-md tracking-wide uppercase text-primary font-semibold mt-4 ml-3">
-                <span>Your Coins:</span>
-                <CircleDollarSign
-                  className="text-violet-950 fill-yellow-500 size-6"
-                  strokeWidth={1}
-                />
-                <span>{typeof coins === "number" ? coins : "-"}</span>
+              <div className="inline-flex items-center gap-2 text-md tracking-wide uppercase text-primary font-semibold mt-2 ml-3">
+                <div className="flex gap-2">
+                  <p>Your coins: </p>
+                  <div className="flex">
+                    <CircleDollarSign
+                      className="text-violet-950 fill-yellow-500 size-6"
+                      strokeWidth={1}
+                    />
+                    {coins && `${coins}`}
+                  </div>
+                </div>
               </div>
             )}
           </div>
