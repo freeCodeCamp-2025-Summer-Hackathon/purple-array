@@ -6,6 +6,8 @@ import useEntries from "../../util/hooks/useEntries";
 import useSettings from "../../util/hooks/useSettings";
 import { CloudUpload, Pencil, Plus } from "lucide-react";
 import AnimatePulseLoader from "../generic/AnimatePulseLoader";
+import useCoins from "../../util/hooks/useCoins.js";
+import { CircleDollarSign } from "lucide-react";
 
 const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
   const { word } = useWord();
@@ -19,6 +21,7 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
   const [fontStyle, setFontStyle] = useState("");
   const [inkStyle, setInkStyle] = useState("");
   const [background, setBackground] = useState("");
+  const { coins } = useCoins();
 
   useEffect(() => {
     //set up style customizations pulling state based on useSettings
@@ -146,8 +149,20 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
       <div className="max-w-4xl mx-auto mt-12 px-6 pb-12">
         {/* *********************** Footer Button Wrapper Header *********************** */}
         <div className="flex justify-between mb-6 items-center">
-          <div className="text-3xl font-semibold text-base-content/80 ml-2">
-            {!entryDate && `Today's Entry`}
+          <div>
+            <div className="text-3xl font-semibold text-base-content/80 ml-2">
+              {!entryDate && `Today's Entry`}
+            </div>
+            {!entryDate && (
+              <div className="inline-flex items-center gap-2 text-md tracking-wide uppercase text-primary font-semibold mt-4 ml-3">
+                <span>Your Coins:</span>
+                <CircleDollarSign
+                  className="text-violet-950 fill-yellow-500 size-6"
+                  strokeWidth={1}
+                />
+                <span>{typeof coins === "number" ? coins : "-"}</span>
+              </div>
+            )}
           </div>
           <Link
             to={"/journal/collection"}
