@@ -228,7 +228,8 @@
 		"optionalPrompt2": "What's something that you learned today?",
 		"response2": "I can handle sudden shifts without feeling lost.",
 		"optionalPrompt3": "How did you challenge yourself today?",
-		"response3": "Allowing my emotions to flow rather than suppressing them."
+		"response3": "Allowing my emotions to flow rather than suppressing them.",
+        "active": false
 	},
 	{
 		"date": "2025-06-29",
@@ -239,7 +240,8 @@
 		"optionalPrompt2": "What gave you hope today?",
 		"response2": "Knowing small actions can bring peace.",
 		"optionalPrompt3": "What song would be the soundtrack to your day?",
-		"response3": "'Weightless' by Marconi Union—it felt perfect."
+		"response3": "'Weightless' by Marconi Union—it felt perfect.",
+        "active": false
 	},
 	{
 		"date": "2025-06-28",
@@ -250,7 +252,8 @@
 		"optionalPrompt2": "What are you grateful for today?",
 		"response2": "The ability to help those I care about.",
 		"optionalPrompt3": "What gave you hope today?",
-		"response3": "Knowing support makes hard times feel lighter."
+		"response3": "Knowing support makes hard times feel lighter.",
+        "active": false
 	},
 	{
 		"date": "2025-06-27",
@@ -261,7 +264,8 @@
 		"optionalPrompt2": "What are you grateful for today?",
 		"response2": "Nature's small, magical surprises.",
 		"optionalPrompt3": "What song would be the soundtrack to your day?",
-		"response3": "'Somewhere Over The Rainbow' by Israel Kamakawiwoʻole—it felt right."
+		"response3": "'Somewhere Over The Rainbow' by Israel Kamakawiwoʻole—it felt right.",
+        "active": false
 	},
 	{
 		"date": "2025-06-26",
@@ -272,7 +276,8 @@
 		"optionalPrompt2": "What are you grateful for today?",
 		"response2": "The excitement of discovering new places.",
 		"optionalPrompt3": "What gave you hope today?",
-		"response3": "Knowing that there’s always more to discover."
+		"response3": "Knowing that there’s always more to discover.",
+        "active": false
 	},
 	{
 		"date": "2025-06-25",
@@ -283,7 +288,8 @@
 		"optionalPrompt2": "What are you grateful for today?",
 		"response2": "People who just 'get me' without explanation.",
 		"optionalPrompt3": "What song would be the soundtrack to your day?",
-		"response3": "'Lean On Me' by Bill Withers—it matched our teamwork."
+		"response3": "'Lean On Me' by Bill Withers—it matched our teamwork.",
+        "active": false
 	},
 	{
 		"date": "2025-06-24",
@@ -294,7 +300,8 @@
 		"optionalPrompt2": "How did you show kindness today?",
 		"response2": "I shared a quiet moment with someone who needed calm.",
 		"optionalPrompt3": "What are you grateful for today?",
-		"response3": "The delicate wonders of nature."
+		"response3": "The delicate wonders of nature.",
+        "active": false
 	},
 	{
 		"date": "2025-06-23",
@@ -305,7 +312,8 @@
 		"optionalPrompt2": "What are you grateful for today?",
 		"response2": "The moments when creativity flows freely.",
 		"optionalPrompt3": "What gave you hope today?",
-		"response3": "Knowing inspiration can appear at any time."
+		"response3": "Knowing inspiration can appear at any time.",
+        "active": false
 	},
 	{
 		"date": "2025-06-22",
@@ -316,7 +324,8 @@
 		"optionalPrompt2": "What are you grateful for today?",
 		"response2": "Comfortable weather that makes everything feel easier.",
 		"optionalPrompt3": "How did you challenge yourself today?",
-		"response3": "I took a longer walk to enjoy the day."
+		"response3": "I took a longer walk to enjoy the day.",
+        "active": false
 	},
 	{
 		"date": "2025-06-21",
@@ -327,6 +336,7 @@
 		"optionalPrompt2": "What's something that you learned today?",
 		"response2": "Sometimes listening is all someone needs.",
 		"optionalPrompt3": "What are you grateful for today?",
-		"response3": "Opportunities to help create peace."
+		"response3": "Opportunities to help create peace.",
+        "active": false
 	}
 ]
