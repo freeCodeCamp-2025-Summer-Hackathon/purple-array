@@ -130,15 +130,14 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 		}
 	}, [entries]);
 
-	{
-		/* *********************** Animated Loader *********************** */
-	}
+	/* *********************** Animated Loader *********************** */
 	if (isLoading)
 		return (
 			<div className="min-h-screen">
 				<AnimatePulseLoader />
 			</div>
 		);
+
 	return (
 		<div className="min-h-screen">
 			<div className="max-w-3xl mx-auto mt-12 px-6 pb-12">
@@ -167,91 +166,87 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 									? formatDate(new Date(todayDate + `T00:00:00`))
 									: formatDate(new Date(entryDate + `T00:00:00`))}
 							</span>
-	        </div>
-												
-							<div>
-								<div className="flex gap-4 items-center bg-base-100 px-2 py-2 rounded-full">
-									<span className="text-primary font-semibold text-xl ml-4">
-										{entryExists ? 'Edit' : 'Write'}
-									</span>
-								<Link
-									to={`/edit/${entryLink}`}
-									className="btn btn-circle bg-neutral-300 btn-lg"
-								>
-									<Pencil />
-								</Link>
+						</div>
 
-	              </div>
+						<div className="flex gap-4 items-center bg-base-100 px-2 py-2 rounded-full">
+							<span className="text-primary font-semibold text-xl ml-4">
+								{entryExists ? 'Edit' : 'Write'}
+							</span>
+							<Link
+								to={`/edit/${entryLink}`}
+								className="btn btn-circle bg-neutral-300 btn-lg"
+							>
+								<Pencil />
+							</Link>
+						</div>
+					</div>
+
+					{/* *********************** Journal Entry Body *********************** */}
+					<div
+						className={`card border-base-content/20 p-2 mt-6 bg-base-100 ${background}`}
+					>
+						{/* ******************** Question/Response 1 ******************** */}
+						<div className="p-4">
+							<h3 className="mb-4 w-full text-lg font-semibold text-secondary">
+								How did you use today's word?
+							</h3>
+
+							<div className="min-h-[4rem]">
+								{fontStyle && inkStyle && (
+									<p className={`${fontStyle} ${inkStyle}`}>
+										{currentEntry?.response || ''}
+									</p>
+								)}
 							</div>
 						</div>
 
-						{/* *********************** Journal Entry Body *********************** */}
-						<div
-							className={`card border-base-content/20 p-2 mt-6 bg-base-100 ${background}`}
-						>
-							{/* ******************** Question/Response 1 ******************** */}
-							<div className="p-4">
-								<h3 className="mb-4 w-full text-lg font-semibold text-secondary">
-									How did you use today's word?
-								</h3>
-
-								<div className="min-h-[4rem]">
-									{fontStyle && inkStyle && (
-										<p className={`${fontStyle} ${inkStyle}`}>
-											{currentEntry?.response || ''}
-										</p>
-									)}
-								</div>
+						{/* ******************** Question/Response 2 ******************** */}
+						<div className="p-4">
+							<h3 className="mb-4 w-full text-lg font-semibold text-secondary">
+								{currentEntry?.optionalPrompt1 ||
+									"What's something that you learned today?"}
+							</h3>
+							<div className="min-h-[4rem]">
+								{fontStyle && inkStyle && (
+									<p className={`${fontStyle} ${inkStyle}`}>
+										{currentEntry?.response1 || ''}
+									</p>
+								)}
 							</div>
+						</div>
 
-							{/* ******************** Question/Response 2 ******************** */}
-							<div className="p-4">
-								<h3 className="mb-4 w-full text-lg font-semibold text-secondary">
-									{currentEntry?.optionalPrompt1 ||
-										"What's something that you learned today?"}
-								</h3>
-								<div className="min-h-[4rem]">
-									{fontStyle && inkStyle && (
-										<p className={`${fontStyle} ${inkStyle}`}>
-											{currentEntry?.response1 || ''}
-										</p>
-									)}
-								</div>
+						{/* ******************** Question/Response 3 ******************** */}
+						<div className="p-4">
+							<h3 className="mb-4 w-full text-lg font-semibold text-secondary">
+								{currentEntry?.optionalPrompt2 || 'What gave you hope today?'}
+							</h3>
+							<div className="min-h-[4rem]">
+								{fontStyle && inkStyle && (
+									<p className={`${fontStyle} ${inkStyle}`}>
+										{currentEntry?.response2 || ''}
+									</p>
+								)}
 							</div>
+						</div>
 
-							{/* ******************** Question/Response 3 ******************** */}
-							<div className="p-4">
-								<h3 className="mb-4 w-full text-lg font-semibold text-secondary">
-									{currentEntry?.optionalPrompt2 || 'What gave you hope today?'}
-								</h3>
-								<div className="min-h-[4rem]">
-									{fontStyle && inkStyle && (
-										<p className={`${fontStyle} ${inkStyle}`}>
-											{currentEntry?.response2 || ''}
-										</p>
-									)}
-								</div>
-							</div>
-
-							{/* ******************** Question/Response 4 ******************** */}
-							<div className="p-4">
-								<h3 className="mb-4 w-full text-lg font-semibold text-secondary">
-									{currentEntry?.optionalPrompt3 ||
-										'How did you show kindness today?'}
-								</h3>
-								<div className="min-h-[4rem]">
-									{fontStyle && inkStyle && (
-										<p className={`${fontStyle} ${inkStyle}`}>
-											{currentEntry?.response3 || ''}
-										</p>
-									)}
-								</div>
+						{/* ******************** Question/Response 4 ******************** */}
+						<div className="p-4">
+							<h3 className="mb-4 w-full text-lg font-semibold text-secondary">
+								{currentEntry?.optionalPrompt3 ||
+									'How did you show kindness today?'}
+							</h3>
+							<div className="min-h-[4rem]">
+								{fontStyle && inkStyle && (
+									<p className={`${fontStyle} ${inkStyle}`}>
+										{currentEntry?.response3 || ''}
+									</p>
+								)}
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		)
+		</div>
 	);
 };
 

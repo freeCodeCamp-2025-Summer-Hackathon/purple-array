@@ -56,6 +56,7 @@ const JournalEntryForm = ({ entry_id }) => {
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
+
 		setJournalEntryData((prev) => ({
 			...prev,
 			[name]: value,
