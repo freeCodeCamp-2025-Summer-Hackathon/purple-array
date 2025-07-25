@@ -22,7 +22,7 @@ export async function signup(req, res, next) {
         res.status(201).json({
             message: 'Sign up and sign in successful',
             success: true,
-            user,
+            email: email,
         });
         next();
     } catch (error) {
@@ -55,6 +55,7 @@ export async function login(req, res, next) {
         res.status(201).json({
             message: 'User logged in successfully',
             success: true,
+            email: email,
         });
         next();
     } catch (error) {
