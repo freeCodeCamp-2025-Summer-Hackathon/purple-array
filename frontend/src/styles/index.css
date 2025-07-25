@@ -3,97 +3,105 @@
 @tailwind utilities;
 
 * {
-	/* outline: solid 1px #463aa2; */
+  /* outline: solid 1px #463aa2; */
 }
 
 @font-face {
-	font-family: 'Caveat';
-	/* font-weight: 400;
+  font-family: "Caveat";
+  /* font-weight: 400;
 	font-style: normal; */
-	src: local('Caveat-Regular'),
-		url('../assets/fonts/Caveat-Regular.ttf') format('truetype');
+  src: local("Caveat-Regular"),
+    url("../assets/fonts/Caveat-Regular.ttf") format("truetype");
 }
 
 @font-face {
-	font-family: 'League Script';
-	src: local('LeagueScript-Regular'),
-		url('../assets/fonts/LeagueScript-Regular.ttf') format('truetype');
+  font-family: "League Script";
+  src: local("LeagueScript-Regular"),
+    url("../assets/fonts/LeagueScript-Regular.ttf") format("truetype");
 }
 
 @font-face {
-	font-family: 'Fredericka the Great';
-	src: local('FrederickatheGreat-Regular'),
-		url('../assets/fonts/FrederickatheGreat-Regular.ttf') format('truetype');
+  font-family: "Fredericka the Great";
+  src: local("FrederickatheGreat-Regular"),
+    url("../assets/fonts/FrederickatheGreat-Regular.ttf") format("truetype");
 }
 
 @font-face {
-	font-family: 'Special Elite';
-	src: local('SpecialElite-Regular'),
-		url('../assets/fonts/SpecialElite-Regular.ttf') format('truetype');
+  font-family: "Special Elite";
+  src: local("SpecialElite-Regular"),
+    url("../assets/fonts/SpecialElite-Regular.ttf") format("truetype");
 }
 
 /******* Font Choices *******/
 /* ************************ */
 .handwritten {
-	font-family: 'Caveat' !important;
+  font-family: "Caveat" !important;
+  font-size: 22px;
 }
 
 .cursive {
-	font-family: 'League Script' !important;
-}
-
-.typewriter {
-	font-family: 'Fredericka the Great' !important;
+  font-family: "League Script" !important;
+  font-size: 20px;
 }
 
 .chalk {
-	font-family: 'Special Elite' !important;
+  font-family: "Fredericka the Great" !important;
+  font-size: 20px;
+}
+
+.typewriter {
+  font-family: "Special Elite" !important;
+  font-size: 20px;
 }
 
 /******* Color Choices *******/
 /* ************************* */
 .red {
-	color: red !important;
+  color: red !important;
 }
 
 .purple {
-	color: purple !important;
+  color: purple !important;
 }
 
 .blue {
-	color: blue !important;
+  color: blue !important;
 }
 
 .green {
-	color: green !important;
+  color: green !important;
 }
 
 .white {
-	color: white !important;
+  color: white !important;
 }
 
 /******* Color Choices *******/
 /* ************************* */
 .notebook {
-	background: url('../../public/assets/parchment/lined-paper.jpg') center
-		no-repeat;
-	background-size: cover;
+  background: url("../../public/assets/parchment/lined-paper_cropped.jpg")
+    center no-repeat;
+  background-size: cover;
 }
 
 .parchment {
-	background: url('../../public/assets/parchment/weathered-paper.png') center
-		no-repeat;
-	background-size: cover;
+  background: url("../../public/assets/parchment/stack-of-paper.png") center
+    no-repeat;
+  background-size: cover;
 }
 
 .post-it {
-	background: url('../../public/assets/parchment/post-it-note1.png') center
-		no-repeat;
-	background-size: cover;
+  background: url("../../public/assets/parchment/posti-it-notes_New_cropped.jpg")
+    center no-repeat;
+  background-size: cover;
+  background-position: top;
 }
 
 .chalkboard {
-	background: url('../../public/assets/parchment/chalkboard.png') center
-		no-repeat;
-	background-size: cover;
+  background: url("../../public/assets/parchment/blackboard.jpg") center
+    no-repeat;
+  background-size: cover;
+}
+.chalkboard h3 {
+  color: white !important;
 }
