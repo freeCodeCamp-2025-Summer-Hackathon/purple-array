@@ -57,6 +57,13 @@ function editJournalEntry(journal, input) {
     return journal;
 }
 
+// TODO: Will eventually be rewritten to check against user's current date for new entries and prevent new entries for non-current date
+// Only checks date string formatting - does NOT check illegal dates
+function validateDate(date) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return false;
+    return true;
+}
+
 function calculatePoints(journal) {
     let points = 0;
     if (journal.response) points += 1;
@@ -86,6 +93,9 @@ export async function writeJournal(req, res) {
         // Entry does NOT exist
         if (journalIndex == -1) {
             // Check if the user is trying to create an entry prior to the most recent entry (including deleted entries)
+            if (req.body.date && !validateDate(req.body.date)) {
+                return res.status(400).json({ message: 'Invalid date' });
+            }
             if (
                 user.rewards.length > 0 &&
                 req.body.date < user.rewards[user.rewards.length - 1].date
@@ -98,7 +108,8 @@ export async function writeJournal(req, res) {
             const newEntry = buildJournalEntry(req.body); // input validation will be handled here
             if (!newEntry)
                 res.status(400).json({
-                    message: 'Date/Word/Response missing',
+                    message:
+                        'Date/Word/Response missing or incorrectly formatted',
                     success: false,
                 });
 
