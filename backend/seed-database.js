@@ -16,7 +16,9 @@ const journalEntries = JSON.parse(
     fs.readFileSync('../frontend/public/placeholderJournalEntries.json', 'utf8')
 );
 
-const activeEntries = journalEntries.filter((entry) => entry.active !== false);
+const activeEntries = journalEntries
+    .filter((entry) => entry.active !== false)
+    .reverse();
 
 const wordData = JSON.parse(
     fs.readFileSync('../frontend/public/wordDict.json', 'utf8')
@@ -49,6 +51,13 @@ const pastEntries = activeEntries.filter((entry) => {
     return entryDate < today;
 });
 
+const rewardData = pastEntries
+    .sort((a, b) => new Date(a.date) - new Date(b.date))
+    .map((entry) => ({
+        date: entry.date,
+        reward: 4,
+    }));
+
 // Create user objects
 const users = [];
 
@@ -62,6 +71,7 @@ for (let i = 0; i < 2; i++) {
         inventory: userInventory,
         coins: coins[i],
         journal: pastEntries,
+        rewards: rewardData,
     });
 }
 
