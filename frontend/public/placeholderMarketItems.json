@@ -76,5 +76,35 @@
 		"cost": 8,
 		"description": "Get back to class with this chalkboard font.",
 		"tags": ["font"]
+	},
+	{
+		"name": "Garden",
+		"cost": 25,
+		"description": "A fresh and vibrant theme inspired by blooming greens and earthy tones.",
+		"tags": ["theme"]
+	},
+	{
+		"name": "Valentine",
+		"cost": 25,
+		"description": "A sweet and romantic palette filled with warm pinks and soft reds.",
+		"tags": ["theme"]
+	},
+	{
+		"name": "Cupcake",
+		"cost": 25,
+		"description": "A playful theme bursting with pastel colors reminiscent of frosted treats.",
+		"tags": ["theme"]
+	},
+	{
+		"name": "Wireframe",
+		"cost": 25,
+		"description": "A minimalistic, grayscale theme designed for focus and clarity.",
+		"tags": ["theme"]
+	},
+	{
+		"name": "Dracula",
+		"cost": 25,
+		"description": "A bold and moody dark theme with deep purples and high contrast for night owls.",
+		"tags": ["theme"]
 	}
 ]
