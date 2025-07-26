@@ -21,18 +21,18 @@ const activeEntries = journalEntries
     .reverse();
 
 const wordData = JSON.parse(
-    fs.readFileSync('../frontend/public/wordDict.json', 'utf8')
+    fs.readFileSync('../frontend/public/placeholderWords.json', 'utf8')
 );
 
 const activeWords = wordData.filter((word) => word.active !== false);
 
 const marketItems = JSON.parse(
-    fs.readFileSync('../frontend/public/marketDummyData.json', 'utf8')
+    fs.readFileSync('../frontend/public/placeholderMarketItems.json', 'utf8')
 );
 
 // Create user variables
 const emails = ['johndoe@testmail.com', 'janedoe@testmail.com'];
-const timeZones = ['EST', 'JST'];
+const timeZones = ['America/New_York', 'Asia/Tokyo'];
 const coins = [100, 500];
 const password = 'password123';
 const userInventory = { theme: [], font: [], ink: [], parchment: [] };
@@ -41,7 +41,7 @@ const purchasedItems = indices
     .map((index) => marketItems[index])
     .filter(Boolean);
 
-// Create a reference point for jounral entries
+// Create a reference point for journal entries
 const today = new Date();
 today.setHours(0, 0, 0, 0);
 
