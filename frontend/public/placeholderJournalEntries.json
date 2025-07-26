@@ -229,7 +229,7 @@
 		"response2": "I can handle sudden shifts without feeling lost.",
 		"optionalPrompt3": "How did you challenge yourself today?",
 		"response3": "Allowing my emotions to flow rather than suppressing them.",
-        "active": false
+		"active": false
 	},
 	{
 		"date": "2025-06-29",
@@ -241,7 +241,7 @@
 		"response2": "Knowing small actions can bring peace.",
 		"optionalPrompt3": "What song would be the soundtrack to your day?",
 		"response3": "'Weightless' by Marconi Union—it felt perfect.",
-        "active": false
+		"active": false
 	},
 	{
 		"date": "2025-06-28",
@@ -253,7 +253,7 @@
 		"response2": "The ability to help those I care about.",
 		"optionalPrompt3": "What gave you hope today?",
 		"response3": "Knowing support makes hard times feel lighter.",
-        "active": false
+		"active": false
 	},
 	{
 		"date": "2025-06-27",
@@ -265,7 +265,7 @@
 		"response2": "Nature's small, magical surprises.",
 		"optionalPrompt3": "What song would be the soundtrack to your day?",
 		"response3": "'Somewhere Over The Rainbow' by Israel Kamakawiwoʻole—it felt right.",
-        "active": false
+		"active": false
 	},
 	{
 		"date": "2025-06-26",
@@ -277,7 +277,7 @@
 		"response2": "The excitement of discovering new places.",
 		"optionalPrompt3": "What gave you hope today?",
 		"response3": "Knowing that there’s always more to discover.",
-        "active": false
+		"active": false
 	},
 	{
 		"date": "2025-06-25",
@@ -289,7 +289,7 @@
 		"response2": "People who just 'get me' without explanation.",
 		"optionalPrompt3": "What song would be the soundtrack to your day?",
 		"response3": "'Lean On Me' by Bill Withers—it matched our teamwork.",
-        "active": false
+		"active": false
 	},
 	{
 		"date": "2025-06-24",
@@ -301,7 +301,7 @@
 		"response2": "I shared a quiet moment with someone who needed calm.",
 		"optionalPrompt3": "What are you grateful for today?",
 		"response3": "The delicate wonders of nature.",
-        "active": false
+		"active": false
 	},
 	{
 		"date": "2025-06-23",
@@ -313,7 +313,7 @@
 		"response2": "The moments when creativity flows freely.",
 		"optionalPrompt3": "What gave you hope today?",
 		"response3": "Knowing inspiration can appear at any time.",
-        "active": false
+		"active": false
 	},
 	{
 		"date": "2025-06-22",
@@ -325,7 +325,7 @@
 		"response2": "Comfortable weather that makes everything feel easier.",
 		"optionalPrompt3": "How did you challenge yourself today?",
 		"response3": "I took a longer walk to enjoy the day.",
-        "active": false
+		"active": false
 	},
 	{
 		"date": "2025-06-21",
@@ -337,6 +337,6 @@
 		"response2": "Sometimes listening is all someone needs.",
 		"optionalPrompt3": "What are you grateful for today?",
 		"response3": "Opportunities to help create peace.",
-        "active": false
+		"active": false
 	}
 ]
