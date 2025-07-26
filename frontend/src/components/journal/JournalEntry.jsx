@@ -1,10 +1,6 @@
 import { Link } from 'react-router';
 import { useState, useEffect } from 'react';
-import {
-	formatLuxonDate,
-	formatUTCDate,
-	formatDate,
-} from '../../util/helper/formatDate';
+import { formatLuxonDate, formatDate } from '../../util/helper/formatDate';
 import useWord from '../../util/hooks/useWord';
 import useEntries from '../../util/hooks/useEntries';
 import useSettings from '../../util/hooks/useSettings';
@@ -19,7 +15,6 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 
 	const [currentEntry, setCurrentEntry] = useState({});
 	const [entryExists, setEntryExists] = useState(false);
-	// const todayDate = formatUTCDate(new Date());
 	const [entryLink, setEntryLink] = useState('');
 
 	const userCurrentDate = formatLuxonDate(
