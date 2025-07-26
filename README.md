@@ -100,6 +100,16 @@ PORT=5001
 NODE_ENV=development
 ```
 
+## ✔️ Load your Database
+
+The script to load your database is located directly in the backend directory and must be ran from such.
+To run the script please open a terminal window and run the following commands:
+
+```
+cd backend
+node seed-database.js
+```
+
 ## 🔧 Run the Backend
 
 In a terminal window please run the following:
