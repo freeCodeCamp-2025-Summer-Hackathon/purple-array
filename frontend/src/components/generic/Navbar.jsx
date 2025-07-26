@@ -1,8 +1,9 @@
-import toast from 'react-hot-toast';
 import { NavLink } from 'react-router';
 import { Sparkles, NotebookPen, Store, Cog } from 'lucide-react';
 
-const Navbar = ({ logout }) => {
+const Navbar = ({ logout, cookies }) => {
+	const user = localStorage.getItem('user');
+
 	return (
 		<div>
 			<header className="bg-base-200 border-b border-base-content/10">
@@ -27,7 +28,6 @@ const Navbar = ({ logout }) => {
 								</div>
 							</NavLink>
 						</div>
-
 						{/* Journal Icon & Link */}
 						<div className="flex gap-4">
 							<NavLink
@@ -47,7 +47,6 @@ const Navbar = ({ logout }) => {
 								</div>
 							</NavLink>
 						</div>
-
 						{/* Market Icon & Link */}
 						<div className="flex gap-4">
 							<NavLink
@@ -67,7 +66,6 @@ const Navbar = ({ logout }) => {
 								</div>
 							</NavLink>
 						</div>
-
 						{/* Settings Icon & Link */}
 						<div className="flex gap-4">
 							<NavLink
@@ -87,12 +85,22 @@ const Navbar = ({ logout }) => {
 								</div>
 							</NavLink>
 						</div>
-
 						{/* This button will remain conditionally not visible for now, until logout can be refactored */}
-
-						<button className="btn btn-outline btn-primary" onClick={logout}>
-							Logout
-						</button>
+						{cookies?.token && (
+							<div className="card-actions gap-2 items-center">
+								<button
+									className="btn btn-outline btn-primary btn-sm"
+									onClick={logout}
+								>
+									Logout
+								</button>
+								{user && (
+									<span className="text-xs font-semibold text-primary/75">
+										{user}
+									</span>
+								)}
+							</div>
+						)}
 					</div>
 				</div>
 			</header>
