@@ -105,7 +105,7 @@ JWT_SECRET=<Secret_String>
 
 ## ✔️ Load your Database
 
-The script to load your database is located directly in the backend directory and must be ran from such.
+The script to load your database is located directly in the backend directory and must be run from that directory.
 To run the script please open a terminal window and run the following commands:
 
 ```
