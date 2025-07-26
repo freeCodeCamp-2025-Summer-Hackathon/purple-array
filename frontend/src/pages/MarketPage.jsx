@@ -7,7 +7,7 @@ const MarketPage = () => {
 
 	return (
 		<div className="min-h-screen">
-			<Navbar logout={handleLogout} />
+			<Navbar logout={handleLogout} cookies={cookies} />
 			<div className="max-w-4xl mx-auto py-5">
 				<MarketItems />
 			</div>
