@@ -9,9 +9,11 @@ const useEntries = () => {
 		try {
 			setIsLoading(true);
 			const entries = await fetchEntries();
+
 			setData(entries);
 		} catch (error) {
 			setData([]);
+			console.log('Error fetching entires.');
 			throw error;
 		} finally {
 			setIsLoading(false);

@@ -13,7 +13,7 @@ const SettingsDropDown = (props) => {
 					className="w-full px-4 py-2 bg-gray-100 rounded-md border border-gray-300 focus:outline-none"
 				>
 					<>
-						<option></option>
+						<option>Default</option>
 						{props.options}
 					</>
 				</select>

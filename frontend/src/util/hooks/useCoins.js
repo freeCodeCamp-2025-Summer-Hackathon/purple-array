@@ -11,6 +11,7 @@ const useCoins = () => {
 			const coins = await fetchCoins();
 			setData(coins);
 		} catch (error) {
+			console.log('Error getting coins:', error);
 			setIsLoading(false);
 			setData({});
 		} finally {
