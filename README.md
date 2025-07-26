@@ -2,9 +2,9 @@
 
 Repository for the purple-array team's work.
 
-## {{Project Name}}
+## WriteLight
 
-###### {{Project Description}}
+WriteLight is a full-stack app that helps users learn new vocabulary through daily reflection and action. Each day, users receive a new word and are challenged to use it meaningfully in their lives. After using their word, they journal their experience by answering prompts like: How did you use today’s word? What gave you hope? What did you learn? How did you show kindness? The app fosters language growth, self-awareness, and positivity—one word at a time.
 
 ## Made With
 
@@ -85,10 +85,11 @@ mongodb+srv://<YOUR_USERNAME>:<YOUR_PASSWORD>@<CLUSTER_NAME>.iva3yfn.mongodb.net
 mongodb+srv://<your_username>:<your_password>@<cluster_name>.iva3yfn.mongodb.net/<ADD_DB_NAME_HERE>?retryWrites=true&w=majority$appName=<cluster_name>
 ```
 
-6. Now add your PORT variable to the .env file and set it to whatever you want
-   e.g `PORT=5001`
+6. Now add your PORT variable to the .env file and set it to `PORT=5001`
 
-7. Now add the following variable to your .env as well: `NODE_ENV=development`
+7. Now add the following variables to your .env as well:
+   `NODE_ENV=development`
+8. Lastly you'll need the necessary JSON Web Token key in your .env file as well. It will be in the following format `JWT_SECRET=<Secret_String>` where `<Secret_String>` is the appropriate JWT key.
 
 **_Please ensure that you now have all of the following environment variables in your .env file, including the Node environment variable with value set to `development` as shown below._**
 
@@ -98,6 +99,8 @@ MONGO_URI=<Your_Mongo_URI>
 PORT=5001
 
 NODE_ENV=development
+
+JWT_SECRET=<Secret_String>
 ```
 
 ## ✔️ Load your Database
