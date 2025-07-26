@@ -1,16 +1,24 @@
 import Navbar from '../components/generic/Navbar';
 import useAuth from '../util/hooks/useAuth';
+import useSettings from '../util/hooks/useSettings';
 import { useParams } from 'react-router';
-import { formatUTCDate } from '../util/helper/formatDate';
+import { DateTime } from 'luxon';
+import { formatLuxonDate } from '../util/helper/formatDate';
 import JournalEntry from '../components/journal/JournalEntry';
 
 const JournalEntryPage = () => {
 	const { navigate, cookies, removeCookie, handleLogout } = useAuth();
+	const { settings } = useSettings();
 
 	const { id } = useParams();
-	const todayDate = formatUTCDate(new Date());
+
+	const userCurrentDate = formatLuxonDate(
+		DateTime.utc().setZone(settings.timezone)
+	);
+
 	const entryDate = id;
-	const pastEntry = todayDate !== entryDate;
+
+	const pastEntry = userCurrentDate !== entryDate;
 
 	return (
 		<div className="min-h-screen">
