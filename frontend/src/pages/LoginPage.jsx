@@ -26,6 +26,7 @@ const LoginPage = () => {
 			if (success) {
 				toast.success(message || 'Login Successful!');
 				navigate('/');
+				window.location.reload();
 			}
 		} catch (error) {
 			toast.error('Login failed. Please try again.');
