@@ -1,10 +1,12 @@
-# purple-array
+### purple-array
 
-Repository for the purple-array team's work.
+###### _Repository for the purple-array team's work._
 
-## WriteLight
+# WriteLight
 
 WriteLight is a full-stack app that helps users learn new vocabulary through daily reflection and action. Each day, users receive a new word and are challenged to use it meaningfully in their lives. After using their word, they journal their experience by answering prompts like: How did you use today’s word? What gave you hope? What did you learn? How did you show kindness? The app fosters language growth, self-awareness, and positivity—one word at a time.
+
+![WriteLight](https://raw.githubusercontent.com/freeCodeCamp-2025-Summer-Hackathon/purple-array/refs/heads/main/frontend/public/WriteLight.png)
 
 ## Made With
 
