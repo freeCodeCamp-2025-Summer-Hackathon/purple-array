@@ -32,7 +32,7 @@ export default {
 			'winter',
 			'sunset',
 			{
-				writeLight: {
+				Default: {
 					primary: '#463aa2',
 					secondary: '#4b4b4b',
 					accent: '#8f97ff',

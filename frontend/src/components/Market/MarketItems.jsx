@@ -9,7 +9,7 @@ import MarketEmpty from './MarketEmpty.jsx';
 function MarketItems() {
 	const { products, isLoading } = useProducts();
 	const { inventory } = useInventory();
-	const { purchaseItem, error } = usePurchase();
+	const { purchaseItem } = usePurchase();
 	const { coins } = useCoins();
 
 	const handlePurchase = async (item) => {
