@@ -1,27 +1,32 @@
 import { Link } from 'react-router';
 import { useState, useEffect } from 'react';
-import { formatUTCDate, formatDate } from '../../util/helper/formatDate';
+import { formatLuxonDate, formatDate } from '../../util/helper/formatDate';
 import useWord from '../../util/hooks/useWord';
 import useEntries from '../../util/hooks/useEntries';
 import useSettings from '../../util/hooks/useSettings';
-import { CloudUpload, Pencil, Plus } from 'lucide-react';
-import AnimatePulseLoader from '../generic/AnimatePulseLoader';
 import useCoins from '../../util/hooks/useCoins.js';
-import { CircleDollarSign } from 'lucide-react';
+import { Pencil, CircleDollarSign } from 'lucide-react';
+import AnimatePulseLoader from '../generic/AnimatePulseLoader';
+import { DateTime } from 'luxon';
+
 
 const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 	const { word } = useWord();
 	const { entries, isLoading } = useEntries();
+  const { settings } = useSettings();
+  const { coins } = useCoins();
+
 	const [currentEntry, setCurrentEntry] = useState({});
 	const [entryExists, setEntryExists] = useState(false);
-	const todayDate = formatUTCDate(new Date());
 	const [entryLink, setEntryLink] = useState('');
 
-	const { settings } = useSettings();
+	const userCurrentDate = formatLuxonDate(
+		DateTime.utc().setZone(settings.timezone)
+	);
+
 	const [fontStyle, setFontStyle] = useState('');
 	const [inkStyle, setInkStyle] = useState('');
 	const [background, setBackground] = useState('');
-	const { coins } = useCoins();
 
 	useEffect(() => {
 		//set up style customizations pulling state based on useSettings
@@ -109,7 +114,7 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 	useEffect(() => {
 		// set entry for today if one exists
 		const todayEntry = entries.find((entry) => {
-			return entry.date === todayDate;
+			return entry.date === userCurrentDate;
 		});
 
 		// set date of past entry if one exits
@@ -131,7 +136,7 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 		} else {
 			// not on journal page and no today entry
 			setCurrentEntry(initialData);
-			setEntryLink(todayDate);
+			setEntryLink(userCurrentDate);
 			setEntryExists(false);
 		}
 	}, [entries]);
@@ -149,23 +154,8 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 			<div className="max-w-4xl mx-auto mt-12 px-6 pb-12">
 				{/* *********************** Footer Button Wrapper Header *********************** */}
 				<div className="flex justify-between mb-6 items-center">
-					<div>
-						<div className="text-3xl font-semibold text-secondary ml-2">
-							{!entryDate && `Today's Entry`}
-						</div>
-
-						<div className="inline-flex items-center gap-2 text-md tracking-wide uppercase text-primary font-semibold mt-2 ml-3">
-							<div className="flex gap-2">
-								<p>Your coins: </p>
-								<div className="flex">
-									<CircleDollarSign
-										className="text-violet-950 fill-yellow-500 size-6"
-										strokeWidth={1}
-									/>
-									{coins && `${coins}`}
-								</div>
-							</div>
-						</div>
+					<div className="text-3xl font-semibold text-base-content/80 ml-2">
+						{!entryDate && `Today's Entry`}
 					</div>
 					<Link
 						to={'/journal/collection'}
@@ -183,8 +173,8 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 								{currentEntry?.word || word.word}
 							</h2>
 							<span className="text-xl uppercase tracking-widest text-secondary font-semibold">
-								{!pastEntry
-									? formatDate(new Date(todayDate + `T00:00:00`))
+								{!pastEntry && userCurrentDate
+									? formatDate(new Date(userCurrentDate + `T00:00:00`))
 									: formatDate(new Date(entryDate + `T00:00:00`))}
 							</span>
 						</div>
@@ -216,12 +206,12 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 								{fontStyle && inkStyle && (
 									<p className={`${fontStyle} ${inkStyle}`}>
 										{currentEntry?.response || ''}
-									</p>
+                		</p>
 								)}
 							</div>
-						</div>
-
-						{/* ******************** Question/Response 2 ******************** */}
+						</div>    
+                            
+           {/* ******************** Question/Response 2 ******************** */}
 						<div className="p-4">
 							<h3 className="mb-4 w-full text-lg font-semibold text-secondary">
 								{currentEntry?.optionalPrompt1 ||
@@ -235,6 +225,9 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 								)}
 							</div>
 						</div>
+
+							
+
 
 						{/* ******************** Question/Response 3 ******************** */}
 						<div className="p-4">

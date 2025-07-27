@@ -14,3 +14,12 @@ export function formatUTCDate(date) {
 	day.length < 2 ? (day = '0' + day) : day;
 	return `${year}-${month}-${day}`;
 }
+
+export function formatLuxonDate(dt) {
+	let year = dt.year.toString();
+	let month = dt.month.toString();
+	month.length < 2 ? (month = '0' + month) : month;
+	let day = dt.day.toString();
+	day.length < 2 ? (day = '0' + day) : day;
+	return `${year}-${month}-${day}`;
+}
