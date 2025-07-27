@@ -10,25 +10,33 @@ import JournalEntryPage from './pages/JournalEntryPage';
 import JournalEditPage from './pages/JournalEditPage';
 import MarketPage from './pages/MarketPage';
 import SettingsPage from './pages/SettingsPage';
+import useAuth from './util/hooks/useAuth';
 
 const App = () => {
-	const settings = useSettings();
+	const { navigate, cookies, removeCookie, handleLogout } = useAuth();
+	const { settings } = useSettings();
 	const [theme, setTheme] = useState();
 
 	useEffect(() => {
 		const useTheme = async () => {
-			const theme = await settings.settings.theme.toLowerCase();
-
-			if (theme) {
-				setTheme(theme);
+			if (!cookies.token) {
+				setTheme('default');
+				console.log(theme);
+				localStorage.setItem('theme', theme);
+			} else {
+				const theme = await settings?.theme;
+				if (theme) {
+					setTheme(theme.toLowerCase());
+					localStorage.setItem('theme', theme);
+				}
 			}
 		};
 
 		useTheme();
-	}, [settings]);
+	}, [settings, cookies]);
 
 	return (
-		theme && (
+		true && (
 			<div data-theme={theme}>
 				<Routes>
 					<Route path="/" element={<HomePage />} />

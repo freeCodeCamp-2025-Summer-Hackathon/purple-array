@@ -4,6 +4,7 @@ import WordOfTheDay from '../components/Home/WordOfTheDay';
 
 const HomePage = () => {
 	const { navigate, cookies, removeCookie, handleLogout } = useAuth();
+
 	return (
 		<div className="min-h-screen">
 			<Navbar logout={handleLogout} cookies={cookies} />
