@@ -42,13 +42,13 @@ const userSchema = new mongoose.Schema(
             font: [String],
             ink: [String],
             parchment: [String],
-            type: Object,
-            default: {
-                theme: ['Sunset'],
-                font: [],
-                ink: [],
-                parchment: [],
-            },
+            // type: Object, // commented out for now as it breaks the market's purchase functionality
+            // default: {
+            //     theme: ['Sunset'],
+            //     font: [],
+            //     ink: [],
+            //     parchment: [],
+            // },
         },
         coins: {
             type: Number,
