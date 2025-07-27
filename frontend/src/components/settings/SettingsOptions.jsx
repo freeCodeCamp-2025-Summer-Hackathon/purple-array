@@ -112,6 +112,18 @@ const SettingsOptions = () => {
                 })}
               />
 
+              {/* Option Select for Website Theme */}
+              <SettingsDropDown
+                disabled={isLoading}
+                label={"Theme"}
+                defaultValue={settings?.theme}
+                onChange={handleChange}
+                name={"theme"}
+                options={inventory?.theme?.map((e) => {
+                  return <option key={e}>{e}</option>;
+                })}
+              />
+
               <div className="card-actions justify-end">
                 <button
                   type="submit"

@@ -22,7 +22,6 @@ export default {
 	daisyui: {
 		themes: [
 			'cupcake',
-			'wireframe',
 			'valentine',
 			'garden',
 			'pastel',
@@ -31,12 +30,30 @@ export default {
 			'coffee',
 			'winter',
 			'sunset',
+			'luxury',
+			'forest',
+			'aqua',
+			'fantasy',
+			'cmyk',
+			'autumn',
+			'synthwave',
 			{
-				writeLight: {
+				default: {
 					primary: '#463aa2',
 					secondary: '#4b4b4b',
 					accent: '#8f97ff',
 					neutral: '221551',
+					'base-100': '#ffffff',
+					info: '#8fd6ff',
+					success: '#96f2b9',
+					warning: '#fdff8f',
+					error: '#ff7a7a',
+				},
+				wireframe: {
+					primary: '#757575',
+					secondary: '#7a7a7a',
+					accent: '#eeeeee',
+					neutral: '#757575',
 					'base-100': '#ffffff',
 					info: '#8fd6ff',
 					success: '#96f2b9',
