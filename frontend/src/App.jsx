@@ -21,12 +21,13 @@ const App = () => {
 		const useTheme = async () => {
 			if (!cookies.token) {
 				setTheme('default');
-				console.log(theme);
+
 				localStorage.setItem('theme', theme);
 			} else {
 				const theme = await settings?.theme;
 				if (theme) {
 					setTheme(theme.toLowerCase());
+
 					localStorage.setItem('theme', theme);
 				}
 			}
