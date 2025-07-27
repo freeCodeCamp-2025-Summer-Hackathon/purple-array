@@ -9,12 +9,11 @@ import { Pencil, CircleDollarSign } from 'lucide-react';
 import AnimatePulseLoader from '../generic/AnimatePulseLoader';
 import { DateTime } from 'luxon';
 
-
 const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 	const { word } = useWord();
 	const { entries, isLoading } = useEntries();
-  const { settings } = useSettings();
-  const { coins } = useCoins();
+	const { settings } = useSettings();
+	const { coins } = useCoins();
 
 	const [currentEntry, setCurrentEntry] = useState({});
 	const [entryExists, setEntryExists] = useState(false);
@@ -154,9 +153,25 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 			<div className="max-w-4xl mx-auto mt-12 px-6 pb-12">
 				{/* *********************** Footer Button Wrapper Header *********************** */}
 				<div className="flex justify-between mb-6 items-center">
-					<div className="text-3xl font-semibold text-base-content/80 ml-2">
-						{!entryDate && `Today's Entry`}
+					<div>
+						<div className="text-3xl font-semibold text-secondary ml-2">
+							{!entryDate && `Today's Entry`}
+						</div>
+
+						<div className="inline-flex items-center gap-2 text-md tracking-wide uppercase text-primary font-semibold mt-2 ml-3">
+							<div className="flex gap-2">
+								<p>Your coins: </p>
+								<div className="flex">
+									<CircleDollarSign
+										className="text-violet-950 fill-yellow-500 size-6"
+										strokeWidth={1}
+									/>
+									{coins && `${coins}`}
+								</div>
+							</div>
+						</div>
 					</div>
+
 					<Link
 						to={'/journal/collection'}
 						className="btn btn-outline btn-primary rounded-lg btn-md"
@@ -185,7 +200,7 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 							</span>
 							<Link
 								to={`/edit/${entryLink}`}
-								className="btn btn-circle bg-neutral-300 btn-lg"
+								className="btn btn-circle text-secondary bg-base-200 btn-lg"
 							>
 								<Pencil />
 							</Link>
@@ -206,12 +221,12 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 								{fontStyle && inkStyle && (
 									<p className={`${fontStyle} ${inkStyle}`}>
 										{currentEntry?.response || ''}
-                		</p>
+									</p>
 								)}
 							</div>
-						</div>    
-                            
-           {/* ******************** Question/Response 2 ******************** */}
+						</div>
+
+						{/* ******************** Question/Response 2 ******************** */}
 						<div className="p-4">
 							<h3 className="mb-4 w-full text-lg font-semibold text-secondary">
 								{currentEntry?.optionalPrompt1 ||
@@ -225,9 +240,6 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 								)}
 							</div>
 						</div>
-
-							
-
 
 						{/* ******************** Question/Response 3 ******************** */}
 						<div className="p-4">
