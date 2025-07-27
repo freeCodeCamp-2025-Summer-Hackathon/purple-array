@@ -89,7 +89,8 @@ mongodb+srv://<your_username>:<your_password>@<cluster_name>.iva3yfn.mongodb.net
 
 7. Now add the following variables to your .env as well:
    `NODE_ENV=development`
-8. Lastly you'll need the necessary JSON Web Token key in your .env file as well. It will be in the following format `JWT_SECRET=<Secret_String>` where `<Secret_String>` is the appropriate JWT key.
+
+8. Lastly you'll need a JSON Web Token Secret key in your .env file as well. It will be in the following format `JWT_SECRET=<Secret_String>` where `<Secret_String>` is the appropriate JWT key. The JWT key just needs to be a unique, randomized alphanumeric `string`. We recommend that it be it at lest 64 characters. You can create a unique string [here](https://generate-random.org/encryption-key-generator) if you don't already have a preferred method.
 
 **_Please ensure that you now have all of the following environment variables in your .env file, including the Node environment variable with value set to `development` as shown below._**
 
