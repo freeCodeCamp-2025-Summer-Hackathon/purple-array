@@ -8,9 +8,10 @@ const JournalEntryFormDropDown = (props) => {
 				onChange={props.onChange}
 				className="w-full select select-bordered"
 			>
-				<option>{props.option1}</option>
+				{!props.defaultValue && <option>{props.option1}</option>}
 				<option>{props.option2}</option>
 				<option>{props.option3}</option>
+				<option>{props.option4}</option>
 			</select>
 		</>
 	);

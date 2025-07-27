@@ -22,7 +22,7 @@ const JournalEntryPage = () => {
 
 	return (
 		<div className="min-h-screen">
-			<Navbar logout={handleLogout} />
+			<Navbar logout={handleLogout} cookies={cookies} />
 			<JournalEntry entry_id={id} entryDate={entryDate} pastEntry={pastEntry} />
 		</div>
 	);
