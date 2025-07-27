@@ -9,6 +9,7 @@ import AnimatePulseLoader from "../generic/AnimatePulseLoader";
 
 const SettingsOptions = () => {
   const { settings } = useSettings();
+  console.log(settings);
   const { inventory, isLoading } = useInventory();
   const { timezones } = useTimezones();
   const [formData, setFormData] = useState({});
@@ -108,6 +109,18 @@ const SettingsOptions = () => {
                 onChange={handleChange}
                 name={"parchment"}
                 options={inventory?.parchment?.map((e) => {
+                  return <option key={e}>{e}</option>;
+                })}
+              />
+
+              {/* Option Select for Website Theme */}
+              <SettingsDropDown
+                disabled={isLoading}
+                label={"Theme"}
+                defaultValue={settings?.theme}
+                onChange={handleChange}
+                name={"theme"}
+                options={inventory?.theme?.map((e) => {
                   return <option key={e}>{e}</option>;
                 })}
               />

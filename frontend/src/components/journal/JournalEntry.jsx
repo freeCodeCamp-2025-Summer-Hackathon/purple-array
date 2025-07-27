@@ -150,7 +150,7 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
         {/* *********************** Footer Button Wrapper Header *********************** */}
         <div className="flex justify-between mb-6 items-center">
           <div>
-            <div className="text-3xl font-semibold text-base-content/80 ml-2">
+            <div className="text-3xl font-semibold text-secondary ml-2">
               {!entryDate && `Today's Entry`}
             </div>
 
