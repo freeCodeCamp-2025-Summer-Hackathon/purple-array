@@ -23,7 +23,7 @@ export const loginUser = async (email, password) => {
 			{ email, password },
 			{ withCredentials: true }
 		);
-
+		// window.location.reload();
 		return { data };
 	} catch (error) {
 		throw error;

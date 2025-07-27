@@ -33,6 +33,7 @@ const useAuth = () => {
 	const handleLogout = () => {
 		removeCookie('token');
 		navigate('/login');
+		window.location.reload();
 	};
 
 	return { navigate, cookies, removeCookie, handleLogout };

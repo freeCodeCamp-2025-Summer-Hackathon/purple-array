@@ -79,26 +79,26 @@
 /******* Color Choices *******/
 /* ************************* */
 .notebook {
-  background: url("../../public/assets/parchment/lined-paper_cropped.jpg")
+  background: url("../../public/assets/parchment/lined-notebook-paper.png")
     center no-repeat;
   background-size: cover;
 }
 
 .parchment {
-  background: url("../../public/assets/parchment/stack-of-paper.png") center
+  background: url("../../public/assets/parchment/weathered-paper.png") center
     no-repeat;
   background-size: cover;
 }
 
 .post-it {
-  background: url("../../public/assets/parchment/posti-it-notes_New_cropped.jpg")
-    center no-repeat;
+  background: url("../../public/assets/parchment/post-it-notes.png") center
+    no-repeat;
   background-size: cover;
   background-position: top;
 }
 
 .chalkboard {
-  background: url("../../public/assets/parchment/blackboard.jpg") center
+  background: url("../../public/assets/parchment/chalkboard.png") center
     no-repeat;
   background-size: cover;
 }

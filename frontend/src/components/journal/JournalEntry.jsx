@@ -4,14 +4,17 @@ import { formatLuxonDate, formatDate } from '../../util/helper/formatDate';
 import useWord from '../../util/hooks/useWord';
 import useEntries from '../../util/hooks/useEntries';
 import useSettings from '../../util/hooks/useSettings';
-import { Pencil } from 'lucide-react';
+import useCoins from '../../util/hooks/useCoins.js';
+import { Pencil, CircleDollarSign } from 'lucide-react';
 import AnimatePulseLoader from '../generic/AnimatePulseLoader';
 import { DateTime } from 'luxon';
+
 
 const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 	const { word } = useWord();
 	const { entries, isLoading } = useEntries();
-	const { settings } = useSettings();
+  const { settings } = useSettings();
+  const { coins } = useCoins();
 
 	const [currentEntry, setCurrentEntry] = useState({});
 	const [entryExists, setEntryExists] = useState(false);
@@ -203,12 +206,12 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 								{fontStyle && inkStyle && (
 									<p className={`${fontStyle} ${inkStyle}`}>
 										{currentEntry?.response || ''}
-									</p>
+                		</p>
 								)}
 							</div>
-						</div>
-
-						{/* ******************** Question/Response 2 ******************** */}
+						</div>    
+                            
+           {/* ******************** Question/Response 2 ******************** */}
 						<div className="p-4">
 							<h3 className="mb-4 w-full text-lg font-semibold text-secondary">
 								{currentEntry?.optionalPrompt1 ||
@@ -222,6 +225,9 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
 								)}
 							</div>
 						</div>
+
+							
+
 
 						{/* ******************** Question/Response 3 ******************** */}
 						<div className="p-4">

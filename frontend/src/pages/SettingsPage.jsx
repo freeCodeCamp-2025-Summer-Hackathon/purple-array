@@ -7,7 +7,7 @@ const SettingsPage = () => {
 
 	return (
 		<div className="min-h-screen">
-			<Navbar logout={handleLogout} />
+			<Navbar logout={handleLogout} cookies={cookies} />
 			<div className="max-w-2xl mx-auto px-4 py-16 space-y-12">
 				<SettingsOptions />
 			</div>
