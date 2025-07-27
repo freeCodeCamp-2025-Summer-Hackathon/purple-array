@@ -9,7 +9,6 @@ import AnimatePulseLoader from "../generic/AnimatePulseLoader";
 
 const SettingsOptions = () => {
   const { settings } = useSettings();
-  console.log(settings);
   const { inventory, isLoading } = useInventory();
   const { timezones } = useTimezones();
   const [formData, setFormData] = useState({});
