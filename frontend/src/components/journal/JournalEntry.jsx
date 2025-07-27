@@ -195,7 +195,7 @@ const JournalEntry = ({ entry_id, entryDate, pastEntry }) => {
               </span>
               <Link
                 to={`/edit/${entryLink}`}
-                className="btn btn-circle bg-neutral-300 btn-lg"
+                className="btn btn-circle bg-secondary-300 btn-lg"
               >
                 <Pencil />
               </Link>
