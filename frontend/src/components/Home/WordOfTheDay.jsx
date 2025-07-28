@@ -8,7 +8,7 @@ function WordOfTheDay() {
     <>
       {isLoading && <AnimatePulseLoader />}
 
-      <div className="flex justify-center px-4 py-10">
+      <div className="flex justify-center">
         <div className="card w-full max-w-3xl bg-base-200 shadow-xl border border-base-300 p-10 text-center space-y-6">
           <h1 className="text-xl font-semibold tracking-tight text-secondary">
             Word of the Day
