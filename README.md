@@ -8,6 +8,8 @@ WriteLight is a full-stack app that helps users learn new vocabulary through dai
 
 ![WriteLight](https://raw.githubusercontent.com/freeCodeCamp-2025-Summer-Hackathon/purple-array/refs/heads/main/frontend/public/WriteLight.png)
 
+![WriteLight-Dark-Theme](https://raw.githubusercontent.com/freeCodeCamp-2025-Summer-Hackathon/purple-array/refs/heads/main/frontend/public/WriteLightDark.png)
+
 ## Made With
 
 ## ![Node.js](https://nodejs.org/static/images/favicons/favicon.png) ![Express.js](https://expressjs.com/images/favicon.png) ![React.js](https://react.dev/favicon-32x32.png)
