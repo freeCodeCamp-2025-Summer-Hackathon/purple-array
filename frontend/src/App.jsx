@@ -37,7 +37,7 @@ const App = () => {
 	}, [settings, cookies]);
 
 	return (
-		true && (
+		theme && (
 			<div data-theme={theme}>
 				<Routes>
 					<Route path="/" element={<HomePage />} />
